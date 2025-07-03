@@ -1,0 +1,25 @@
+{
+  "name": "upwr-wayfinder",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "vue": "^3.5.17"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/tsconfig": "^0.7.0",
+    "sass": "^1.89.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0",
+    "vite-plugin-vuetify": "^2.1.1",
+    "vue-tsc": "^2.2.10",
+    "vuetify": "^3.8.12"
+  }
+}
