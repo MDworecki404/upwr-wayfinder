@@ -1,0 +1,8 @@
+{
+  "app": {
+    "name": "UPWr Wayfinder"
+  },
+  "welcome": "Witaj w UPWr Wayfinder!",
+  "layers": "Warstwy",
+  "orto": "Ortofotomapa"
+}

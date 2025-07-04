@@ -1,0 +1,19 @@
+{
+    "app": {
+        "name": "UPWr Wayfinder",
+        "version": "1.0.0",
+        "description": "A wayfinding application for UPWr campus",
+        "author": "Marek",
+        "license": "MIT"
+    },
+    "camera": {
+        "defaultPosition": {
+            "longitude": 17.05779262426435,
+            "latitude": 51.09648667394181,
+            "height": 1419.3491607555334
+        },
+        "defaultHeading": 9.452232419913209,
+        "defaultPitch": -35.1966254252074,
+        "defaultRoll": 0.002891826778682142
+    }
+}

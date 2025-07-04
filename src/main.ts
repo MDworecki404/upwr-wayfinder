@@ -1,11 +1,28 @@
+import 'vuetify/styles'
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import 'vuetify/styles'
+import *as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import { createI18n } from 'vue-i18n'
+
+import en from './locales/en.json'
+import pl from './locales/pl.json'
+import startConfig from './data/startConfig.json';
+
+en.app.name = startConfig.app.name;
+pl.app.name = startConfig.app.name;
+
+const i18n = createI18n({
+  locale: 'pl', // set locale
+  fallbackLocale: 'pl', // set fallback locale
+  messages: {
+    en,
+    pl
+  },
+})
 
 const vuetify = createVuetify({
     components,
@@ -26,4 +43,4 @@ const vuetify = createVuetify({
 })
 
 
-createApp(App).use(vuetify).mount('#app')
+createApp(App).use(vuetify).use(i18n).mount('#app')
