@@ -4,5 +4,10 @@
   },
   "welcome": "Witaj w UPWr Wayfinder!",
   "layers": "Warstwy",
-  "orto": "Ortofotomapa"
+  "orto": "Ortofotomapa",
+  "basemaps": "Mapy podkładowe",
+  "google3dtiles": "Budynki 3D Google",
+  "osm3dtiles": "Budynki 3D OpenStreetMap",
+  "lod1buildings": "Budynki 3D LoD1",
+  "upwrbuildings": "Budynki UPWr"
 }

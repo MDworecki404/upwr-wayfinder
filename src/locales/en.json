@@ -4,5 +4,10 @@
   },
   "welcome": "Welcome to UPWr Wayfinder!",
   "layers": "Layers",
-  "orto": "Ortophoto"
+  "orto": "Ortophoto",
+  "basemaps": "Basemaps",
+  "google3dtiles": "Google 3D Tiles",
+  "osm3dtiles": "OSM 3D Tiles",
+  "lod1buildings": "LOD1 Buildings",
+  "upwrbuildings": "UPWr Buildings"
 }

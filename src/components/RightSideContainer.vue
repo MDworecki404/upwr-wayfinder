@@ -9,10 +9,12 @@
     <v-list>
       <Suspense v-if="isLayerComponentVisible">
         <template #default>
-          <LayerComponent />
+          <LayersContainer />
         </template>
-        <template #fallback>
-          <div>Loading...</div>
+      </Suspense>
+      <Suspense v-if="isSettingsComponentVisible">
+        <template #default>
+          <SettingsContainer />
         </template>
       </Suspense>
     </v-list>
@@ -20,14 +22,17 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, inject, Ref } from 'vue';
+import { defineAsyncComponent, inject, type Ref } from 'vue';
 
-const LayerComponent = defineAsyncComponent(() =>
+const LayersContainer = defineAsyncComponent(() =>
   import('./RightSideComponents/LayersContainer.vue')
+);
+const SettingsContainer = defineAsyncComponent(() =>
+  import('./RightSideComponents/SettingsContainer.vue')
 );
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
-
+const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
 </script>
 
 <style scoped>

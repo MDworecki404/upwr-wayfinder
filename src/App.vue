@@ -10,8 +10,16 @@ const toggleLayerComponentVisibility = () => {
   isLayerComponentVisible.value = !isLayerComponentVisible.value;
 };
 
+const isSettingsComponentVisible = ref(false);
+
+const toggleSettingsComponentVisibility = () => {
+  isSettingsComponentVisible.value = !isSettingsComponentVisible.value;
+};
+
 provide('isLayerComponentVisible', isLayerComponentVisible);
 provide('toggleLayerComponentVisibility', toggleLayerComponentVisibility);
+provide('isSettingsComponentVisible', isSettingsComponentVisible);
+provide('toggleSettingsComponentVisibility', toggleSettingsComponentVisibility);
 </script>
 
 <template>

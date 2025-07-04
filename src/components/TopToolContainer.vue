@@ -9,14 +9,17 @@ const changeGpsIcon = () => {
     gpsStyle.value = isGpsEnabled.value ? 'mdi-crosshairs-gps' : 'mdi-crosshairs';
 };
 
+
+
 const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') as () => void;
+const toggleSettingsComponentVisibility = inject('toggleSettingsComponentVisibility') as () => void;
 
 </script>
 <template>
         <v-container class="tool-container" fluid>
             <v-row no-gutters>
                 <v-col cols="12" class="d-flex justify-start align-center">
-                    <v-btn color="info" icon="mdi-cog"></v-btn>
+                    <v-btn color="info" icon="mdi-cog" @click="toggleSettingsComponentVisibility"></v-btn>
                     <v-btn color="info" icon="mdi-layers" class="ml-2" @click="toggleLayerComponentVisibility"></v-btn>
                     <v-btn color="info" icon="mdi-map-marker-path" class="ml-2"></v-btn>
                     <v-btn color="info" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
