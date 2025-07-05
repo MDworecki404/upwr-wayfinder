@@ -9,13 +9,6 @@ let watchId: number | null = null;
 let userEntity: Cesium.Entity | null = null; // <- zapamiętujemy encję poza funkcją
 let tracking = false
 
-// Callback do aktualizacji stanu GPS w komponencie
-let gpsStateCallback: ((isEnabled: boolean) => void) | null = null;
-
-export const setGpsStateCallback = (callback: (isEnabled: boolean) => void) => {
-    gpsStateCallback = callback;
-};
-
 export const stopTracking = () => {
     if (watchId !== null) {
         navigator.geolocation.clearWatch(watchId);
@@ -25,10 +18,6 @@ export const stopTracking = () => {
             userEntity = null;
         }
         tracking = false
-        // Powiadom komponent o zmianie stanu GPS
-        if (gpsStateCallback) {
-            gpsStateCallback(false);
-        }
     }
 };
 
@@ -38,10 +27,6 @@ export const userPositionFollow = () => {
         stopTracking()
     } else {
     tracking = true
-    // Powiadom komponent o zmianie stanu GPS
-    if (gpsStateCallback) {
-        gpsStateCallback(true);
-    }
   // Tworzymy ikonkę i encję
 
 

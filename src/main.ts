@@ -1,4 +1,4 @@
-import 'vuetify/styles'
+import 'vuetify/dist/vuetify.css'
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
