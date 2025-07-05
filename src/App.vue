@@ -4,6 +4,7 @@ import { ref, provide, defineAsyncComponent } from 'vue';
 const Map = defineAsyncComponent(() => import('./components/Map.vue'));
 const TopToolContainer = defineAsyncComponent(() => import('./components/TopToolContainer.vue'));
 const RightSideContainer = defineAsyncComponent(() => import('./components/RightSideContainer.vue'));
+const HelloDialog = defineAsyncComponent(() => import('./components/HelloDialog.vue'));
 
 const isLayerComponentVisible = ref(false);
 
@@ -53,10 +54,11 @@ provide('selectedLayer', selectedLayer);
 <template>
     <v-app>
         <v-main>
+            <HelloDialog />
             <Map />
             <TopToolContainer />
+            <RightSideContainer />
         </v-main>
-        <RightSideContainer />
     </v-app>
 </template>
 

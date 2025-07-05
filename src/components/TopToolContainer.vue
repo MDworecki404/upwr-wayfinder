@@ -1,16 +1,27 @@
 <script lang="ts" setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 
 
 const isGpsEnabled = ref(false);
 const gpsStyle = ref('mdi-crosshairs')
-import { userPositionFollow } from '../services/userLocation';
+import { userPositionFollow, setGpsStateCallback } from '../services/userLocation';
 
 const changeGpsIcon = () => {
     isGpsEnabled.value = !isGpsEnabled.value;
     gpsStyle.value = isGpsEnabled.value ? 'mdi-crosshairs-gps' : 'mdi-crosshairs';
     userPositionFollow();
 };
+
+// Funkcja do aktualizacji stanu GPS z zewnątrz
+const updateGpsState = (isEnabled: boolean) => {
+    isGpsEnabled.value = isEnabled;
+    gpsStyle.value = isEnabled ? 'mdi-crosshairs-gps' : 'mdi-crosshairs';
+};
+
+// Rejestracja callbacka przy montowaniu komponentu
+onMounted(() => {
+    setGpsStateCallback(updateGpsState);
+});
 
 
 

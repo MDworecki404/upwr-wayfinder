@@ -3,6 +3,8 @@
     "name": "UPWr Wayfinder"
   },
   "welcome": "Witaj w UPWr Wayfinder!",
+  "welcomeText": "UPWr Wayfinder to geoportal dla studentów Uniwersytetu Przyrodniczego we Wrocławiu ukierunkowany na uproszczenie nawigacji na terenie uczelni. Aplikacja pozwala na wyszukiwanie tras pomiędzy budynkami na mapie. ",
+  "close": "Zamknij",
   "layersPanel": "Panel warstw",
   "layers3D": "Warstwy 3D",
   "orto": "Ortofotomapa",

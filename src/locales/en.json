@@ -3,6 +3,7 @@
     "name": "UPWr Wayfinder"
   },
   "welcome": "Welcome to UPWr Wayfinder!",
+  "welcomeText": "UPWr Wayfinder is a geoportal for students of the University of Life Sciences in Wroclaw, focused on simplifying navigation on the university campus. The application allows you to search for routes between buildings on the map.",
   "layersPanel": "Layers panel",
   "layers3D": "3D layers",
   "orto": "Ortophoto",

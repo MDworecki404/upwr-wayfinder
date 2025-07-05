@@ -114,6 +114,12 @@ const activeComponents = computed(() => {
 
   .v-navigation-drawer {
     pointer-events: none;
+    
+    // Ukrycie scrollbara ale zachowanie możliwości przewijania
+    ::-webkit-scrollbar{
+      display: none;
+    }
+    
   }
 
 .component {

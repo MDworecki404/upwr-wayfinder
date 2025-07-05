@@ -18,8 +18,8 @@ const toggleSettingsComponentVisibility = inject('toggleSettingsComponentVisibil
         <v-card-text>
             <v-card-text>{{ $t('language') }}</v-card-text>
             <v-radio-group v-model="selectedLanguage">
-                <v-radio :label="$t('pl')" @click="changeLanguage('pl')" value="pl"></v-radio>
-                <v-radio :label="$t('en')" @click="changeLanguage('en')" value="en"></v-radio>
+                <v-radio label="Polski" @click="changeLanguage('pl')" value="pl"></v-radio>
+                <v-radio label="English" @click="changeLanguage('en')" value="en"></v-radio>
             </v-radio-group>
         </v-card-text>
     </v-card>
