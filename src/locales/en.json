@@ -3,11 +3,22 @@
     "name": "UPWr Wayfinder"
   },
   "welcome": "Welcome to UPWr Wayfinder!",
-  "layers": "Layers",
+  "layersPanel": "Layers panel",
+  "layers3D": "3D layers",
   "orto": "Ortophoto",
   "basemaps": "Basemaps",
   "google3dtiles": "Google 3D Tiles",
   "osm3dtiles": "OSM 3D Tiles",
-  "lod1buildings": "LOD1 Buildings",
-  "upwrbuildings": "UPWr Buildings"
+  "lod1buildings": "LoD1 Buildings",
+  "upwrbuildings": "UPWr Buildings",
+  "settings": "Settings",
+  "language": "Language",
+  "en": "English",
+  "pl": "Polish",
+  "toBuilding": "To building",
+  "fromBuildingToBuilding": "From building to building",
+  "startBuilding": "Start building",
+  "endBuilding": "End building",
+  "routing": "Route finder",
+  "findRoute": "Find route"
 }

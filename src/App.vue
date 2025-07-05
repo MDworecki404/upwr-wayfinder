@@ -16,10 +16,37 @@ const toggleSettingsComponentVisibility = () => {
   isSettingsComponentVisible.value = !isSettingsComponentVisible.value;
 };
 
+const isRoutingComponentVisible = ref(false);
+
+const toggleRoutingComponentVisibility = () => {
+  isRoutingComponentVisible.value = !isRoutingComponentVisible.value;
+};
+
+
+// Stan warstw - przeniesiony z LayersContainer
+const selectedBasemap = ref('osm')
+const expandedBasemap = ref([0])
+const expandedLayers = ref([0])
+
+const selectedLayer = ref({
+    google3dtiles: false,
+    osm3dtiles: false,
+    lod1buildings: false,
+    upwrbuildings: false
+})
+
 provide('isLayerComponentVisible', isLayerComponentVisible);
 provide('toggleLayerComponentVisibility', toggleLayerComponentVisibility);
 provide('isSettingsComponentVisible', isSettingsComponentVisible);
 provide('toggleSettingsComponentVisibility', toggleSettingsComponentVisibility);
+provide('isRoutingComponentVisible', isRoutingComponentVisible);
+provide('toggleRoutingComponentVisibility', toggleRoutingComponentVisibility);
+
+// Provide dla stanu warstw
+provide('selectedBasemap', selectedBasemap);
+provide('expandedBasemap', expandedBasemap);
+provide('expandedLayers', expandedLayers);
+provide('selectedLayer', selectedLayer);
 </script>
 
 <template>

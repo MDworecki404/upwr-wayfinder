@@ -5,7 +5,6 @@ import { displayMap } from '../services/displayMap';
 onMounted(() => {
     displayMap('cesiumContainer');
 });
-
 </script>
 <template>
     <div id="cesiumContainer"></div>

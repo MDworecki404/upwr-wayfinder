@@ -22,7 +22,11 @@ export function displayMap(containerId: string): void {
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false,
         shouldAnimate: false,
-    })
+        baseLayer: new Cesium.ImageryLayer(new Cesium.OpenStreetMapImageryProvider({
+            url: 'https://a.tile.openstreetmap.org/'
+        }))
+    });
+
 
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
@@ -48,3 +52,5 @@ export function displayMap(containerId: string): void {
     //    console.log(`Camera Roll: ${Cesium.Math.toDegrees(cameraRoll)} degrees`);
     //});
 }
+
+export { viewer };
