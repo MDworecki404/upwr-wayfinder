@@ -4,9 +4,12 @@ import { ref, inject } from 'vue';
 
 const isGpsEnabled = ref(false);
 const gpsStyle = ref('mdi-crosshairs')
+import { userPositionFollow } from '../services/userLocation';
+
 const changeGpsIcon = () => {
     isGpsEnabled.value = !isGpsEnabled.value;
     gpsStyle.value = isGpsEnabled.value ? 'mdi-crosshairs-gps' : 'mdi-crosshairs';
+    userPositionFollow();
 };
 
 

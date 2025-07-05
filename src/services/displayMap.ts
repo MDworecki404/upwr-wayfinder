@@ -51,6 +51,8 @@ export function displayMap(containerId: string): void {
     //    const cameraRoll = viewer.camera.roll;
     //    console.log(`Camera Roll: ${Cesium.Math.toDegrees(cameraRoll)} degrees`);
     //});
+
+    
 }
 
 export { viewer };

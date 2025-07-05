@@ -2,22 +2,32 @@
 import { inject, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import universityBuildings from '../../data/universityBuildings.json';
+import  routeFinder  from '../../services/RouteFinder/routeFinder';
+import {userRouteFinder} from '../../services/RouteFinder/userRouteFinder';
 
 const { t } = useI18n();
 
-const buildings = ref(universityBuildings.buildings.flat());
+const buildings = ref(universityBuildings.buildings);
 const selectedStartBuilding = ref();
 const selectedEndBuilding = ref();
 const selectedMode = ref('foot');
 
 const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibility') as () => void;
 
+const findRoute = () => {
+    routeFinder(selectedStartBuilding.value, selectedEndBuilding.value, selectedMode.value);
+}
+
+const findUserRoute = () => {
+    userRouteFinder(selectedEndBuilding.value, selectedMode.value);
+}
+
 const selectedRouteType = ref(t('toBuilding'));
 </script>
 
 <template>
     <v-card :width="300">
-        <v-card-title>{{ $t('routing') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" color="primary" @click="toggleRoutingComponentVisibility">mdi-close</v-icon></v-card-title>
+        <v-card-title class="bg-blue-lighten-1">{{ $t('routing') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" @click="toggleRoutingComponentVisibility">mdi-close</v-icon></v-card-title>
         <v-select
         class="ma-3" 
         :items="[$t('toBuilding'), $t('fromBuildingToBuilding')]" 
@@ -56,7 +66,7 @@ const selectedRouteType = ref(t('toBuilding'));
             </v-btn-toggle>
             <v-btn 
             color="info" 
-            @click="console.log(selectedMode)"
+            @click="findUserRoute"
             class="mt-5 "
             >{{ $t('findRoute') }}</v-btn>
         </v-card-text>
@@ -99,7 +109,7 @@ const selectedRouteType = ref(t('toBuilding'));
             </v-btn-toggle>
             <v-btn 
             color="info" 
-            @click="console.log(selectedMode)"
+            @click="findRoute"
             class="mt-5 "
             >{{ $t('findRoute') }}</v-btn>
         </v-card-text>

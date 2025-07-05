@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, provide } from 'vue';
-import Map from './components/Map.vue';
-import TopToolContainer from './components/TopToolContainer.vue';
-import RightSideContainer from './components/RightSideContainer.vue';
+import { ref, provide, defineAsyncComponent } from 'vue';
+
+const Map = defineAsyncComponent(() => import('./components/Map.vue'));
+const TopToolContainer = defineAsyncComponent(() => import('./components/TopToolContainer.vue'));
+const RightSideContainer = defineAsyncComponent(() => import('./components/RightSideContainer.vue'));
 
 const isLayerComponentVisible = ref(false);
 
