@@ -2,9 +2,12 @@ import { viewer } from "../displayMap";
 import * as Cesium from 'cesium'
 import BuildingData from '../../data/universityBuildings.json'
 import { stopTracking, userPositionFollow } from "../userLocation";
+import gsap from "gsap";
 
 // Zmienna do śledzenia aktywnego workera
 let activeWorker: Worker | null = null;
+
+const loadingIconSVG = document.querySelector('.loading-icon') as HTMLElement;
 
 const getCurrentPosition = () => {
     return new Promise((resolve, reject) => {
@@ -21,7 +24,7 @@ const getCurrentPosition = () => {
 const userRouteFinder = async (endChoice: string, selectedMode: string) => {
 
     stopTracking();
-
+    gsap.to('#routeClear', {opacity: 0, visibility: 'hidden', pointerEvents: 'none', duration: 0.2})
     console.log("Rozpoczęcie wyszukiwania trasy:", Date.now());
     
     // Anuluj poprzedniego workera jeśli istnieje
@@ -31,7 +34,8 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
     }
     
     viewer!.entities.removeAll();
-    
+
+    gsap.to(loadingIconSVG, {visibility: 'visible', opacity: 1, duration: 0.5});
 
     let startNode = [];
     try {
@@ -40,13 +44,16 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
         console.log('Pobrano pozycję startową:', startNode);
     } catch (error) {
         console.error("Nie udało się pobrać lokalizacji:", error);
-        // Ukryj animację ładowania w przypadku błędu
+        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
         alert("Nie udało się pobrać lokalizacji. Sprawdź uprawnienia lub spróbuj ponownie.");
         return;
     }
     
     if (!endChoice) {
         console.error("Nie wybrano budynku docelowego");
+        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
         alert("Wybierz budynek docelowy");
         return;
     }
@@ -61,6 +68,8 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
 
     if (!endNode) {
         console.error("Nie znaleziono budynku o podanym kodzie:", endChoice);
+        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
         alert("Nie znaleziono wybranego budynku");
         return;
     }
@@ -77,6 +86,8 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
                 console.warn("Worker timeout - przerywanie");
                 activeWorker.terminate();
                 activeWorker = null;
+                gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+                gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
                 alert("Obliczanie trasy zajęło zbyt dużo czasu. Spróbuj ponownie.");
             }
         }, 30000);
@@ -95,6 +106,8 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
 
             if (!path || path.length === 0) {
                 console.warn("Brak trasy.");
+                gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+                gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
                 alert("Nie udało się znaleźć trasy. Spróbuj z innym budynkiem lub rodzajem transportu.");
                 return;
             }
@@ -109,11 +122,15 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
                         outlineWidth: 2,
                         outlineColor: Cesium.Color.fromCssColorString('#0D47A1') // Darker blue outline
                     }),
-                    clampToGround: true,
+                    clampToGround: true
                 }
             });
 
-            
+
+            // Ukryj ikonę ładowania
+            gsap.to('#routeClear', {opacity: 1, visibility: 'visible', pointerEvents: 'auto', duration: 0.2})
+            gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+            gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
             // Wyśrodkuj widok na trasie
             
             // Zakończ workera
@@ -125,12 +142,16 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
         activeWorker.onerror = function(error: ErrorEvent) {
             clearTimeout(workerTimeout);
             console.error("Błąd workera:", error);
+            gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+            gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
             alert("Wystąpił błąd podczas wyszukiwania trasy. Spróbuj ponownie.");
             activeWorker!.terminate();
             activeWorker = null;
         };
     } catch (error) {
         console.error("Błąd podczas wyszukiwania trasy:", error);
+        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
+        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
         alert("Wystąpił nieoczekiwany błąd. Spróbuj ponownie.");
     }
     userPositionFollow()

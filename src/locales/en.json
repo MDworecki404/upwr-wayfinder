@@ -20,5 +20,6 @@
   "startBuilding": "Start building",
   "endBuilding": "End building",
   "routing": "Route finder",
-  "findRoute": "Find route"
+  "findRoute": "Find route",
+  "clearRoute": "Clear route"
 }

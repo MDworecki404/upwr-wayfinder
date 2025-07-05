@@ -20,5 +20,6 @@
   "startBuilding": "Budynek startowy",
   "endBuilding": "Budynek docelowy",
   "routing": "Wyszukiwarka tras",
-  "findRoute": "Wyszukaj trasę"
+  "findRoute": "Wyszukaj trasę",
+  "clearRoute": "Wyczyść trasę"
 }
