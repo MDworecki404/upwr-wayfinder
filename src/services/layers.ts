@@ -1,5 +1,7 @@
 import { viewer } from "./displayMap";
 import * as Cesium from 'cesium';
+import { updatePopUpData } from './popUpStates';
+
 
 let google3dtiles: Cesium.Cesium3DTileset | null = null;
 
@@ -53,7 +55,9 @@ let upwrBuildingsDataSource: Cesium.GeoJsonDataSource | null = null;
 
 Cesium.GeoJsonDataSource.clampToGround = true;
 
-export const registerUpwrBuildings = async (isEnabled: boolean) => {
+
+
+export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () => void) => {
     switch(isEnabled){
         case true:
             const resource = await Cesium.IonResource.fromAssetId(3516824);
@@ -115,6 +119,24 @@ export const registerUpwrBuildings = async (isEnabled: boolean) => {
                     }
                 }
             }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+            handler.setInputAction(function (click: any) {
+                const pickedObject = viewer?.scene.pick(click.position);
+                if (Cesium.defined(pickedObject) && pickedObject.id && upwrBuildingsDataSource?.entities.contains(pickedObject.id)) {
+                    if (showPopUp) {
+                        showPopUp();
+                    }
+                    const newTitle = 'Budynek UPWr';
+                    const newDescription = `
+                        Numer budynku: <b>${pickedObject.id.properties?.A._value}</b> <br>
+                        Adres: <b>${pickedObject.id.properties?.B._value}</b> <br><br>
+                        <b>Informacje dodatkowe:</b> <i>${pickedObject.id.properties?.desc._value}</i> <br>
+                    `;
+                    updatePopUpData(newTitle, newDescription);
+                    
+                }
+            }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+        
 
             viewer?.dataSources.add(upwrBuildingsDataSource);
             break;

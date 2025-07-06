@@ -3,10 +3,10 @@ import startConfig from '../data/startConfig.json';
 
 let viewer: Cesium.Viewer | null = null;
 
-const cesiumIonApiKey = Cesium.Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_API_KEY;
+const cesiumIonApiKey = import.meta.env.VITE_CESIUM_API_KEY;
+Cesium.Ion.defaultAccessToken = cesiumIonApiKey;
 
 export function displayMap(containerId: string): void {
-    console.log(`Using Cesium Ion API Key: ${cesiumIonApiKey}`);
     viewer = new Cesium.Viewer(containerId, {
         terrain: Cesium.Terrain.fromWorldTerrain(),
         animation: false,

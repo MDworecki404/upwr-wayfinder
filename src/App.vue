@@ -31,6 +31,15 @@ const toggleUpwrBuildingsLegendVisibility = () => {
   isUpwrBuildingsLegendVisible.value = !isUpwrBuildingsLegendVisible.value;
 };
 
+const isPopUpVisible = ref(false);
+
+  const showPopUp = () => {
+  isPopUpVisible.value = true;
+};
+
+const hidePopUp = () => {
+  isPopUpVisible.value = false;
+};
 
 // Stan warstw - przeniesiony z LayersContainer
 const selectedBasemap = ref('osm')
@@ -58,6 +67,9 @@ provide('expandedLayers', expandedLayers);
 provide('selectedLayer', selectedLayer);
 provide('isUpwrBuildingsLegendVisible', isUpwrBuildingsLegendVisible);
 provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibility);
+provide('isPopUpVisible', isPopUpVisible);
+provide('showPopUp', showPopUp);
+provide('hidePopUp', hidePopUp);
 </script>
 
 <template>

@@ -23,6 +23,7 @@ const isOrtoBasemapEnabled = ref(selectedLayer.value.ortho);
 const isOSMBasemapEnabled = ref(selectedLayer.value.osm);
 const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
+const showPopUp = inject('showPopUp') as () => void;
 
 watch(isGoogle3dtilesEnabled, (newVal) => {
     register3DGoogleTiles(newVal);
@@ -37,7 +38,7 @@ watch(isLod1BuildingsEnabled, (newVal) => {
 });
 
 watch(isUpwrBuildingsEnabled, (newVal) => {
-    registerUpwrBuildings(newVal);
+    registerUpwrBuildings(newVal, showPopUp);
 });
 
 watch(selectedBasemap, (newVal) => {

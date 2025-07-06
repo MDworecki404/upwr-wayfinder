@@ -7,6 +7,7 @@
     class="bg-transparent border-0 outline-0 pr-3"
   >
     <v-list>
+      
       <Suspense v-for="component in activeComponents" :key="component.id">
         <template #default>
           <component class="component mb-2" :is="component.component" />
@@ -31,12 +32,16 @@ const RoutingContainer = defineAsyncComponent(() =>
 const UpwrBuildingsLegend = defineAsyncComponent(() =>
   import('./RightSideComponents/Legends/UpwrBuildingsLegend.vue')
 );
+const PopUpComponent = defineAsyncComponent(() =>
+  import('./RightSideComponents/PopUpComponent.vue')
+);
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
 const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
 const isRoutingComponentVisible = inject('isRoutingComponentVisible') as Ref<boolean>;
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
-// Śledzenie kolejności aktywacji komponentów
+const isPopUpVisible = inject('isPopUpVisible') as Ref<boolean>;
+
 const componentOrder = ref<string[]>([]);
 
 // Obserwowanie zmian widoczności komponentów
@@ -44,7 +49,7 @@ watch(isLayerComponentVisible, (newVal, oldVal) => {
   if (newVal && !oldVal) {    
     // Komponent został aktywowany
     if (!componentOrder.value.includes('layers')) {
-      componentOrder.value.push('layers');
+      componentOrder.value.unshift('layers');
     }
   } else if (!newVal && oldVal) {
     // Komponent został dezaktywowany
@@ -59,7 +64,7 @@ watch(isSettingsComponentVisible, (newVal, oldVal) => {
   if (newVal && !oldVal) {
     // Komponent został aktywowany
     if (!componentOrder.value.includes('settings')) {
-      componentOrder.value.push('settings');
+      componentOrder.value.unshift('settings');
     }
   } else if (!newVal && oldVal) {
     // Komponent został dezaktywowany
@@ -74,7 +79,7 @@ watch(isRoutingComponentVisible, (newVal, oldVal) => {
   if (newVal && !oldVal) {
     // Komponent został aktywowany
     if (!componentOrder.value.includes('routing')) {
-      componentOrder.value.push('routing');
+      componentOrder.value.unshift('routing');
     }
   } else if (!newVal && oldVal) {
     // Komponent został dezaktywowany
@@ -88,10 +93,23 @@ watch(isRoutingComponentVisible, (newVal, oldVal) => {
 watch(isUpwrBuildingsLegendVisible, (newVal, oldVal) => {
   if (newVal && !oldVal) {
     if (!componentOrder.value.includes('upwrBuildingsLegend')) {
-      componentOrder.value.push('upwrBuildingsLegend');
+      componentOrder.value.unshift('upwrBuildingsLegend');
     }
   } else if (!newVal && oldVal) {
     const index = componentOrder.value.indexOf('upwrBuildingsLegend');
+    if (index > -1) {
+      componentOrder.value.splice(index, 1);
+    }
+  }
+});
+
+watch(isPopUpVisible, (newVal, oldVal) => {
+  if (newVal && !oldVal) {
+    if (!componentOrder.value.includes('popUp')) {
+      componentOrder.value.unshift('popUp');
+    }
+  } else if (!newVal && oldVal) {
+    const index = componentOrder.value.indexOf('popUp');
     if (index > -1) {
       componentOrder.value.splice(index, 1);
     }
@@ -123,6 +141,11 @@ const activeComponents = computed(() => {
       components.push({
         id: 'upwrBuildingsLegend',
         component: UpwrBuildingsLegend
+      });
+    } else if (componentId === 'popUp' && isPopUpVisible.value) {
+      components.push({
+        id: 'popUp',
+        component: PopUpComponent
       });
     }
   }
