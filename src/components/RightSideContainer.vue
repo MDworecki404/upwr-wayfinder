@@ -28,17 +28,20 @@ const SettingsContainer = defineAsyncComponent(() =>
 const RoutingContainer = defineAsyncComponent(() =>
   import('./RightSideComponents/RoutingComponent.vue')
 );
+const UpwrBuildingsLegend = defineAsyncComponent(() =>
+  import('./RightSideComponents/Legends/UpwrBuildingsLegend.vue')
+);
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
 const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
 const isRoutingComponentVisible = inject('isRoutingComponentVisible') as Ref<boolean>;
-
+const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 // Śledzenie kolejności aktywacji komponentów
 const componentOrder = ref<string[]>([]);
 
 // Obserwowanie zmian widoczności komponentów
 watch(isLayerComponentVisible, (newVal, oldVal) => {
-  if (newVal && !oldVal) {
+  if (newVal && !oldVal) {    
     // Komponent został aktywowany
     if (!componentOrder.value.includes('layers')) {
       componentOrder.value.push('layers');
@@ -82,6 +85,19 @@ watch(isRoutingComponentVisible, (newVal, oldVal) => {
   }
 });
 
+watch(isUpwrBuildingsLegendVisible, (newVal, oldVal) => {
+  if (newVal && !oldVal) {
+    if (!componentOrder.value.includes('upwrBuildingsLegend')) {
+      componentOrder.value.push('upwrBuildingsLegend');
+    }
+  } else if (!newVal && oldVal) {
+    const index = componentOrder.value.indexOf('upwrBuildingsLegend');
+    if (index > -1) {
+      componentOrder.value.splice(index, 1);
+    }
+  }
+});
+
 // Tablica aktywnych komponentów w kolejności ich aktywacji
 const activeComponents = computed(() => {
   const components = [];
@@ -103,9 +119,13 @@ const activeComponents = computed(() => {
         id: 'routing',
         component: RoutingContainer
       });
+    } else if (componentId === 'upwrBuildingsLegend' && isUpwrBuildingsLegendVisible.value) {
+      components.push({
+        id: 'upwrBuildingsLegend',
+        component: UpwrBuildingsLegend
+      });
     }
   }
-  
   return components;
 });
 </script>

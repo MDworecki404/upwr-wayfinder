@@ -5,6 +5,7 @@ const Map = defineAsyncComponent(() => import('./components/Map.vue'));
 const TopToolContainer = defineAsyncComponent(() => import('./components/TopToolContainer.vue'));
 const RightSideContainer = defineAsyncComponent(() => import('./components/RightSideContainer.vue'));
 const HelloDialog = defineAsyncComponent(() => import('./components/HelloDialog.vue'));
+const BottomToolContainer = defineAsyncComponent(() => import('./components/BottomToolContainer.vue'));
 
 const isLayerComponentVisible = ref(false);
 
@@ -22,6 +23,12 @@ const isRoutingComponentVisible = ref(false);
 
 const toggleRoutingComponentVisibility = () => {
   isRoutingComponentVisible.value = !isRoutingComponentVisible.value;
+};
+
+const isUpwrBuildingsLegendVisible = ref(false);
+
+const toggleUpwrBuildingsLegendVisibility = () => {
+  isUpwrBuildingsLegendVisible.value = !isUpwrBuildingsLegendVisible.value;
 };
 
 
@@ -49,6 +56,8 @@ provide('selectedBasemap', selectedBasemap);
 provide('expandedBasemap', expandedBasemap);
 provide('expandedLayers', expandedLayers);
 provide('selectedLayer', selectedLayer);
+provide('isUpwrBuildingsLegendVisible', isUpwrBuildingsLegendVisible);
+provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibility);
 </script>
 
 <template>
@@ -58,6 +67,7 @@ provide('selectedLayer', selectedLayer);
             <Map />
             <TopToolContainer />
             <RightSideContainer />
+            <BottomToolContainer />
         </v-main>
     </v-app>
 </template>

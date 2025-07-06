@@ -17,6 +17,7 @@ const changeGpsIcon = () => {
 const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') as () => void;
 const toggleSettingsComponentVisibility = inject('toggleSettingsComponentVisibility') as () => void;
 const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibility') as () => void;
+
 </script>
 <template>
         <v-container class="tool-container" fluid>

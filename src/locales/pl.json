@@ -23,5 +23,12 @@
   "endBuilding": "Budynek docelowy",
   "routing": "Wyszukiwarka tras",
   "findRoute": "Wyszukaj trasę",
-  "clearRoute": "Wyczyść trasę"
+  "clearRoute": "Wyczyść trasę",
+  "legend": "Legenda",
+  "budynkiA": "Budynki A",
+  "budynkiB": "Budynki B",
+  "budynkiC": "Budynki C",
+  "budynkiD": "Budynki D",
+  "budynkiE": "Budynki E",
+  "budynkiF": "Budynki F"
 }

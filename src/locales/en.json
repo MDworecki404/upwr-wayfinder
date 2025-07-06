@@ -22,5 +22,12 @@
   "endBuilding": "End building",
   "routing": "Route finder",
   "findRoute": "Find route",
-  "clearRoute": "Clear route"
+  "clearRoute": "Clear route",
+  "legend": "Legend",
+  "budynkiA": "A buildings",
+  "budynkiB": "B buildings",
+  "budynkiC": "C buildings",
+  "budynkiD": "D buildings",
+  "budynkiE": "E buildings",
+  "budynkiF": "F buildings"
 }

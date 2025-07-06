@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import {inject} from 'vue';
+import {inject, type Ref} from 'vue';
 import { 
     register3DGoogleTiles, 
     register3DOSM3DTiles,
-    registerLod1Buildings
+    registerLod1Buildings,
+    registerUpwrBuildings
 }  from '../../services/layers';
 import { changeBasemap } from '../../services/basemaps';
 import { ref, watch } from 'vue';
+import { zoomTo } from '../../services/zoomTo'
 
 // Inject stanu z App.vue zamiast lokalnych refów
 const selectedBasemap = inject('selectedBasemap') as any;
@@ -14,16 +16,13 @@ const expandedBasemap = inject('expandedBasemap') as any;
 const expandedLayers = inject('expandedLayers') as any;
 const selectedLayer = inject('selectedLayer') as any;
 
-selectedLayer.value.google3dtiles = false;
-selectedLayer.value.osm3dtiles = false;
-selectedLayer.value.lod1buildings = false;
-selectedLayer.value.upwrbuildings = false;
-
-const isGoogle3dtilesEnabled = ref(false);
-const isOsm3dtilesEnabled = ref(false);
-const isLod1BuildingsEnabled = ref(false);
-const isOrtoBasemapEnabled = ref(false);
-const isOSMBasemapEnabled = ref(false);
+const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
+const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
+const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
+const isOrtoBasemapEnabled = ref(selectedLayer.value.ortho);
+const isOSMBasemapEnabled = ref(selectedLayer.value.osm);
+const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
+const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 
 watch(isGoogle3dtilesEnabled, (newVal) => {
     register3DGoogleTiles(newVal);
@@ -35,6 +34,10 @@ watch(isOsm3dtilesEnabled, (newVal) => {
 
 watch(isLod1BuildingsEnabled, (newVal) => {
     registerLod1Buildings(newVal);
+});
+
+watch(isUpwrBuildingsEnabled, (newVal) => {
+    registerUpwrBuildings(newVal);
 });
 
 watch(selectedBasemap, (newVal) => {
@@ -75,10 +78,28 @@ const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') 
                 >
                     <v-expansion-panel-title color="grey-lighten-3">{{ $t('layers3D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
-                        <v-checkbox color="info" v-model="selectedLayer.google3dtiles" @click="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" :label="$t('google3dtiles')"></v-checkbox>
-                        <v-checkbox color="info" v-model="selectedLayer.osm3dtiles" @click="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" :label="$t('osm3dtiles')"></v-checkbox>
-                        <v-checkbox color="info" v-model="selectedLayer.lod1buildings" @click="isLod1BuildingsEnabled = !isLod1BuildingsEnabled" :label="$t('lod1buildings')"></v-checkbox>
-                        <v-checkbox color="info" v-model="selectedLayer.upwrbuildings" :label="$t('upwrbuildings')"></v-checkbox>
+                        <v-row align="center" justify="space-between">
+                            <v-checkbox color="info" v-model="selectedLayer.google3dtiles" @click="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" :label="$t('google3dtiles')" />
+                        </v-row>
+                        <v-row align="center" justify="space-between">
+                            <v-checkbox color="info" v-model="selectedLayer.osm3dtiles" @click="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" :label="$t('osm3dtiles')" />
+                        </v-row>
+                        <v-row align="center" justify="space-between">
+                            <v-checkbox color="info" v-model="selectedLayer.lod1buildings" @click="isLod1BuildingsEnabled = !isLod1BuildingsEnabled"  :label="$t('lod1buildings')" />
+                            <v-btn icon size="x-small" variant="text" @click="zoomTo('lod1buildings')" v-if="isLod1BuildingsEnabled">
+                                <v-icon>mdi-magnify</v-icon>
+                            </v-btn>
+                        </v-row>
+                        <v-row align="center" justify="space-between">
+                            <v-checkbox color="info" v-model="selectedLayer.upwrbuildings" @click="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" :label="$t('upwrbuildings')" />
+                            <v-btn icon size="x-small" variant="text" @click="isUpwrBuildingsLegendVisible = !isUpwrBuildingsLegendVisible" v-if="isUpwrBuildingsEnabled">
+                                <v-icon>mdi-map-legend</v-icon>
+                            </v-btn>    
+                            <v-btn icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource')" v-if="isUpwrBuildingsEnabled">
+                                <v-icon>mdi-magnify</v-icon>
+                            </v-btn>
+                            
+                        </v-row>
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>

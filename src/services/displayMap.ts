@@ -41,6 +41,7 @@ export function displayMap(containerId: string): void {
         }
     })
 
+
     //viewer.scene.camera.changed.addEventListener(() => {
     //    const cameraPosition = viewer.camera.positionCartographic;
     //    console.log(`Camera Position: Longitude: ${Cesium.Math.toDegrees(cameraPosition.longitude)}, Latitude: ${Cesium.Math.toDegrees(cameraPosition.latitude)}, Height: ${cameraPosition.height}`);
