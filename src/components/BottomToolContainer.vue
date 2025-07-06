@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, shallowRef, watch } from 'vue';
+import { shallowRef, watch } from 'vue';
 
 const open = shallowRef(false)
 const fabPosition = shallowRef('absolute')

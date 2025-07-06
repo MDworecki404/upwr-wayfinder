@@ -2,7 +2,7 @@ import * as Cesium from 'cesium'
 
 
 import { viewer } from './displayMap'
-import { google3dtiles, osm3dtiles, lod1buildings, upwrBuildingsDataSource } from './layers';
+import {lod1buildings, upwrBuildingsDataSource } from './layers';
 
 const zoomTo = (entity: string) => {         
     switch(entity){
