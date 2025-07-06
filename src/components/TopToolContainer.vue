@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted, onUnmounted } from 'vue';
 
 
 const isGpsEnabled = ref(false);
@@ -12,7 +12,31 @@ const changeGpsIcon = () => {
     userPositionFollow();
 };
 
+const fullscreenStyle = ref('mdi-fullscreen');
 
+const toggleFullscreen = () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen();
+    }
+};
+
+const updateFullscreenIcon = () => {
+    if (document.fullscreenElement) {
+        fullscreenStyle.value = 'mdi-fullscreen-exit';
+    } else {
+        fullscreenStyle.value = 'mdi-fullscreen';
+    }
+};
+
+onMounted(() => {
+    document.addEventListener('fullscreenchange', updateFullscreenIcon);
+});
+    
+onUnmounted(() => {
+    document.removeEventListener('fullscreenchange', updateFullscreenIcon);
+});
 
 const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') as () => void;
 const toggleSettingsComponentVisibility = inject('toggleSettingsComponentVisibility') as () => void;
@@ -23,6 +47,7 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
             <v-row no-gutters>
                 <v-col cols="12" class="d-flex justify-start align-center">
                     <v-btn color="info" icon="mdi-cog" @click="toggleSettingsComponentVisibility"></v-btn>
+                    <v-btn color="info" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen"></v-btn>
                     <v-btn color="info" icon="mdi-layers" class="ml-2" @click="toggleLayerComponentVisibility"></v-btn>
                     <v-btn color="info" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility"></v-btn>
                     <v-btn color="info" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
