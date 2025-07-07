@@ -3,14 +3,14 @@ import universityBuildings from '../../data/universityBuildings.json';
 import { ref } from 'vue';
 import { flyToBuilding } from '../../services/flyToBuilding';
 
-const search = ref('');
+const search = ref(universityBuildings.buildings[0]?.navCode || '');
 const loading = ref(false);
 
 
 </script>
 
 <template>
-    <v-divider class="mb-3"></v-divider>
+    <v-divider class="mb-5 mt-5"></v-divider>
     <v-autocomplete
         :items="universityBuildings.buildings"
         :item-title="item => item.code + ' - ' + item.name"

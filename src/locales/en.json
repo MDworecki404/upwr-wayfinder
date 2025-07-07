@@ -35,5 +35,7 @@
   "selectedTime": "Selected time",
   "playAnimation": "Play animation",
   "stopAnimation": "Reset",
-  "searchBuilding": "Search building"
+  "searchBuilding": "Search building",
+  "google": "Google Maps",
+  "esri": "Esri World Topo Map"
 }

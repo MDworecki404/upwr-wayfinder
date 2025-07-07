@@ -123,11 +123,9 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                         highlightedEntity = entity;
                     }
                 } else {
-                    // ZAWSZE przywróć kolor, jeśli nie ma budynku pod kursorem
-                    if (highlightedEntity && originalColors.has(highlightedEntity)) {
-                        highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
-                        highlightedEntity = null;
-                    }
+                    // @ts-expect-error
+                    highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
+                    highlightedEntity = null;
                 }
             }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 

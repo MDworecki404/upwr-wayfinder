@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium';
 import startConfig from '../data/startConfig.json';
+import { google3dtiles, osm3dtiles, lod1buildings } from './layers';
 
 let viewer: Cesium.Viewer | null = null;
 
@@ -30,6 +31,11 @@ export function displayMap(containerId: string): void {
     viewer.shadows = true;
     viewer.scene.shadowMap.enabled = true;
     viewer.scene.shadowMap.darkness = 0.5;
+    viewer.scene.sun.show = true;
+    viewer.scene.skyBox.show = true;
+    viewer.scene.skyAtmosphere.show = true;
+    viewer.scene.globe.enableLighting = true;
+    viewer.clock.currentTime = Cesium.JulianDate.fromDate(new Date(Date.UTC(2025, 6, 1, 12, 0, 0)));
 
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
@@ -44,6 +50,30 @@ export function displayMap(containerId: string): void {
         }
     })
 
+    function updateImageryBrightness() {
+        // @ts-expect-error
+        const imageryLayer = viewer.imageryLayers.get(0);
+        if (!viewer) return;
+        const date = Cesium.JulianDate.toDate(viewer.clock.currentTime);
+        const hour = date.getHours() + date.getMinutes() / 60;
+
+        let brightness = 1;
+
+        if (hour >= 6 && hour < 18) {
+            brightness = 1;
+        } else if (hour >= 18 && hour < 20) {
+            brightness = 1 - ((hour - 18) / 2) * 0.7;
+        } else if (hour >= 20 || hour < 4) {
+            brightness = 0.3;
+        } else if (hour >= 4 && hour < 6) {
+            brightness = 0.3 + ((hour - 4) / 2) * 0.7;
+        }
+
+        imageryLayer.brightness = brightness;
+
+
+    }
+    viewer.clock.onTick.addEventListener(updateImageryBrightness);
 
     //viewer.scene.camera.changed.addEventListener(() => {
     //    const cameraPosition = viewer.camera.positionCartographic;

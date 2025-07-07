@@ -36,5 +36,7 @@
   "selectedTime": "Wybrany czas",
   "playAnimation": "Odtwórz animację",
   "stopAnimation": "Zresetuj",
-  "searchBuilding": "Wyszukaj budynek"
+  "searchBuilding": "Wyszukaj budynek",
+  "google": "Google Maps",
+  "esri": "Esri World Topo Map"
 }

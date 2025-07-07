@@ -31,6 +31,32 @@ export const registerOrtoBasemap = async (isEnabled: boolean) => {
     )}
 }
 
+export const registerGoogleMapsStandard = async (isEnabled: boolean) => {
+    switch(isEnabled){
+        case true:
+            viewer?.imageryLayers.removeAll()
+            viewer?.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                url: 'https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}&hl={pl}',
+                maximumLevel: 22,
+                credit: new Cesium.Credit('Map data &copy;2025 Google'),
+            }))
+
+    }
+}
+
+export const registerEsriWorldTopoMap = async (isEnabled: boolean) => {
+    switch(isEnabled){
+        case true:
+            viewer?.imageryLayers.removeAll()
+            viewer?.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}&hl={pl}',
+                credit: new Cesium.Credit('Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'),
+                maximumLevel: 22,
+            }))
+            break;
+    }
+}
+
 export const changeBasemap = async (basemap: string) => {
     switch(basemap){
         case 'osm':
@@ -38,6 +64,12 @@ export const changeBasemap = async (basemap: string) => {
             break;
         case 'ortho':
             registerOrtoBasemap(true);
+            break;
+        case 'google':
+            registerGoogleMapsStandard(true);
+            break;
+        case 'esri':
+            registerEsriWorldTopoMap(true);
             break;
     }
 }
