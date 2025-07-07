@@ -69,11 +69,11 @@ Cesium.GeoJsonDataSource.clampToGround = true;
 export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () => void) => {
     switch(isEnabled){
         case true:
-            const resource = await Cesium.IonResource.fromAssetId(3519476);
+            const resource = await Cesium.IonResource.fromAssetId(3519578);
             upwrBuildingsDataSource = await Cesium.GeoJsonDataSource.load(resource);
             
             upwrBuildingsDataSource.entities.values.forEach(entity => {
-                entity.polygon!.height = new Cesium.ConstantProperty(170);
+                entity.polygon!.height = new Cesium.ConstantProperty(158+entity.properties?.height._value+5);
                 entity.polygon!.extrudedHeight = new Cesium.ConstantProperty(158);
                 entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(255, 255, 255, 255));
                 entity.polygon!.outline = new Cesium.ConstantProperty(false);
