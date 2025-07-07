@@ -1,6 +1,5 @@
 import * as Cesium from 'cesium';
 import startConfig from '../data/startConfig.json';
-import { google3dtiles, osm3dtiles, lod1buildings } from './layers';
 
 let viewer: Cesium.Viewer | null = null;
 
