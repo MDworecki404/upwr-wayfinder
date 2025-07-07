@@ -35,12 +35,16 @@ const UpwrBuildingsLegend = defineAsyncComponent(() =>
 const PopUpComponent = defineAsyncComponent(() =>
   import('./RightSideComponents/PopUpComponent.vue')
 );
+const TimelineComponent = defineAsyncComponent(() =>
+  import('./RightSideComponents/TimelineComponent.vue')
+);
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
 const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
 const isRoutingComponentVisible = inject('isRoutingComponentVisible') as Ref<boolean>;
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 const isPopUpVisible = inject('isPopUpVisible') as Ref<boolean>;
+const isTimelineComponentVisible = inject('isTimelineComponentVisible') as Ref<boolean>;
 
 const componentOrder = ref<string[]>([]);
 
@@ -116,6 +120,21 @@ watch(isPopUpVisible, (newVal, oldVal) => {
   }
 });
 
+watch(isTimelineComponentVisible, (newVal, oldVal) => {
+
+  if (newVal && !oldVal) {
+    if (!componentOrder.value.includes('timeline')) {
+      componentOrder.value.unshift('timeline');
+    }
+  }
+  else if (!newVal && oldVal) {
+    const index = componentOrder.value.indexOf('timeline');
+    if (index > -1) {
+      componentOrder.value.splice(index, 1);
+    }
+  }
+});
+
 // Tablica aktywnych komponentów w kolejności ich aktywacji
 const activeComponents = computed(() => {
   const components = [];
@@ -146,6 +165,11 @@ const activeComponents = computed(() => {
       components.push({
         id: 'popUp',
         component: PopUpComponent
+      });
+    } else if (componentId === 'timeline' && isTimelineComponentVisible.value) {
+      components.push({
+        id: 'timeline',
+        component: TimelineComponent
       });
     }
   }

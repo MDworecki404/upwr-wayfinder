@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { shallowRef, watch } from 'vue';
+import { inject, shallowRef, watch } from 'vue';
 
 const open = shallowRef(false)
 const fabPosition = shallowRef('absolute')
 const menuLocation = shallowRef('right center') as any
 const fabLocation = shallowRef('left bottom')
 const transition = shallowRef('slide-x-reverse')
+
+const toggleTimelineComponentVisibility = inject('toggleTimelineComponentVisibility') as () => void;
 
 
 const reopen = () => {
@@ -32,7 +34,7 @@ watch(fabPosition, () => open.value = false)
         :transition="transition"
         activator="parent"  
         >
-        <v-btn key="1" color="info" icon>
+        <v-btn key="1" color="info" icon @click="toggleTimelineComponentVisibility">
             <v-icon size="24">mdi-clock-outline</v-icon>
         </v-btn>
         </v-speed-dial>

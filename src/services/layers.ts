@@ -44,6 +44,15 @@ export const registerLod1Buildings = async (isEnabled: boolean) => {
             const offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0);
             const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
             lod1buildings.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+            lod1buildings.shadows = Cesium.ShadowMode.ENABLED;
+
+            const handler = new Cesium.ScreenSpaceEventHandler(viewer?.canvas);
+            handler.setInputAction(function (click: any) {
+                const picked = viewer?.scene.pick(click.position);
+                if (Cesium.defined(picked) && picked.primitive === lod1buildings && picked instanceof Cesium.Cesium3DTileFeature){
+                    console.log(picked.getProperty('gml_id'));
+                }
+            }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
             break;
         case false:
             viewer?.scene.primitives.remove(lod1buildings);
@@ -60,7 +69,7 @@ Cesium.GeoJsonDataSource.clampToGround = true;
 export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () => void) => {
     switch(isEnabled){
         case true:
-            const resource = await Cesium.IonResource.fromAssetId(3516824);
+            const resource = await Cesium.IonResource.fromAssetId(3519476);
             upwrBuildingsDataSource = await Cesium.GeoJsonDataSource.load(resource);
             
             upwrBuildingsDataSource.entities.values.forEach(entity => {
@@ -68,26 +77,21 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                 entity.polygon!.extrudedHeight = new Cesium.ConstantProperty(158);
                 entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(255, 255, 255, 255));
                 entity.polygon!.outline = new Cesium.ConstantProperty(false);
-
-                switch(entity.properties?.A._value[0]){
-                    case 'A':
+                const id = entity.properties?.A._value;
+                if (typeof id === 'string') {
+                    if (id.startsWith('A')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(135, 70, 36, 255));
-                        break;
-                    case 'B':
+                    } else if (id.startsWith('B')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(131, 105, 30, 255));
-                        break;
-                    case 'C':
+                    } else if (id.startsWith('C')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(108, 140, 58, 255));
-                        break;
-                    case 'D':
+                    } else if (id.startsWith('D')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(52, 171, 116, 255));
-                        break;
-                    case 'E':
+                    } else if (id.startsWith('E')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(0, 199, 193, 255));
-                        break;
-                    case 'F':
+                    } else if (id.startsWith('F')) {
                         entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(71, 64, 99, 255));
-                        break;
+                    }
                 }
             });
             const handler = new Cesium.ScreenSpaceEventHandler(viewer?.canvas);
@@ -97,14 +101,20 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
             handler.setInputAction(function (movement: any) {
                 const pickedObject = viewer?.scene.pick(movement.endPosition);
 
-                if (Cesium.defined(pickedObject) && pickedObject?.id && upwrBuildingsDataSource?.entities.contains(pickedObject.id)) {
+                if (
+                    Cesium.defined(pickedObject) &&
+                    pickedObject?.id &&
+                    upwrBuildingsDataSource?.entities.contains(pickedObject.id)
+                ) {
                     const entity = pickedObject.id;
 
                     if (highlightedEntity !== entity) {
+                        // Przywróć poprzedni podświetlony
                         if (highlightedEntity && originalColors.has(highlightedEntity)) {
                             highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
                         }
 
+                        // Zapisz oryginalny kolor jeśli nie był zapisany
                         if (!originalColors.has(entity)) {
                             originalColors.set(entity, entity.polygon!.material);
                         }
@@ -113,6 +123,7 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                         highlightedEntity = entity;
                     }
                 } else {
+                    // ZAWSZE przywróć kolor, jeśli nie ma budynku pod kursorem
                     if (highlightedEntity && originalColors.has(highlightedEntity)) {
                         highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
                         highlightedEntity = null;
@@ -137,7 +148,7 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                 }
             }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
         
-
+            
             viewer?.dataSources.add(upwrBuildingsDataSource);
             break;
         case false:

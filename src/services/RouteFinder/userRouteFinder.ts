@@ -3,6 +3,7 @@ import * as Cesium from 'cesium'
 import BuildingData from '../../data/universityBuildings.json'
 import { stopTracking, userPositionFollow } from "../userLocation";
 import gsap from "gsap";
+import { upwrBuildingsDataSource } from "../layers";
 
 // Zmienna do śledzenia aktywnego workera
 let activeWorker: Worker | null = null;
@@ -125,6 +126,15 @@ const userRouteFinder = async (endChoice: string, selectedMode: string) => {
                     clampToGround: true
                 }
             });
+            if(upwrBuildingsDataSource) {
+                const endBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
+                    (entity: any) => entity._properties.A._value === endChoice
+                );
+                if(endBuildingEntity) {
+                    // @ts-expect-error
+                    endBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
+                }
+            }
 
 
             // Ukryj ikonę ładowania

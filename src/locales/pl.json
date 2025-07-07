@@ -31,5 +31,10 @@
   "budynkiD": "Budynki D",
   "budynkiE": "Budynki E",
   "budynkiF": "Budynki F",
-  "popUpTitle": "Informacje o budynku"
+  "popUpTitle": "Informacje o budynku",
+  "timeline": "Oś czasu",
+  "selectedTime": "Wybrany czas",
+  "playAnimation": "Odtwórz animację",
+  "stopAnimation": "Zresetuj",
+  "searchBuilding": "Wyszukaj budynek"
 }

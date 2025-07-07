@@ -30,5 +30,10 @@
   "budynkiD": "D buildings",
   "budynkiE": "E buildings",
   "budynkiF": "F buildings",
-  "popUpTitle": "Building information"
+  "popUpTitle": "Building information",
+  "timeline": "Timeline",
+  "selectedTime": "Selected time",
+  "playAnimation": "Play animation",
+  "stopAnimation": "Reset",
+  "searchBuilding": "Search building"
 }

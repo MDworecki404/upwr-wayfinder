@@ -7,8 +7,10 @@ import {
     registerUpwrBuildings
 }  from '../../services/layers';
 import { changeBasemap } from '../../services/basemaps';
-import { ref, watch } from 'vue';
+import { defineAsyncComponent, ref, watch } from 'vue';
 import { zoomTo } from '../../services/zoomTo'
+
+const SearchComponent = defineAsyncComponent(() => import('./SearchComponent.vue'));
 
 // Inject stanu z App.vue zamiast lokalnych refów
 const selectedBasemap = inject('selectedBasemap') as any;
@@ -100,6 +102,9 @@ const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') 
                                 <v-icon>mdi-magnify</v-icon>
                             </v-btn>
                             
+                        </v-row>
+                        <v-row v-if="isUpwrBuildingsEnabled" align="center" justify="space-between">
+                            <SearchComponent />
                         </v-row>
                     </v-expansion-panel-text>
                 </v-expansion-panel>

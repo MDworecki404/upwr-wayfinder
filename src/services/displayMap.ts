@@ -27,6 +27,9 @@ export function displayMap(containerId: string): void {
         }))
     });
 
+    viewer.shadows = true;
+    viewer.scene.shadowMap.enabled = true;
+    viewer.scene.shadowMap.darkness = 0.5;
 
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(

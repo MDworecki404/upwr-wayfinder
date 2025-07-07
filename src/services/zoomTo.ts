@@ -2,18 +2,33 @@ import * as Cesium from 'cesium'
 
 
 import { viewer } from './displayMap'
+
 import {lod1buildings, upwrBuildingsDataSource } from './layers';
 
 const zoomTo = (entity: string) => {         
     switch(entity){
         case 'lod1buildings':
             if(lod1buildings){
-                viewer?.zoomTo(lod1buildings!, new Cesium.HeadingPitchRange(0.0, -0.9))
+                viewer?.camera.setView({
+                    destination: Cesium.Cartesian3.fromRadians(17.026377945456957*Math.PI/180, 51.0859535257346*Math.PI/180, 2400.2296524386547),
+                    orientation: {
+                        heading: 33.04896713576276*Math.PI/180,
+                        pitch: -39.683620410669114*Math.PI/180,
+                        roll: 0.005388234304626005*Math.PI/180
+                    }
+                })
             }
             break;
         case 'upwrBuildingsDataSource':
             if(upwrBuildingsDataSource){
-                viewer?.zoomTo(upwrBuildingsDataSource!, new Cesium.HeadingPitchRange(0.0, -0.9))
+                viewer?.camera.setView({
+                    destination: Cesium.Cartesian3.fromRadians(17.077919474160037*Math.PI/180, 51.08271347054283*Math.PI/180, 2399.3896360433782),
+                    orientation: {
+                        heading: 0.7410473729223745*Math.PI/180,
+                        pitch: -41.75127005799727*Math.PI/180,
+                        roll: 359.9911063897071*Math.PI/180
+                    }
+                })
             }
             break;
     }

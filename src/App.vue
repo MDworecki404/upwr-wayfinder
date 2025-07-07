@@ -31,6 +31,12 @@ const toggleUpwrBuildingsLegendVisibility = () => {
   isUpwrBuildingsLegendVisible.value = !isUpwrBuildingsLegendVisible.value;
 };
 
+const isTimelineComponentVisible = ref(false);
+
+const toggleTimelineComponentVisibility = () => {
+  isTimelineComponentVisible.value = !isTimelineComponentVisible.value;
+};
+
 const isPopUpVisible = ref(false);
 
   const showPopUp = () => {
@@ -70,6 +76,9 @@ provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibili
 provide('isPopUpVisible', isPopUpVisible);
 provide('showPopUp', showPopUp);
 provide('hidePopUp', hidePopUp);
+
+provide('isTimelineComponentVisible', isTimelineComponentVisible);
+provide('toggleTimelineComponentVisibility', toggleTimelineComponentVisibility);
 </script>
 
 <template>

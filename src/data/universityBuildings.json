@@ -2,6 +2,7 @@
   "buildings": [
     {
       "code": "A1",
+      "navCode": "A1",
       "name": "Skłodowskiej-Curie 42 – sale Z",
       "node": [17.0634787, 51.110551],
       "facilities": [
@@ -24,6 +25,7 @@
     },
     {
       "code": "A2",
+      "navCode": "A2",
       "name": "Norwida 25 – sale R",
       "node": [17.0639417, 51.1113126],
       "facilities": [
@@ -63,6 +65,7 @@
     },
     {
       "code": "A3",
+      "navCode": "A3",
       "name": "Norwida 31 – sale W",
       "node": [17.0646965, 51.1122054],
       "facilities": [
@@ -78,16 +81,18 @@
     },
     {
       "code": "A4",
+      "navCode": "A4",
       "name": "Norwida 25",
-      "node": [17.0639417, 51.1113126],
+      "node": [17.0655739,51.1117660],
       "facilities": [
         "Biblioteka Główna"
       ]
     },
     {
       "code": "A5",
+      "navCode": "A5",
       "name": "Norwida 27",
-      "node": [17.0643268, 51.1109914],
+      "node": [51.1117685,17.0655727],
       "facilities": [
         "Centrum Eksploatacji i Remontów Obiektów Budowlanych",
         "Centrum Zamówień Publicznych i Zakupów",
@@ -101,6 +106,7 @@
     },
     {
       "code": "A6",
+      "navCode": "A6",
       "name": "Norwida 27A",
       "node": [17.0646454, 51.1110378],
       "facilities": [
@@ -109,6 +115,7 @@
     },
     {
       "code": "A7",
+      "navCode": "A7",
       "name": "Norwida 27B",
       "node": [ 17.0649949, 51.111292],
       "facilities": [
@@ -117,6 +124,7 @@
     },
     {
       "code": "A8",
+      "navCode": "A7",
       "name": "Norwida 27D",
       "node": [ 17.0653697, 51.1115534],
       "facilities": [
@@ -126,6 +134,7 @@
     },
     {
       "code": "A12",
+      "navCode": "A7",
       "name": "Norwida 27C",
       "node": [17.0650555, 51.111469],
       "facilities": [
@@ -136,6 +145,7 @@
     },
     {
       "code": "B1",
+      "navCode": "B1",
       "name": "pl. Grunwaldzki 45 – sale W",
       "node": [17.0657807, 51.1125429],
       "facilities": [
@@ -144,6 +154,7 @@
     },
     {
       "code": "B2",
+      "navCode": "B2",
       "name": "pl. Grunwaldzki 47 – sale W",
       "node": [ 17.0667404, 51.1128346],
       "facilities": [
@@ -152,6 +163,7 @@
     },
     {
       "code": "B3",
+      "navCode": "B3",
       "name": "pl. Grunwaldzki 49 – sale W",
       "node": [17.0677224, 51.1131023],
       "facilities": [
@@ -161,6 +173,7 @@
     },
     {
       "code": "B4",
+      "navCode": "B4",
       "name": "pl. Grunwaldzki 51 – sale W",
       "node": [17.0685927, 51.1133778],
       "facilities": [
@@ -169,6 +182,7 @@
     },
     {
       "code": "B5",
+      "navCode": "B5",
       "name": "pl. Grunwaldzki 51A",
       "node": [17.0693351, 51.1137806],
       "facilities": [
@@ -177,6 +191,7 @@
     },
     {
       "code": "B6",
+      "navCode": "B4",
       "name": "pl. Grunwaldzki 49A",
       "node": [17.06783406477118, 51.11300329624157],
       "facilities": [
@@ -184,15 +199,8 @@
       ]
     },
     {
-      "code": "B7",
-      "name": "Mikulicza-Radeckiego 6",
-      "node": [17.0669998, 51.1121978],
-      "facilities": [
-        "Brama wjazdowa"
-      ]
-    },
-    {
       "code": "B8",
+      "navCode": "B8",
       "name": "Mikulicza-Radeckiego 6",
       "node": [17.0669998, 51.1121978],
       "facilities": [
@@ -201,6 +209,7 @@
     },
     {
       "code": "B9",
+      "navCode": "B9",
       "name": "pl. Grunwaldzki 47A",
       "node": [17.0663065, 51.112501],
       "facilities": [
@@ -210,6 +219,7 @@
     },
     {
       "code": "C1",
+      "navCode": "C1",
       "name": "Grunwaldzka 53 – sale G",
       "node": [17.0620949, 51.1132382],
       "facilities": [
@@ -221,6 +231,7 @@
     },
     {
       "code": "C2",
+      "navCode": "C2",
       "name": "pl. Grunwaldzki 24 – sale M",
       "node": [17.0630029, 51.1129031],
       "facilities": [
@@ -234,6 +245,7 @@
     },
     {
       "code": "C3",
+      "navCode": "C3",
       "name": "pl. Grunwaldzki 24A – sale C",
       "node": [17.0637573, 51.1128419],
       "description": "Centrum Dydaktyczno-Naukowe",
@@ -252,6 +264,7 @@
     },
     {
       "code": "C4",
+      "navCode": "C4",
       "name": "pl. Grunwaldzki 24 – sale G, M",
       "node": [17.0630029, 51.1129031],
       "facilities": [
@@ -263,6 +276,7 @@
     },
     {
       "code": "C5",
+      "navCode": "C5",
       "name": "ul. Grunwaldzka 55 – sale H",
       "node": [17.0622198, 51.1137842],
       "facilities": [
@@ -276,6 +290,7 @@
     },
     {
       "code": "E1",
+      "navCode": "E1",
       "name": "Kożuchowska 1",
       "node": [17.0945321, 51.0987899],
       "facilities": [
@@ -284,6 +299,7 @@
     },
     {
       "code": "E2",
+      "navCode": "E2",
       "name": "Kożuchowska 5B",
       "node": [17.0949057, 51.0981787],
       "facilities": [
@@ -295,6 +311,7 @@
     },
     {
       "code": "E3",
+      "navCode": "E3",
       "name": "Kożuchowska 5 – sale W",
       "node": [17.095247, 51.0979641],
       "facilities": [
@@ -303,6 +320,7 @@
     },
     {
       "code": "E4",
+      "navCode": "E4",
       "name": "Kożuchowska 7A",
       "node": [17.0956434, 51.0975707],
       "facilities": [
@@ -311,6 +329,7 @@
     },
     {
       "code": "E5",
+      "navCode": "E5",
       "name": "Kożuchowska 7",
       "node": [17.0964081, 51.0975797],
       "facilities": [
@@ -320,6 +339,7 @@
     },
     {
       "code": "E6",
+      "navCode": "E6",
       "name": "Kożuchowska 5A",
       "node": [17.0955496, 51.0980909],
       "facilities": [
@@ -328,6 +348,7 @@
     },
     {
       "code": "E9",
+      "navCode": "E9",
       "name": "Kożuchowska 5C",
       "node": [17.095346, 51.0982418],
       "facilities": [
@@ -336,6 +357,7 @@
     },
     {
       "code": "E10",
+      "navCode": "E5",
       "name": "Kożuchowska 7",
       "node": [17.0964081, 51.0975797],
       "facilities": [
@@ -344,6 +366,7 @@
     },
     {
       "code": "E11",
+      "navCode": "E11",
       "name": "Chełmońskiego 38D",
       "node": [17.0959078, 51.0987664],
       "facilities": [
@@ -354,6 +377,7 @@
     },
     {
       "code": "E12",
+      "navCode": "E12",
       "name": "Chełmońskiego 38C – sale AZ, AB",
       "node": [17.0956919, 51.0991462],
       "facilities": [
@@ -364,6 +388,7 @@
     },
     {
       "code": "E13",
+      "navCode": "E13",
       "name": "Chełmońskiego 38E",
       "node": [17.0954249, 51.0989428],
       "facilities": [
@@ -373,6 +398,7 @@
     },
     {
       "code": "F1",
+      "navCode": "F1",
       "name": "Chełmońskiego 37B – sale MR",
       "node": [17.0955641, 51.1000185],
       "facilities": [
@@ -382,6 +408,7 @@
     },
     {
       "code": "F2",
+      "navCode": "F2",
       "name": "Chełmońskiego 37",
       "node": [17.0953224, 51.0995765],
       "facilities": [
@@ -390,6 +417,7 @@
     },
     {
       "code": "F3",
+      "navCode": "F3",
       "name": "Chełmońskiego 39A",
       "node": [17.0962351, 51.1003607],
       "facilities": [
@@ -399,6 +427,7 @@
     },
     {
       "code": "F4",
+      "navCode": "F4",
       "name": "Chełmońskiego 41",
       "node": [17.0969047, 51.0999219],
       "facilities": [
@@ -408,6 +437,7 @@
     },
     {
       "code": "F5",
+      "navCode": "F5",
       "name": "Chełmońskiego 39",
       "node": [17.0969765, 51.0998325],
       "facilities": [
@@ -417,6 +447,7 @@
     },
     {
       "code": "F8",
+      "navCode": "F8",
       "name": "Chełmońskiego 37A",
       "node": [17.0951056, 51.0999763],
       "description": "Centrum Bioinżynierii",
@@ -427,6 +458,7 @@
     },
     {
       "code": "F11",
+      "navCode": "F11",
       "name": "Chełmońskiego 43A",
       "node": [17.0977216, 51.0996724],
       "facilities": [
@@ -435,6 +467,7 @@
     },
     {
       "code": "F12",
+      "navCode": "F12",
       "name": "Chełmońskiego 43",
       "node": [17.0976403, 51.1003348],
       "facilities": [
@@ -444,6 +477,7 @@
     },
     {
       "code": "F13",
+      "navCode": "F2",
       "name": "Chełmońskiego 37",
       "node": [17.0953224, 51.0995765],
       "description": "Centrum Nauk o Żywności i Żywieniu",
@@ -459,18 +493,21 @@
     },
     {
       "code": "DS1",
+      "navCode": "DS1",
       "name": "Arka, Olszewskiego 25",
       "node": [17.0974812, 51.1021278],
       "facilities": []
     },
     {
       "code": "DS2",
+      "navCode": "DS2",
       "name": "Centaur, ul. Grunwaldzka 65",
       "node": [17.0660493, 51.1140808],
       "facilities": []
     },
     {
       "code": "DS3",
+      "navCode": "DS3",
       "name": "„Labirynt, Sopocka 23",
       "node": [17.0703176, 51.116662],
       "facilities": [
@@ -480,18 +517,21 @@
     },
     {
       "code": "DS4",
+      "navCode": "DS4",
       "name": "Talizman, ul. Grunwaldzka 63",
       "node": [17.0654933, 51.1139827],
       "facilities": []
     },
     {
       "code": "DS5",
+      "navCode": "DS5",
       "name": "Zodiak, Grunwaldzka 106A",
       "node": [17.070888, 51.115013],
       "facilities": []
     },
     {
       "code": "DS6",
+      "navCode": "DS6",
       "name": "Raj, Pautscha 5/7",
       "node": [17.0997992, 51.1011293],
       "facilities": [] 

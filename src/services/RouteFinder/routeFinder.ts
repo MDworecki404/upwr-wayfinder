@@ -3,6 +3,7 @@ import * as Cesium from 'cesium'
 import BuildingData from '../../data/universityBuildings.json'
 import { stopTracking } from '../userLocation';
 import gsap from "gsap";
+import { upwrBuildingsDataSource } from '../layers';
 
 // Zmienna do śledzenia aktywnego workera
 let activeWorker: Worker | null = null;
@@ -109,6 +110,23 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
                     clampToGround: true
                 }
             });
+            
+            if(upwrBuildingsDataSource) {
+                const endBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
+                    (entity: any) => entity._properties.A._value === endChoice
+                );
+                const startBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
+                    (entity: any) => entity._properties.A._value === startChoice
+                );
+                if(endBuildingEntity) {
+                    // @ts-expect-error
+                    endBuildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
+                }
+                if(startBuildingEntity) {
+                    // @ts-expect-error
+                    startBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
+                }
+            }
 
             // Dodaj marker końcowy
 
