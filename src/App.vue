@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, provide, defineAsyncComponent } from 'vue';
+import { checkCameraPosition } from './services/forTest/checkCameraPosition';
+import startConfig from './data/startConfig.json';
 
 const Map = defineAsyncComponent(() => import('./components/Map.vue'));
 const TopToolContainer = defineAsyncComponent(() => import('./components/TopToolContainer.vue'));
 const RightSideContainer = defineAsyncComponent(() => import('./components/RightSideContainer.vue'));
 const HelloDialog = defineAsyncComponent(() => import('./components/HelloDialog.vue'));
 const BottomToolContainer = defineAsyncComponent(() => import('./components/BottomToolContainer.vue'));
-
+const SubtitlesComponent = defineAsyncComponent(() => import('./components/SubtitlesComponent.vue'));
+  
 const isLayerComponentVisible = ref(false);
 
 const toggleLayerComponentVisibility = () => {
@@ -35,6 +38,11 @@ const isTimelineComponentVisible = ref(false);
 
 const toggleTimelineComponentVisibility = () => {
   isTimelineComponentVisible.value = !isTimelineComponentVisible.value;
+};
+
+const isPresentationComponentVisible = ref(false);
+const togglePresentationComponentVisibility = () => {
+  isPresentationComponentVisible.value = !isPresentationComponentVisible.value;
 };
 
 const isPopUpVisible = ref(false);
@@ -79,6 +87,13 @@ provide('hidePopUp', hidePopUp);
 
 provide('isTimelineComponentVisible', isTimelineComponentVisible);
 provide('toggleTimelineComponentVisibility', toggleTimelineComponentVisibility);
+provide('isPresentationComponentVisible', isPresentationComponentVisible);
+provide('togglePresentationComponentVisibility', togglePresentationComponentVisibility);
+
+
+const triggerCheckCameraPosition = () => {
+  checkCameraPosition();
+}
 </script>
 
 <template>
@@ -89,6 +104,8 @@ provide('toggleTimelineComponentVisibility', toggleTimelineComponentVisibility);
             <TopToolContainer />
             <RightSideContainer />
             <BottomToolContainer />
+            <v-btn v-if="startConfig.isDev" @click="triggerCheckCameraPosition">Check Camera Position</v-btn>
+            <SubtitlesComponent />
         </v-main>
     </v-app>
 </template>

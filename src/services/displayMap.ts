@@ -36,6 +36,7 @@ export function displayMap(containerId: string): void {
     viewer.scene.globe.enableLighting = true;
     viewer.clock.currentTime = Cesium.JulianDate.fromDate(new Date(Date.UTC(2025, 6, 1, 12, 0, 0)));
 
+
     viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(
             startConfig.camera.defaultPosition.longitude,
@@ -74,16 +75,7 @@ export function displayMap(containerId: string): void {
     }
     viewer.clock.onTick.addEventListener(updateImageryBrightness);
 
-    //viewer.scene.camera.changed.addEventListener(() => {
-    //    const cameraPosition = viewer.camera.positionCartographic;
-    //    console.log(`Camera Position: Longitude: ${Cesium.Math.toDegrees(cameraPosition.longitude)}, Latitude: ${Cesium.Math.toDegrees(cameraPosition.latitude)}, Height: ${cameraPosition.height}`);
-    //    const cameraHeading = viewer.camera.heading;
-    //    console.log(`Camera Heading: ${Cesium.Math.toDegrees(cameraHeading)} degrees`);
-    //    const cameraPitch = viewer.camera.pitch;
-    //    console.log(`Camera Pitch: ${Cesium.Math.toDegrees(cameraPitch)} degrees`);
-    //    const cameraRoll = viewer.camera.roll;
-    //    console.log(`Camera Roll: ${Cesium.Math.toDegrees(cameraRoll)} degrees`);
-    //});
+    
 
     
 }

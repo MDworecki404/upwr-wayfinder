@@ -38,6 +38,9 @@ const PopUpComponent = defineAsyncComponent(() =>
 const TimelineComponent = defineAsyncComponent(() =>
   import('./RightSideComponents/TimelineComponent.vue')
 );
+const PresentationComponent = defineAsyncComponent(() =>
+  import('./RightSideComponents/PresentationComponent.vue')
+);
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
 const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
@@ -45,6 +48,7 @@ const isRoutingComponentVisible = inject('isRoutingComponentVisible') as Ref<boo
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 const isPopUpVisible = inject('isPopUpVisible') as Ref<boolean>;
 const isTimelineComponentVisible = inject('isTimelineComponentVisible') as Ref<boolean>;
+const isPresentationComponentVisible = inject('isPresentationComponentVisible') as Ref<boolean>;
 
 const componentOrder = ref<string[]>([]);
 
@@ -135,6 +139,21 @@ watch(isTimelineComponentVisible, (newVal, oldVal) => {
   }
 });
 
+watch(isPresentationComponentVisible, (newVal, oldVal) => {
+
+  if (newVal && !oldVal) {
+    if (!componentOrder.value.includes('presentation')) {
+      componentOrder.value.unshift('presentation');
+    }
+  }
+  else if (!newVal && oldVal) {
+    const index = componentOrder.value.indexOf('presentation');
+    if (index > -1) {
+      componentOrder.value.splice(index, 1);
+    }
+  }
+});
+
 // Tablica aktywnych komponentów w kolejności ich aktywacji
 const activeComponents = computed(() => {
   const components = [];
@@ -170,6 +189,11 @@ const activeComponents = computed(() => {
       components.push({
         id: 'timeline',
         component: TimelineComponent
+      });
+    } else if (componentId === 'presentation' && isPresentationComponentVisible.value) {
+      components.push({
+        id: 'presentation',
+        component: PresentationComponent
       });
     }
   }

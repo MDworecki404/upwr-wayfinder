@@ -6,6 +6,7 @@
         "author": "Marek",
         "license": "MIT"
     },
+    "isDev": false,
     "camera": {
         "defaultPosition": {
             "longitude": 17.05779262426435,

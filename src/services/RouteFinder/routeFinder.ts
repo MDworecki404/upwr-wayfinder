@@ -120,11 +120,11 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
                 );
                 if(endBuildingEntity) {
                     // @ts-expect-error
-                    endBuildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
+                    endBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
                 }
                 if(startBuildingEntity) {
                     // @ts-expect-error
-                    startBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
+                    startBuildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
                 }
             }
 

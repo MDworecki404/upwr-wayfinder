@@ -95,39 +95,7 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                 }
             });
             const handler = new Cesium.ScreenSpaceEventHandler(viewer?.canvas);
-            let highlightedEntity: Cesium.Entity | null = null;
-            const originalColors = new Map<Cesium.Entity, Cesium.MaterialProperty>();
-
-            handler.setInputAction(function (movement: any) {
-                const pickedObject = viewer?.scene.pick(movement.endPosition);
-
-                if (
-                    Cesium.defined(pickedObject) &&
-                    pickedObject?.id &&
-                    upwrBuildingsDataSource?.entities.contains(pickedObject.id)
-                ) {
-                    const entity = pickedObject.id;
-
-                    if (highlightedEntity !== entity) {
-                        // Przywróć poprzedni podświetlony
-                        if (highlightedEntity && originalColors.has(highlightedEntity)) {
-                            highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
-                        }
-
-                        // Zapisz oryginalny kolor jeśli nie był zapisany
-                        if (!originalColors.has(entity)) {
-                            originalColors.set(entity, entity.polygon!.material);
-                        }
-
-                        entity.polygon!.material = Cesium.Color.SKYBLUE.withAlpha(0.8);
-                        highlightedEntity = entity;
-                    }
-                } else {
-                    // @ts-expect-error
-                    highlightedEntity.polygon!.material = originalColors.get(highlightedEntity)!;
-                    highlightedEntity = null;
-                }
-            }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            
 
             handler.setInputAction(function (click: any) {
                 const pickedObject = viewer?.scene.pick(click.position);
