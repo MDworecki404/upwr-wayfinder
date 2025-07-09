@@ -22,7 +22,7 @@ const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
 const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
 const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
 const isOrtoBasemapEnabled = ref(selectedLayer.value.ortho);
-const isOSMBasemapEnabled = ref(selectedLayer.value.osm);
+const isOSMBasemapEnabled = ref(selectedBasemap.value.osm);
 const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 const showPopUp = inject('showPopUp') as () => void;
@@ -84,27 +84,54 @@ const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') 
                 >
                     <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('layers3D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
-                        <v-row align="center" justify="space-between">
-                            <v-checkbox color="info" v-model="selectedLayer.google3dtiles" @click="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" :label="$t('google3dtiles')" />
+                        <v-row class="align-center justify-start">
+                            <v-checkbox 
+                                color="info" 
+                                v-model="selectedLayer.google3dtiles" 
+                                @click="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" 
+                            />
+                            <span class="mb-5 text-subtitle-1">{{ $t('google3dtiles') }}</span>
                         </v-row>
-                        <v-row align="center" justify="space-between">
-                            <v-checkbox color="info" v-model="selectedLayer.osm3dtiles" @click="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" :label="$t('osm3dtiles')" />
+                        <v-row class="align-center justify-start">
+                            <v-checkbox 
+                                color="info" 
+                                v-model="selectedLayer.osm3dtiles" 
+                                @click="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" 
+                            />
+                            <span class="mb-5 text-subtitle-1">{{ $t('osm3dtiles') }}</span>
                         </v-row>
-                        <v-row align="center" justify="space-between">
-                            <v-checkbox color="info" v-model="selectedLayer.lod1buildings" @click="isLod1BuildingsEnabled = !isLod1BuildingsEnabled"  :label="$t('lod1buildings')" />
-                            <v-btn class="mb-6" icon size="x-small" variant="text" @click="zoomTo('lod1buildings')" v-if="isLod1BuildingsEnabled">
-                                <v-icon>mdi-magnify</v-icon>
-                            </v-btn>
+                        <v-row class="align-center justify-space-between">
+                            <div class="d-flex align-center">
+                                <v-checkbox 
+                                    color="info" 
+                                    v-model="selectedLayer.lod1buildings" 
+                                    @click="isLod1BuildingsEnabled = !isLod1BuildingsEnabled"  
+                                />
+                                <span class="mb-5 text-subtitle-1">{{ $t('lod1buildings') }}</span>
+                            </div>
+                            <div class="d-flex" v-if="isLod1BuildingsEnabled">
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('lod1buildings')">
+                                    <v-icon>mdi-magnify</v-icon>
+                                </v-btn>
+                            </div>
                         </v-row>
-                        <v-row align="center" justify="space-between">
-                            <v-checkbox color="info" v-model="selectedLayer.upwrbuildings" @click="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" :label="$t('upwrbuildings')" />
-                            <v-btn class="mb-6" icon size="x-small" variant="text" @click="isUpwrBuildingsLegendVisible = !isUpwrBuildingsLegendVisible" v-if="isUpwrBuildingsEnabled">
-                                <v-icon>mdi-map-legend</v-icon>
-                            </v-btn>    
-                            <v-btn class="mb-6" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource')" v-if="isUpwrBuildingsEnabled">
-                                <v-icon>mdi-magnify</v-icon>
-                            </v-btn>
-                            
+                        <v-row class="align-center justify-space-between">
+                            <div class="d-flex align-center">
+                                <v-checkbox 
+                                    color="info" 
+                                    v-model="selectedLayer.upwrbuildings" 
+                                    @click="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" 
+                                />
+                                <span class="mb-5 text-subtitle-1">{{ $t('upwrbuildings') }}</span>
+                            </div>
+                            <div class="d-flex" v-if="isUpwrBuildingsEnabled">
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="isUpwrBuildingsLegendVisible = !isUpwrBuildingsLegendVisible">
+                                    <v-icon>mdi-map-legend</v-icon>
+                                </v-btn>    
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource')">
+                                    <v-icon>mdi-magnify</v-icon>
+                                </v-btn>
+                            </div>
                         </v-row>
                         <v-row v-if="isUpwrBuildingsEnabled" align="center" justify="space-between">
                             <SearchComponent />
