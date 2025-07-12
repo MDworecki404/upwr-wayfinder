@@ -4,8 +4,10 @@ import * as Cesium from 'cesium'
 import { viewer } from './displayMap'
 
 import {lod1buildings, upwrBuildingsDataSource } from './layers';
+import { upwrBuildingsLayer2D } from './olLayers';
+import { map } from './olMap';
 
-const zoomTo = (entity: string) => {         
+const zoomTo = (entity: string, mapType: string) => {         
     switch(entity){
         case 'lod1buildings':
             if(lod1buildings){
@@ -20,15 +22,24 @@ const zoomTo = (entity: string) => {
             }
             break;
         case 'upwrBuildingsDataSource':
-            if(upwrBuildingsDataSource){
-                viewer?.camera.setView({
-                    destination: Cesium.Cartesian3.fromRadians(17.077919474160037*Math.PI/180, 51.08271347054283*Math.PI/180, 2399.3896360433782),
-                    orientation: {
-                        heading: 0.7410473729223745*Math.PI/180,
-                        pitch: -41.75127005799727*Math.PI/180,
-                        roll: 359.9911063897071*Math.PI/180
-                    }
-                })
+            if(mapType === '3d'){
+                if(upwrBuildingsDataSource){
+                    viewer?.camera.setView({
+                        destination: Cesium.Cartesian3.fromRadians(17.077919474160037*Math.PI/180, 51.08271347054283*Math.PI/180, 2399.3896360433782),
+                        orientation: {
+                            heading: 0.7410473729223745*Math.PI/180,
+                            pitch: -41.75127005799727*Math.PI/180,
+                            roll: 359.9911063897071*Math.PI/180
+                        }
+                    })
+                }
+            } else if(mapType === '2d'){
+                if(upwrBuildingsLayer2D){
+                    const extent = upwrBuildingsLayer2D.getSource()?.getExtent();
+                    map.getView().fit(extent!, {
+                        duration: 1000,
+                    });
+                }
             }
             break;
     }

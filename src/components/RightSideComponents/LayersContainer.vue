@@ -133,7 +133,7 @@ watch(mapType, (newVal) => {
                                 <span class="mb-5 text-subtitle-1">{{ $t('lod1buildings') }}</span>
                             </div>
                             <div class="d-flex" v-if="isLod1BuildingsEnabled">
-                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('lod1buildings')">
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('lod1buildings', mapType)">
                                     <v-icon>mdi-magnify</v-icon>
                                 </v-btn>
                             </div>
@@ -151,7 +151,7 @@ watch(mapType, (newVal) => {
                                 <v-btn class="mb-5" icon size="x-small" variant="text" @click="isUpwrBuildingsLegendVisible = !isUpwrBuildingsLegendVisible">
                                     <v-icon>mdi-map-legend</v-icon>
                                 </v-btn>    
-                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource')">
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource', mapType)">
                                     <v-icon>mdi-magnify</v-icon>
                                 </v-btn>
                             </div>
@@ -203,7 +203,7 @@ watch(mapType, (newVal) => {
                                 <v-btn class="mb-5" icon size="x-small" variant="text" @click="isUpwrBuildingsLegendVisible = !isUpwrBuildingsLegendVisible">
                                     <v-icon>mdi-map-legend</v-icon>
                                 </v-btn>    
-                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource')">
+                                <v-btn class="mb-5" icon size="x-small" variant="text" @click="zoomTo('upwrBuildingsDataSource', mapType)">
                                     <v-icon>mdi-magnify</v-icon>
                                 </v-btn>
                             </div>
