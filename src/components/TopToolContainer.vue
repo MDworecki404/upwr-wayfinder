@@ -47,19 +47,19 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
         <v-container class="tool-container" fluid>
             <v-row no-gutters>
                 <v-col cols="12" class="d-flex justify-start align-center">
-                    <v-btn color="info" rounded="lg" icon="mdi-cog" @click="toggleSettingsComponentVisibility">
+                    <v-btn size="small" color="info" rounded="lg" icon="mdi-cog" @click="toggleSettingsComponentVisibility">
 
                     </v-btn>
-                    <v-btn color="info" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
+                    <v-btn size="small" color="info" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
 
                     </v-btn>
-                    <v-btn color="info" rounded="lg" icon="mdi-layers" class="ml-2" @click="toggleLayerComponentVisibility">
+                    <v-btn size="small" color="info" rounded="lg" icon="mdi-layers-outline" class="ml-2" @click="toggleLayerComponentVisibility">
 
                     </v-btn>
-                    <v-btn color="info" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
+                    <v-btn size="small" color="info" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
                         
                     </v-btn>
-                    <v-btn color="info" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
+                    <v-btn size="small" color="info" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -68,5 +68,12 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
 .tool-container {
     align-items:flex-start;
     width: auto;
+}
+
+// Zwiększenie rozmiaru ikon w przyciskach
+.tool-container :deep(.v-btn) {
+    .v-icon {
+        font-size: 1.5rem !important;
+    }
 }
 </style>

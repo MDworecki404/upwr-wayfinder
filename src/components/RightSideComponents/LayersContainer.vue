@@ -20,12 +20,12 @@ const expandedBasemap = inject('expandedBasemap') as any;
 const expandedLayers = inject('expandedLayers') as any;
 const selectedLayer = inject('selectedLayer') as any;
 
-const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
-const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
-const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
+const isGoogle3dtilesEnabled = inject('isGoogle3dtilesEnabled') as Ref<boolean>;
+const isOsm3dtilesEnabled = inject('isOsm3dtilesEnabled') as Ref<boolean>;
+const isLod1BuildingsEnabled = inject('isLod1BuildingsEnabled') as Ref<boolean>;
 const isOrtoBasemapEnabled = ref(selectedBasemap.value === 'ortho');
 const isOSMBasemapEnabled = ref(selectedBasemap.value === 'osm');
-const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
+const isUpwrBuildingsEnabled = inject('isUpwrBuildingsEnabled') as Ref<boolean>;
 const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as Ref<boolean>;
 const showPopUp = inject('showPopUp') as () => void;
 const isGoogleBasemapEnabled = ref(selectedBasemap.value === 'google');
@@ -44,7 +44,7 @@ watch(isLod1BuildingsEnabled, (newVal) => {
 
 watch(isUpwrBuildingsEnabled, (newVal) => {
     if (mapType.value === '3d'){
-    registerUpwrBuildings(newVal, showPopUp);
+        registerUpwrBuildings(newVal, showPopUp);
     } else if (mapType.value === '2d') {
         olRegisterUpwrBuildings(newVal, showPopUp);
     }
@@ -77,7 +77,7 @@ watch(mapType, (newVal) => {
 
 <template>  
     <v-card rounded="0" :width="300">
-        <v-card-title class="bg-blue-lighten-1">
+        <v-card-title class="bg-info">
             {{ $t('layersPanel')}} 
             <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;"  @click="toggleLayerComponentVisibility">mdi-close</v-icon>
         </v-card-title>

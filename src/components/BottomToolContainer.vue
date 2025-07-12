@@ -21,6 +21,9 @@ const reopen = () => {
 const mapType = inject('mapType') as Ref<string>
 const isGpsEnabled = inject('isGpsEnabled') as Ref<boolean>
 const gpsStyle = inject('gpsStyle') as Ref<string>
+const selectedBasemap = inject('selectedBasemap') as Ref<string>
+const selectedLayer = inject('selectedLayer') as Ref<any>
+const isUpwrBuildingsEnabled = inject('isUpwrBuildingsEnabled') as Ref<boolean>
 
 const triggerChangeMapType = () => {
     if (mapType.value === '2d') {
@@ -31,6 +34,12 @@ const triggerChangeMapType = () => {
         clearRoutes(mapType.value)
         isGpsEnabled.value = false
         gpsStyle.value = 'mdi-crosshairs'
+        selectedBasemap.value = 'osm'
+        selectedLayer.value.google3dtiles = false
+        selectedLayer.value.osm3dtiles = false
+        selectedLayer.value.lod1buildings = false
+        selectedLayer.value.upwrbuildings = false
+        isUpwrBuildingsEnabled.value = false
     } else {
         // Zatrzymaj śledzenie w poprzednim trybie (3D)
         stopTracking('3d')
@@ -39,6 +48,12 @@ const triggerChangeMapType = () => {
         clearRoutes(mapType.value)
         isGpsEnabled.value = false
         gpsStyle.value = 'mdi-crosshairs'
+        selectedBasemap.value = 'google'
+        selectedLayer.value.google3dtiles = true
+        selectedLayer.value.osm3dtiles = false
+        selectedLayer.value.lod1buildings = false
+        selectedLayer.value.upwrbuildings = false
+        isUpwrBuildingsEnabled.value = false
     }
 }
 
@@ -51,18 +66,21 @@ watch(fabPosition, () => open.value = false)
 <template>
 <div class="fab-column">
     <v-fab
+        size='small'
         rounded="lg"
         :icon="mapType === '3d' ? 'mdi-video-2d' : 'mdi-video-3d'"
         color="info"
         @click="triggerChangeMapType"
     />
     <v-fab
+        size='small'
         rounded="lg"
         icon="mdi-home"
         color="info"
         @click="flyToHome(mapType)"
     />
     <v-fab
+        size='small'
         v-if="mapType === '3d'"
         rounded="lg" 
         icon="mdi-presentation-play" 
@@ -70,6 +88,7 @@ watch(fabPosition, () => open.value = false)
         @click="togglePresentationComponentVisibility"
     />
     <v-fab
+        size='small'
         rounded="lg" 
         icon="mdi-dots-vertical" 
         color="info"
@@ -102,5 +121,19 @@ watch(fabPosition, () => open.value = false)
     gap: 16px; // odstęp między przyciskami
     z-index: 1000;
     margin-bottom: 50px;
+}
+
+// Zwiększenie rozmiaru ikon w przyciskach
+.fab-column :deep(.v-fab) {
+    .v-icon {
+        font-size: 1.5rem !important;
+    }
+}
+
+// Zwiększenie rozmiaru ikon w speed dial
+.fab-column :deep(.v-speed-dial) {
+    .v-btn .v-icon {
+        font-size: 1.5rem !important;
+    }
 }
 </style>

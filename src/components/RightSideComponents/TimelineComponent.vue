@@ -56,7 +56,7 @@ const toggleVisibility = () => {
 
 <template>
     <v-card :width="300">
-        <v-card-title class="bg-blue-lighten-1">{{ $t('timeline') }} <v-icon class="position-absolute right-0 mr-2" style="cursor: pointer;" @click="toggleVisibility">mdi-close</v-icon></v-card-title>
+        <v-card-title class="bg-info">{{ $t('timeline') }} <v-icon class="position-absolute right-0 mr-2" style="cursor: pointer;" @click="toggleVisibility">mdi-close</v-icon></v-card-title>
         <v-card-text>
             <v-row class="d-flex justify-center mt-1">
                 <v-col cols="12" class="text-center">

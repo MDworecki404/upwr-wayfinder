@@ -27,7 +27,7 @@ const selectedRouteType = ref(t('toBuilding'));
 
 <template>
     <v-card :width="300">
-        <v-card-title class="bg-blue-lighten-1">{{ $t('routing') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" @click="toggleRoutingComponentVisibility">mdi-close</v-icon></v-card-title>
+        <v-card-title class="bg-info">{{ $t('routing') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" @click="toggleRoutingComponentVisibility">mdi-close</v-icon></v-card-title>
         <v-select
         class="ma-3" 
         :items="[$t('toBuilding'), $t('fromBuildingToBuilding')]" 

@@ -1,14 +1,29 @@
 <script setup lang="ts">
 import { playPresentation, resetPresentation } from '../../services/presentation';
-import { inject, ref } from 'vue';
+import { inject, ref, type Ref } from 'vue';
 
 import { isDisabled } from '../../services/presentation';
 
+const selectedBasemap = inject('selectedBasemap') as Ref<string>;
+const selectedLayer = inject('selectedLayer') as Ref<any>;
+const isUpwrBuildingsEnabled = inject('isUpwrBuildingsEnabled') as Ref<boolean>;
+const isLod1BuildingsEnabled = inject('isLod1BuildingsEnabled') as Ref<boolean>;
+const isOsm3dtilesEnabled = inject('isOsm3dtilesEnabled') as Ref<boolean>;
+const isGoogle3dtilesEnabled = inject('isGoogle3dtilesEnabled') as Ref<boolean>;
 
 const triggerPlayPresentation = (step: number) => {
     if (isPresVisible.value) {
         isPresVisible.value = false;
         resetPresentation();
+        selectedBasemap.value = 'osm'
+        selectedLayer.value.google3dtiles = false
+        selectedLayer.value.osm3dtiles = false
+        selectedLayer.value.lod1buildings = false
+        selectedLayer.value.upwrbuildings = false
+        isUpwrBuildingsEnabled.value = false
+        isLod1BuildingsEnabled.value = false
+        isOsm3dtilesEnabled.value = false
+        isGoogle3dtilesEnabled.value = false
     }
     else {
         isPresVisible.value = true;
@@ -21,6 +36,15 @@ const togglePresentationComponentVisibility = inject('togglePresentationComponen
 const triggerVisibility = () => {
     togglePresentationComponentVisibility();
     resetPresentation()
+    selectedBasemap.value = 'osm'
+    selectedLayer.value.google3dtiles = false
+    selectedLayer.value.osm3dtiles = false
+    selectedLayer.value.lod1buildings = false
+    selectedLayer.value.upwrbuildings = false
+    isUpwrBuildingsEnabled.value = false
+    isLod1BuildingsEnabled.value = false
+    isOsm3dtilesEnabled.value = false
+    isGoogle3dtilesEnabled.value = false
 }
 
 const isPresVisible = ref(false);
@@ -36,7 +60,7 @@ const onStepChange = (val: number) => {
 </script>
 <template>
     <v-card :width="300">
-        <v-card-title class="bg-blue-lighten-1">
+        <v-card-title class="bg-info">
             <v-row class="d-flex justify-space-between align-center">
                 <v-col cols="12" class="d-flex justify-start align-center">
                     <span class="ml-2">{{$t('presentation')}}</span>

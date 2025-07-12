@@ -72,9 +72,20 @@ const mapType = ref('3d')
 const isGpsEnabled = ref(false)
 const gpsStyle = ref('mdi-crosshairs')
 
+const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
+const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
+const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
+const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
+
 provide('mapType', mapType)
 provide('isGpsEnabled', isGpsEnabled)
 provide('gpsStyle', gpsStyle)
+
+
+provide('isUpwrBuildingsEnabled', isUpwrBuildingsEnabled);
+provide('isGoogle3dtilesEnabled', isGoogle3dtilesEnabled);
+provide('isOsm3dtilesEnabled', isOsm3dtilesEnabled);
+provide('isLod1BuildingsEnabled', isLod1BuildingsEnabled);
 
 provide('isLayerComponentVisible', isLayerComponentVisible);
 provide('toggleLayerComponentVisibility', toggleLayerComponentVisibility);
