@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { inject, shallowRef, watch, ref } from 'vue';
+import { inject, shallowRef, watch, type Ref } from 'vue';
 import { flyToHome } from '../services/flyToHome';
+import { changeMapType } from '../services/changeMapType';
+import { clearRoutes } from '../services/clearRoutes';
+import { stopTracking } from '../services/userLocation';
 
 const open = shallowRef(false)
 const fabPosition = shallowRef('absolute')
@@ -11,12 +14,33 @@ const transition = shallowRef('slide-x-reverse')
 const toggleTimelineComponentVisibility = inject('toggleTimelineComponentVisibility') as () => void;
 const togglePresentationComponentVisibility = inject('togglePresentationComponentVisibility') as () => void;
 
-
 const reopen = () => {
     open.value = true
 }
 
-const mapType = ref('mdi-video-2d')
+const mapType = inject('mapType') as Ref<string>
+const isGpsEnabled = inject('isGpsEnabled') as Ref<boolean>
+const gpsStyle = inject('gpsStyle') as Ref<string>
+
+const triggerChangeMapType = () => {
+    if (mapType.value === '2d') {
+        // Zatrzymaj śledzenie w poprzednim trybie (2D)
+        stopTracking('2d')
+        mapType.value = '3d'
+        changeMapType(mapType.value)
+        clearRoutes(mapType.value)
+        isGpsEnabled.value = false
+        gpsStyle.value = 'mdi-crosshairs'
+    } else {
+        // Zatrzymaj śledzenie w poprzednim trybie (3D)
+        stopTracking('3d')
+        mapType.value = '2d'
+        changeMapType(mapType.value)
+        clearRoutes(mapType.value)
+        isGpsEnabled.value = false
+        gpsStyle.value = 'mdi-crosshairs'
+    }
+}
 
 watch(menuLocation, reopen)
 watch(transition, reopen)
@@ -28,16 +52,18 @@ watch(fabPosition, () => open.value = false)
 <div class="fab-column">
     <v-fab
         rounded="lg"
-        :icon="mapType"
+        :icon="mapType === '3d' ? 'mdi-video-2d' : 'mdi-video-3d'"
         color="info"
+        @click="triggerChangeMapType"
     />
     <v-fab
         rounded="lg"
         icon="mdi-home"
         color="info"
-        @click="flyToHome"
+        @click="flyToHome(mapType)"
     />
     <v-fab
+        v-if="mapType === '3d'"
         rounded="lg" 
         icon="mdi-presentation-play" 
         color="info"
@@ -56,9 +82,9 @@ watch(fabPosition, () => open.value = false)
         :transition="transition"
         activator="parent"  
         >
-        <v-btn key="1" color="info" icon @click="toggleTimelineComponentVisibility">
-            <v-icon size="24">mdi-clock-outline</v-icon>
-        </v-btn>
+            <v-btn v-if="mapType === '3d'" key="1" color="info" icon @click="toggleTimelineComponentVisibility">
+                <v-icon size="24">mdi-clock-outline</v-icon>
+            </v-btn>
         </v-speed-dial>
     </v-fab>
     <!-- Dodawaj kolejne <v-fab> tutaj -->

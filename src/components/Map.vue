@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted, type Ref, inject } from 'vue';
 import { displayMap } from '../services/displayMap';
 import ClearRoute from './ClearRoute.vue';
 import { clearRoutes } from '../services/clearRoutes';
 import LoadingIcon from './LoadingIcon.vue';
+
+const mapType = inject('mapType') as Ref;
 
 onMounted(() => {
     displayMap('cesiumContainer');
@@ -11,7 +13,7 @@ onMounted(() => {
 </script>
 <template>
     <div id="cesiumContainer"></div>
-    <ClearRoute @click="clearRoutes" />
+    <ClearRoute @click="clearRoutes(mapType)" />
     <LoadingIcon />
 </template>
 <style scoped>

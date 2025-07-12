@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import universityBuildings from '../../data/universityBuildings.json';
-import { ref } from 'vue';
+import { inject, ref, type Ref } from 'vue';
 import { flyToBuilding } from '../../services/flyToBuilding';
 
 const search = ref(universityBuildings.buildings[0]?.navCode || '');
 const loading = ref(false);
+
+const mapType = inject('mapType') as Ref<string>;
 
 
 </script>
@@ -27,7 +29,7 @@ const loading = ref(false);
     </v-autocomplete>
     <v-row class="d-flex justify-center mb-1">
         <v-col cols="12" class="text-center">
-            <v-btn color="info" @click="flyToBuilding(search)">
+            <v-btn color="info" @click="flyToBuilding(search, mapType)">
                 {{ $t('searchBuilding') }}
             </v-btn>
         </v-col>

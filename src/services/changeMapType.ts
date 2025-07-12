@@ -1,0 +1,15 @@
+import { viewer } from "./displayMap";
+import { displayMap } from "./displayMap";
+import * as Cesium from 'cesium';
+import { createMap, map } from "./olMap";
+
+
+export const changeMapType = (mapType: string) => {
+    if (mapType === '2d'){
+        viewer?.destroy()
+        createMap()
+    } else if (mapType === '3d') {
+        map.setTarget('')
+        displayMap('cesiumContainer')
+    }
+}

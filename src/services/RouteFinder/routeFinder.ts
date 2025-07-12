@@ -4,14 +4,21 @@ import BuildingData from '../../data/universityBuildings.json'
 import { stopTracking } from '../userLocation';
 import gsap from "gsap";
 import { upwrBuildingsDataSource } from '../layers';
+import { map } from '../olMap'
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { LineString } from 'ol/geom';
+import Feature from 'ol/Feature';
+import { Stroke, Style } from 'ol/style';
+import { clearRoutes } from '../clearRoutes';
 
 // Zmienna do śledzenia aktywnego workera
 let activeWorker: Worker | null = null;
+export let routeLayer: VectorLayer | null = null;
 
-const loadingIconSVG = document.querySelector('.loading-icon') as HTMLElement;
-
-const routeFinder = async (startChoice: string, endChoice: string, selectedMode: string) => {
-    stopTracking();
+const routeFinder = async (startChoice: string, endChoice: string, selectedMode: string, mapType: string) => {
+    stopTracking(mapType);
+    clearRoutes(mapType);
     gsap.to('#routeClear', {opacity: 0, visibility: 'hidden', pointerEvents: 'none', duration: 0.2})
     console.log("Rozpoczęcie wyszukiwania trasy:", Date.now());
     
@@ -21,15 +28,17 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
         activeWorker = null;
     }
     
-    viewer!.entities.removeAll();
+    if (mapType === '3d'){
+        viewer!.entities.removeAll();
+    }
 
-    gsap.to(loadingIconSVG, {visibility: 'visible', opacity: 1, duration: 0.5});
+    gsap.to('.loading-icon', {visibility: 'visible', opacity: 1, duration: 0.5});
 
     // Sprawdzenie czy wybrano budynki
     if (!startChoice || !endChoice) {
         console.error("Nie wybrano budynków");
-        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+        gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+        gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
         alert("Wybierz budynki początkowy i docelowy");
         return;
     }
@@ -50,8 +59,8 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
 
     if (!startNode || !endNode) {
         console.error("Nie znaleziono wybranych budynków.");
-        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+        gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+        gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
         alert("Nie znaleziono wybranych budynków. Spróbuj ponownie wybrać budynki.");
         return;
     } 
@@ -68,8 +77,8 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
                 console.warn("Worker timeout - przerywanie");
                 activeWorker!.terminate();
                 activeWorker = null;
-                gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-                gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+                gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+                gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
                 alert("Obliczanie trasy zajęło zbyt dużo czasu. Spróbuj ponownie.");
             }
         }, 30000);
@@ -88,8 +97,8 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
 
             if (!path || path.length === 0) {
                 console.warn("Brak trasy.");
-                gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-                gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+                gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+                gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
                 alert("Nie udało się znaleźć trasy. Spróbuj z innymi budynkami lub rodzajem transportu.");
                 activeWorker!.terminate();
                 activeWorker = null;
@@ -97,43 +106,67 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
             }
 
             // Dodaj trasę
-            const positions = path.map((coord: number[]) => Cesium.Cartesian3.fromDegrees(coord[0], coord[1]));
-            viewer!.entities.add({
-                polyline: {
-                    positions: positions,
-                    width: 8,
-                    material: new Cesium.PolylineOutlineMaterialProperty({
-                        color: Cesium.Color.fromCssColorString('#42A5F5'), // Vuetify primary blue
-                        outlineWidth: 2,
-                        outlineColor: Cesium.Color.fromCssColorString('#0D47A1') // Darker blue outline
+            if (mapType === '3d'){
+                const positions = path.map((coord: number[]) => Cesium.Cartesian3.fromDegrees(coord[0], coord[1]));
+                viewer!.entities.add({
+                    polyline: {
+                        positions: positions,
+                        width: 8,
+                        material: new Cesium.PolylineOutlineMaterialProperty({
+                            color: Cesium.Color.fromCssColorString('#42A5F5'), // Vuetify primary blue
+                            outlineWidth: 2,
+                            outlineColor: Cesium.Color.fromCssColorString('#0D47A1') // Darker blue outline
+                        }),
+                        clampToGround: true
+                    }
+                });
+
+                if(upwrBuildingsDataSource) {
+                    const endBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
+                        (entity: any) => entity._properties.A._value === endChoice
+                    );
+                    const startBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
+                        (entity: any) => entity._properties.A._value === startChoice
+                    );
+                    if(endBuildingEntity) {
+                        // @ts-expect-error
+                        endBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
+                    }
+                    if(startBuildingEntity) {
+                        // @ts-expect-error
+                        startBuildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
+                    }
+                }
+            } else if (mapType === '2d'){
+                // Dla OpenLayers używamy oryginalnych koordynatów [longitude, latitude]
+                const routeFeature = new Feature({
+                    geometry: new LineString(path)
+                });
+                
+                // Styl dla linii trasy
+                const routeStyle = new Style({
+                    stroke: new Stroke({
+                        color: '#42A5F5', // Vuetify primary blue
+                        width: 4
+                    })
+                });
+                
+                routeFeature.setStyle(routeStyle);
+                routeLayer = new VectorLayer({
+                    source: new VectorSource({
+                        features: [routeFeature],
                     }),
-                    clampToGround: true
-                }
-            });
-            
-            if(upwrBuildingsDataSource) {
-                const endBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
-                    (entity: any) => entity._properties.A._value === endChoice
-                );
-                const startBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
-                    (entity: any) => entity._properties.A._value === startChoice
-                );
-                if(endBuildingEntity) {
-                    // @ts-expect-error
-                    endBuildingEntity.polygon!.material = Cesium.Color.GREEN.withAlpha(0.5);
-                }
-                if(startBuildingEntity) {
-                    // @ts-expect-error
-                    startBuildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
-                }
+                    zIndex: 100 // Upewniamy się, że trasa jest nad innymi warstwami
+                })
+                map.addLayer(routeLayer);
             }
 
             // Dodaj marker końcowy
 
             // Ukryj ikonę ładowania
             gsap.to('#routeClear', {opacity: 1, visibility: 'visible', pointerEvents: 'auto', duration: 0.2})
-            gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-            gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+            gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+            gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
             // Zakończ workera
             activeWorker!.terminate();
             activeWorker = null;
@@ -143,16 +176,16 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
         activeWorker.onerror = function(error: ErrorEvent) {
             clearTimeout(workerTimeout);
             console.error("Błąd workera:", error);
-            gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-            gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+            gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+            gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
             alert("Wystąpił błąd podczas wyszukiwania trasy. Spróbuj ponownie.");
             activeWorker!.terminate();
             activeWorker = null;
         };
     } catch (error) {
         console.error("Błąd podczas wyszukiwania trasy:", error);
-        gsap.to(loadingIconSVG, {opacity: 0, duration: 0.5});
-        gsap.to(loadingIconSVG, {visibility: 'hidden', delay: 0.5});
+        gsap.to('.loading-icon', {opacity: 0, duration: 0.5});
+        gsap.to('.loading-icon', {visibility: 'hidden', delay: 0.5});
         alert("Wystąpił nieoczekiwany błąd. Spróbuj ponownie.");
     }
 };

@@ -1,15 +1,16 @@
 <script lang="ts" setup>
-import { ref, inject, onMounted, onUnmounted } from 'vue';
+import { ref, inject, onMounted, onUnmounted, type Ref } from 'vue';
 
 
-const isGpsEnabled = ref(false);
-const gpsStyle = ref('mdi-crosshairs')
+const isGpsEnabled = inject('isGpsEnabled') as Ref<boolean>;
+const gpsStyle = inject('gpsStyle') as Ref<string>;
+const mapType = inject('mapType') as Ref<string>;
 import { userPositionFollow } from '../services/userLocation';
 
 const changeGpsIcon = () => {
     isGpsEnabled.value = !isGpsEnabled.value;
     gpsStyle.value = isGpsEnabled.value ? 'mdi-crosshairs-gps' : 'mdi-crosshairs';
-    userPositionFollow();
+    userPositionFollow(mapType.value);
 };
 
 const fullscreenStyle = ref('mdi-fullscreen');

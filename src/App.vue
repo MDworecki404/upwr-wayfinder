@@ -67,6 +67,15 @@ const selectedLayer = ref({
     upwrbuildings: false
 })
 
+const mapType = ref('3d')
+
+const isGpsEnabled = ref(false)
+const gpsStyle = ref('mdi-crosshairs')
+
+provide('mapType', mapType)
+provide('isGpsEnabled', isGpsEnabled)
+provide('gpsStyle', gpsStyle)
+
 provide('isLayerComponentVisible', isLayerComponentVisible);
 provide('toggleLayerComponentVisibility', toggleLayerComponentVisibility);
 provide('isSettingsComponentVisible', isSettingsComponentVisible);

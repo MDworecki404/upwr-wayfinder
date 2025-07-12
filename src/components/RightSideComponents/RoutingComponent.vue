@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { inject, ref } from 'vue';
+import { inject, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import universityBuildings from '../../data/universityBuildings.json';
 import  routeFinder  from '../../services/RouteFinder/routeFinder';
 import {userRouteFinder} from '../../services/RouteFinder/userRouteFinder';
 
 const { t } = useI18n();
-
+const mapType = inject('mapType') as Ref;
 const buildings = ref(universityBuildings.buildings);
 const selectedStartBuilding = ref();
 const selectedEndBuilding = ref();
@@ -15,11 +15,11 @@ const selectedMode = ref('foot');
 const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibility') as () => void;
 
 const findRoute = () => {
-    routeFinder(selectedStartBuilding.value, selectedEndBuilding.value, selectedMode.value);
+    routeFinder(selectedStartBuilding.value, selectedEndBuilding.value, selectedMode.value, mapType.value);
 }
 
 const findUserRoute = () => {
-    userRouteFinder(selectedEndBuilding.value, selectedMode.value);
+    userRouteFinder(selectedEndBuilding.value, selectedMode.value, mapType.value);
 }
 
 const selectedRouteType = ref(t('toBuilding'));

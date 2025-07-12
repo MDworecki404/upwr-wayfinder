@@ -38,5 +38,6 @@
   "searchBuilding": "Search building",
   "google": "Google Maps",
   "esri": "Esri World Topo Map",
-  "presentation": "Presentation"
+  "presentation": "Presentation",
+  "layers2D": "2D layers"
 }

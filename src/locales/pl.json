@@ -39,5 +39,6 @@
   "searchBuilding": "Wyszukaj budynek",
   "google": "Google Maps",
   "esri": "Esri World Topo Map",
-  "presentation": "Prezentacja"
+  "presentation": "Prezentacja",
+  "layers2D": "Warstwy 2D"
 }
