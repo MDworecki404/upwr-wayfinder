@@ -46,11 +46,19 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
         <v-container class="tool-container" fluid>
             <v-row no-gutters>
                 <v-col cols="12" class="d-flex justify-start align-center">
-                    <v-btn color="info" icon="mdi-cog" @click="toggleSettingsComponentVisibility"></v-btn>
-                    <v-btn color="info" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen"></v-btn>
-                    <v-btn color="info" icon="mdi-layers" class="ml-2" @click="toggleLayerComponentVisibility"></v-btn>
-                    <v-btn color="info" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility"></v-btn>
-                    <v-btn color="info" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
+                    <v-btn color="info" rounded="lg" icon="mdi-cog" @click="toggleSettingsComponentVisibility">
+
+                    </v-btn>
+                    <v-btn color="info" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
+
+                    </v-btn>
+                    <v-btn color="info" rounded="lg" icon="mdi-layers" class="ml-2" @click="toggleLayerComponentVisibility">
+
+                    </v-btn>
+                    <v-btn color="info" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
+                        
+                    </v-btn>
+                    <v-btn color="info" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
                 </v-col>
             </v-row>
         </v-container>

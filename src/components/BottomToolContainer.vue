@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, shallowRef, watch } from 'vue';
+import { inject, shallowRef, watch, ref } from 'vue';
 import { flyToHome } from '../services/flyToHome';
 
 const open = shallowRef(false)
@@ -16,6 +16,7 @@ const reopen = () => {
     open.value = true
 }
 
+const mapType = ref('mdi-video-2d')
 
 watch(menuLocation, reopen)
 watch(transition, reopen)
@@ -26,16 +27,24 @@ watch(fabPosition, () => open.value = false)
 <template>
 <div class="fab-column">
     <v-fab
+        rounded="lg"
+        :icon="mapType"
+        color="info"
+    />
+    <v-fab
+        rounded="lg"
         icon="mdi-home"
         color="info"
         @click="flyToHome"
     />
-    <v-fab 
+    <v-fab
+        rounded="lg" 
         icon="mdi-presentation-play" 
         color="info"
         @click="togglePresentationComponentVisibility"
     />
-    <v-fab 
+    <v-fab
+        rounded="lg" 
         icon="mdi-dots-vertical" 
         color="info"
         @click="open = !open"
