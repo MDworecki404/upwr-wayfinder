@@ -1,6 +1,5 @@
 import { viewer } from "./displayMap";
 import { displayMap } from "./displayMap";
-import * as Cesium from 'cesium';
 import { createMap, map } from "./olMap";
 
 
