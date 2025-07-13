@@ -78,7 +78,7 @@ export const playPresentation = (step: number) => {
                         }
                     }
                     });
-                    subtitles.value = 'Oprowadzę cię po kampusie. Zółtym kolorem będą oznaczone budynki, które będę omawiał. Teraz widzimy budynki A.'
+                    subtitles.value = 'Oprowadzę cię po kampusie. Zółtym kolorem będą oznaczone budynki, które będę omawiał. Budynki A stanowią serce administracyjne uczelni, skupiając kluczowe jednostki zarządzające. Znajdują się tu władze rektorskie, kwestura, biura obsługi studentów oraz główna biblioteka. To także miejsce prowadzenia zajęć w salach oznaczonych literami Z, R i W. Budynki A1-A8 i A12 mieszczą między innymi Centrum Spraw Studenckich, Samorząd Studencki, Szkołę Doktorską oraz jednostki medycyny weterynaryjnej.'
                 }, 3000);
             });
             break;
@@ -95,7 +95,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(0.0007119599105749354)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki B.'
+                subtitles.value = 'Kompleks budynków B (B1-B9) to centrum weterynaryjne uczelni, gdzie prowadzona jest praktyczna nauka i leczenie zwierząt. Znajdziemy tu kliniki dla różnych gatunków - od koni, psów i kotów po ptaki i zwierzęta egzotyczne. Budynki mieszczą też katedry chorób wewnętrznych, chirurgii oraz rozrodu zwierząt. To miejsce, gdzie teoria spotyka się z praktyką weterynaryjną.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {
@@ -128,7 +128,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(359.99979528664466)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki C.'
+                subtitles.value = 'Budynki C1-C5 to dom dla wydziałów związanych z naukami o środowisku, geodezją i technologiami rolniczymi. Mieszczą się tu instytuty geodezji, inżynierii środowiska, nauk o glebie oraz katedry ochrony roślin i architektury krajobrazu. Sale oznaczone literami G, M i C służą zajęciom z zakresu kształtowania i ochrony środowiska.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {
@@ -161,7 +161,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(0.00013445902469524126)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki E.'
+                subtitles.value = 'Kompleks E (E1-E13) skupia się na naukach biologicznych i hodowli zwierząt. To tu działają instytuty biologii, hodowli zwierząt, katedry genetyki oraz centra badawcze. Budynki mieszczą nowoczesne laboratoria, wiwarium wydziałowe, Muzeum Bioróżnorodności oraz Pracownię Mikroskopii Elektronowej. Dziekanat Wydziału Biologii i Hodowli Zwierząt również ma tu swoją siedzibę.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {
@@ -194,7 +194,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(0.00013201549435233704)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki F.'
+                subtitles.value = 'Budynki F1-F13 to przestrzeń dla inżynierii rolniczej, biotechnologii i nauk o żywności. Znajdują się tu hale maszyn, warsztaty, laboratoria oraz Centrum Odnawialnych Źródeł Energii. Kompleks obejmuje też obiekty sportowe - halę sportową i krytą pływalnię. Katedry zajmują się technologiami żywności, biotechnologią i żywieniem człowieka.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {
@@ -227,7 +227,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(0.00023955936049139262)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki D.'
+                subtitles.value = 'Zespół domów studenckich DS1-DS6 to miejsca zamieszkania dla studentów UPWr. Każdy dom ma swoją nazwę: "Arka", "Centaur", "Labirynt", "Talizman", "Zodiak" i "Raj". Oprócz funkcji mieszkalnej, w DS3 "Labirynt" mieści się Wydawnictwo Uniwersytetu oraz Archiwum. To przestrzenie integrujące społeczność studencką i zapewniające komfortowe warunki życia podczas studiów.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {
@@ -260,7 +260,7 @@ export const playPresentation = (step: number) => {
                         roll: Cesium.Math.toRadians(0)
                     }
                 });
-                subtitles.value = 'Teraz widzimy budynki D.'
+                subtitles.value = 'Zespół domów studenckich DS1-DS6 to miejsca zamieszkania dla studentów UPWr. Każdy dom ma swoją nazwę: "Arka", "Centaur", "Labirynt", "Talizman", "Zodiak" i "Raj". Oprócz funkcji mieszkalnej, w DS3 "Labirynt" mieści się Wydawnictwo Uniwersytetu oraz Archiwum. To przestrzenie integrujące społeczność studencką i zapewniające komfortowe warunki życia podczas studiów.'
                 upwrBuildingsDataSource?.entities.values.forEach(entity => {
                     const id = entity.properties?.A._value;
                     if (typeof id === 'string') {

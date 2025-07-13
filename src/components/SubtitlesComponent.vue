@@ -6,7 +6,7 @@ import { subtitles } from '../services/presentation';
 </script>
 
 <template>
-    <v-card color="grey-darken-4" class="subtitles-component pl-2 pr-2 elevation-0 text-white text-h6">{{subtitles}}</v-card>
+    <v-card color="grey-darken-4" class="subtitles-component pl-2 pr-2 elevation-0 text-white">{{subtitles}}</v-card>
 </template>
 
 <style scoped lang="scss">
@@ -25,5 +25,27 @@ import { subtitles } from '../services/presentation';
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-size: 1.25rem; // domyślnie (np. ~20px)
+}
+
+@media (max-width: 900px) {
+    .subtitles-component {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .subtitles-component {
+        font-size: 0.95rem;
+        max-width: 95vw;
+        width: 70vw;
+        margin-left: 10vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .subtitles-component {
+        font-size: 0.8rem;
+    }
 }
 </style>
