@@ -53,7 +53,7 @@ const getCurrentPosition = () => {
 }
 
 const userRouteFinder = async (endChoice: string, selectedMode: string, mapType: string): Promise<number | null> => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
         stopTracking(mapType);
         clearRoutes(mapType);
         gsap.to('#routeClear', {opacity: 0, visibility: 'hidden', pointerEvents: 'none', duration: 0.2})

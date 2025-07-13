@@ -41,7 +41,7 @@ const calculatePathDistance = (path: number[][]): number => {
 };
 
 const routeFinder = async (startChoice: string, endChoice: string, selectedMode: string, mapType: string): Promise<number | null> => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         stopTracking(mapType);
         clearRoutes(mapType);
         gsap.to('#routeClear', {opacity: 0, visibility: 'hidden', pointerEvents: 'none', duration: 0.2})
