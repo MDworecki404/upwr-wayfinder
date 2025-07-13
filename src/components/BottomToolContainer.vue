@@ -5,6 +5,8 @@ import { changeMapType } from '../services/changeMapType';
 import { clearRoutes } from '../services/clearRoutes';
 import { stopTracking } from '../services/userLocation';
 import { map } from '../services/olMap';
+import { viewer } from '../services/displayMap';
+import * as Cesium from 'cesium';
 
 
 const open = shallowRef(false)
@@ -43,6 +45,10 @@ const triggerChangeMapType = () => {
         selectedLayer.value.lod1buildings = false
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
+
+        viewer?.screenSpaceEventHandler.setInputAction(() => {
+        hideAllPanels();
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     } else {
         // Zatrzymaj śledzenie w poprzednim trybie (3D)
         stopTracking('3d')
