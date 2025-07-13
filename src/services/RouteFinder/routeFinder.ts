@@ -154,6 +154,15 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
                         }
                     });
 
+                    // FlyTo do całej trasy po narysowaniu - cała linia w widoku
+                    const boundingSphere = Cesium.BoundingSphere.fromPoints(positions);
+                    // Rozszerz boundingSphere o 20% dla lepszego widoku
+                    boundingSphere.radius *= 1.5;
+                    viewer!.camera.flyToBoundingSphere(boundingSphere, {
+                        duration: 1.0,
+                        offset: new Cesium.HeadingPitchRange(0, -2, 0)
+                    });
+
                     if(upwrBuildingsDataSource) {
                         const endBuildingEntity = upwrBuildingsDataSource?.entities.values.find(
                             (entity: any) => entity._properties.A._value === endChoice
@@ -192,6 +201,10 @@ const routeFinder = async (startChoice: string, endChoice: string, selectedMode:
                         zIndex: 100 // Upewniamy się, że trasa jest nad innymi warstwami
                     })
                     map.addLayer(routeLayer);
+                    map.getView().fit(routeFeature.getGeometry() as LineString, {
+                        padding: [100, 100, 100, 100],
+                        duration: 1000,
+                    });
                 }
                 
 

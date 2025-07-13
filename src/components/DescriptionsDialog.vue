@@ -18,24 +18,53 @@ const toggleDescriptionsDialogVisibility = inject('toggleDescriptionsDialogVisib
                 {{$t('technologies')}}
             </v-card-text>
             <v-card-text class="d-flex justify-center align-center flex-wrap">
-                <a href="https://cesium.com/platform/cesiumjs/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/CesiumJS_dark_color.svg" alt="CesiumJS" :width="200">
-                </a>
-                <a href="https://openlayers.org/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/OpenLayers_Logo_200x200.png" alt="CesiumJS" :width="100">
-                </a>
-                <a href="https://vuejs.org/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/vuejs.png" alt="CesiumJS" :width="100">
-                </a>
-                <a href="https://vuetifyjs.com/en/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/v-logo.svg" alt="CesiumJS" :width="100">
-                </a>
-                <a href="https://www.typescriptlang.org/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/typescript.png" alt="CesiumJS" :width="100">
-                </a>
-                <a href="https://sass-lang.com/" target="_blank">
-                    <img class="ma-2" src="../assets/technologiesIcons/sass.png" alt="CesiumJS" :width="100">
-                </a>
+                <v-tooltip text="CesiumJS" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://cesium.com/platform/cesiumjs/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/CesiumJS_dark_color.svg" alt="CesiumJS" :width="200">
+                        </a>
+                    </template>
+                </v-tooltip>
+                <v-tooltip text="OpenLayers" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://openlayers.org/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/OpenLayers_Logo_200x200.png" alt="CesiumJS" :width="100">
+                        </a>
+                    </template>
+                </v-tooltip>
+                
+                <v-tooltip text="Vue.js" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://vuejs.org/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/vuejs.png" alt="CesiumJS" :width="100">
+                        </a>
+                    </template>
+                </v-tooltip>
+                
+                <v-tooltip text="Vuetify" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://vuetifyjs.com/en/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/v-logo.svg" alt="CesiumJS" :width="100">
+                        </a>
+                    </template>
+                </v-tooltip>
+                
+                <v-tooltip text="TypeScript" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://www.typescriptlang.org/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/typescript.png" alt="CesiumJS" :width="100">
+                        </a>
+                    </template>
+                </v-tooltip>
+                
+                <v-tooltip text="Sass" location="bottom">
+                    <template v-slot:activator="{ props }">
+                        <a href="https://sass-lang.com/" target="_blank" v-bind="props">
+                            <img class="ma-2" src="../assets/technologiesIcons/sass.png" alt="CesiumJS" :width="100">
+                        </a>
+                    </template>
+                </v-tooltip>
+                
             </v-card-text>
             <v-card-actions>
                 <v-btn color="primary" @click="toggleDescriptionsDialogVisibility">{{$t('close')}}</v-btn>

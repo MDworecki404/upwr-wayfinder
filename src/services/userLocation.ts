@@ -5,8 +5,7 @@ import { map } from "./olMap";
 import { Point } from "ol/geom";
 import { Vector as VectorLayer } from "ol/layer";
 import { Vector as VectorSource } from "ol/source";
-import { Style, Icon, Circle as CircleStyle, Fill, Stroke } from "ol/style";
-
+import { Style, Icon} from "ol/style";
 // Tymczasowa ikona użytkownika - możesz zastąpić własną ikoną
 const userIconPNG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyQzIgMTcuNTIgNi40OCAyMiAxMiAyMkMxNy41MiAyMiAyMiAxNy41MiAyMiAxMkMyMiA2LjQ4IDE3LjUyIDIgMTIgMloiIGZpbGw9IiM0Q0FGNTAiLz4KPHBhdGggZD0iTTEyIDZDMTAuMzQgNiA5IDcuMzQgOSA5QzkgMTAuNjYgMTAuMzQgMTIgMTIgMTJDMTMuNjYgMTIgMTUgMTAuNjYgMTUgOUMxNSA3LjM0IDEzLjY2IDYgMTIgNloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMiAxNEM5LjMzIDE0IDcgMTYuMzMgNyAxOVYyMEgxN1YxOUMxNyAxNi4zMyAxNC42NyAxNCAxMiAxNFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=';
 
@@ -82,13 +81,14 @@ export const userPositionFollow = (mapType: string) => {
                 }
 
                 if (!hasSetInitialView) {
-                    viewer!.camera.setView({
+                    viewer!.camera.flyTo({
                         destination: destination,
                         orientation: {
                             heading: 0.0,
                             pitch: -Math.PI / 2,
                             roll: 0.0
-                        }
+                        },
+                        duration: 2.0
                     });
                     hasSetInitialView = true; // ustawiamy flagę, żeby już nie wykonywało się ponownie
                 }
@@ -119,31 +119,16 @@ export const userPositionFollow = (mapType: string) => {
 
             // Create style for user location
             const userStyle = new Style({
-                image: new Icon({
-                    src: simpleUserIcon,
-                    scale: 2, // Zwiększamy rozmiar ikony
-                    anchor: [0.5, 0.5]
-                })
+                                  image: new Icon({
+                      src: simpleUserIcon,
+                      scale: 1.0, // Przywracamy normalny rozmiar ikony
+                      anchor: [0.5, 0.5]
+                  })
             });
 
             userFeature.setStyle(userStyle);
+        
             
-            // Alternatywny styl jako kółko dla testów
-            const circleStyle = new Style({
-                image: new CircleStyle({
-                    radius: 10,
-                    fill: new Fill({
-                        color: '#4CAF50'
-                    }),
-                    stroke: new Stroke({
-                        color: 'white',
-                        width: 2
-                    })
-                })
-            });
-            
-            // Użyj stylu kółka zamiast ikony
-            userFeature.setStyle(circleStyle);
 
             // Create vector source and layer
             const userSource = new VectorSource({
@@ -172,6 +157,7 @@ export const userPositionFollow = (mapType: string) => {
             olGeolocation.setTracking(true);
 
             // Handle position updates
+            let hasSetInitialView2D = false;
             olGeolocation.on('change:position', () => {
                 const coordinates = olGeolocation!.getPosition();
                 
@@ -179,7 +165,16 @@ export const userPositionFollow = (mapType: string) => {
                     const geometry = userFeature.getGeometry() as Point;
                     if (geometry) {
                         geometry.setCoordinates(coordinates);
-                        // Sprawdź czy punkt jest w widoku map
+                        
+                        // Zoom na feature tylko przy pierwszym pobraniu pozycji
+                        if (!hasSetInitialView2D) {
+                            map.getView().fit(geometry, {
+                                padding: [200, 200, 200, 200], // Zwiększony padding
+                                maxZoom: 20, // Maksymalny zoom - nie wlatuj zbyt blisko
+                                duration: 1000,
+                            });
+                            hasSetInitialView2D = true;
+                        }
                     }
                 }
             });

@@ -200,12 +200,6 @@ const userRouteFinder = async (endChoice: string, selectedMode: string, mapType:
                         zIndex: 100 // Upewniamy się, że trasa jest nad innymi warstwami
                     })
                     map.addLayer(userRouteLayer);
-                    const extent = routeFeature!.getGeometry()!.getExtent();
-                    map.getView().fit(extent, {
-                        duration: 1000,
-                        padding: [50, 50, 50, 50],
-                        maxZoom: 18
-                    });
                 }
 
 
