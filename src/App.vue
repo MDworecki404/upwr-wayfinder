@@ -9,8 +9,16 @@ const RightSideContainer = defineAsyncComponent(() => import('./components/Right
 const HelloDialog = defineAsyncComponent(() => import('./components/HelloDialog.vue'));
 const BottomToolContainer = defineAsyncComponent(() => import('./components/BottomToolContainer.vue'));
 const SubtitlesComponent = defineAsyncComponent(() => import('./components/SubtitlesComponent.vue'));
-  
+const DescriptionsDialog = defineAsyncComponent(() => import('./components/DescriptionsDialog.vue'));
 const isLayerComponentVisible = ref(false);
+const isDescriptionsDialogVisible = ref(false);
+
+const toggleDescriptionsDialogVisibility = () => {
+  isDescriptionsDialogVisible.value = !isDescriptionsDialogVisible.value;
+};
+
+provide('isDescriptionsDialogVisible', isDescriptionsDialogVisible);
+provide('toggleDescriptionsDialogVisibility', toggleDescriptionsDialogVisibility);
 
 const toggleLayerComponentVisibility = () => {
   isLayerComponentVisible.value = !isLayerComponentVisible.value;
@@ -69,6 +77,8 @@ const selectedLayer = ref({
 
 const mapType = ref('3d')
 
+const font = ref('Roboto')
+
 const isGpsEnabled = ref(false)
 const gpsStyle = ref('mdi-crosshairs')
 
@@ -104,7 +114,7 @@ provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibili
 provide('isPopUpVisible', isPopUpVisible);
 provide('showPopUp', showPopUp);
 provide('hidePopUp', hidePopUp);
-
+provide('font', font);
 provide('isTimelineComponentVisible', isTimelineComponentVisible);
 provide('toggleTimelineComponentVisibility', toggleTimelineComponentVisibility);
 provide('isPresentationComponentVisible', isPresentationComponentVisible);
@@ -119,6 +129,7 @@ const triggerCheckCameraPosition = () => {
 <template>
     <v-app>
         <v-main>
+            <DescriptionsDialog v-if="isDescriptionsDialogVisible" />
             <HelloDialog />
             <Map />
             <TopToolContainer />

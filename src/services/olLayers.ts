@@ -43,7 +43,7 @@ const createBuildingStyle = (buildingType: string, isHovered: boolean = false) =
             color: fillColor,
         }),
         stroke: new Stroke({
-            color: isHovered ? 'rgb(255, 255, 0)' : 'rgb(0, 0, 0)',
+            color: isHovered ? 'rgba(255, 0, 0, 0.5)' : 'rgb(0, 0, 0)',
             width: isHovered ? 3 : 1
         })
     });

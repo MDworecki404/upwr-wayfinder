@@ -111,7 +111,7 @@ watch(mapType, (newVal) => {
                             <v-checkbox 
                                 color="info" 
                                 v-model="selectedLayer.google3dtiles" 
-                                @click="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" 
+                                @change="isGoogle3dtilesEnabled = !isGoogle3dtilesEnabled" 
                             />
                             <span class="mb-5 text-subtitle-1">{{ $t('google3dtiles') }}</span>
                         </v-row>
@@ -119,7 +119,7 @@ watch(mapType, (newVal) => {
                             <v-checkbox 
                                 color="info" 
                                 v-model="selectedLayer.osm3dtiles" 
-                                @click="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" 
+                                @change="isOsm3dtilesEnabled = !isOsm3dtilesEnabled" 
                             />
                             <span class="mb-5 text-subtitle-1">{{ $t('osm3dtiles') }}</span>
                         </v-row>
@@ -128,7 +128,7 @@ watch(mapType, (newVal) => {
                                 <v-checkbox 
                                     color="info" 
                                     v-model="selectedLayer.lod1buildings" 
-                                    @click="isLod1BuildingsEnabled = !isLod1BuildingsEnabled"  
+                                    @change="isLod1BuildingsEnabled = !isLod1BuildingsEnabled"  
                                 />
                                 <span class="mb-5 text-subtitle-1">{{ $t('lod1buildings') }}</span>
                             </div>
@@ -143,7 +143,7 @@ watch(mapType, (newVal) => {
                                 <v-checkbox 
                                     color="info" 
                                     v-model="selectedLayer.upwrbuildings" 
-                                    @click="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" 
+                                    @change="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" 
                                 />
                                 <span class="mb-5 text-subtitle-1">{{ $t('upwrbuildings') }}</span>
                             </div>
@@ -195,7 +195,7 @@ watch(mapType, (newVal) => {
                                 <v-checkbox 
                                     color="info" 
                                     v-model="selectedLayer.upwrbuildings" 
-                                    @click="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" 
+                                    @change="isUpwrBuildingsEnabled = !isUpwrBuildingsEnabled" 
                                 />
                                 <span class="mb-5 text-subtitle-1">{{ $t('upwrbuildings') }}</span>
                             </div>

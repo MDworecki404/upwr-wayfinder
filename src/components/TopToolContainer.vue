@@ -42,24 +42,28 @@ onUnmounted(() => {
 const toggleLayerComponentVisibility = inject('toggleLayerComponentVisibility') as () => void;
 const toggleSettingsComponentVisibility = inject('toggleSettingsComponentVisibility') as () => void;
 const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibility') as () => void;
+const toggleDescriptionsDialogVisibility = inject('toggleDescriptionsDialogVisibility') as () => void;
 </script>
 <template>
         <v-container class="tool-container" fluid>
             <v-row no-gutters>
                 <v-col cols="12" class="d-flex justify-start align-center">
-                    <v-btn size="small" color="info" rounded="lg" icon="mdi-cog" @click="toggleSettingsComponentVisibility">
+                    <v-btn size="small" rounded="lg" icon="mdi-tune" @click="toggleSettingsComponentVisibility">
 
                     </v-btn>
-                    <v-btn size="small" color="info" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
+                    <v-btn size="small" rounded="lg" icon="mdi-information-outline" class="ml-2" @click="toggleDescriptionsDialogVisibility">
 
                     </v-btn>
-                    <v-btn size="small" color="info" rounded="lg" icon="mdi-layers-outline" class="ml-2" @click="toggleLayerComponentVisibility">
+                    <v-btn size="small" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
 
                     </v-btn>
-                    <v-btn size="small" color="info" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
+                    <v-btn size="small" rounded="lg" icon="mdi-layers-outline" class="ml-2" @click="toggleLayerComponentVisibility">
+
+                    </v-btn>
+                    <v-btn size="small" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
                         
                     </v-btn>
-                    <v-btn size="small" color="info" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
+                    <v-btn size="small" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -74,6 +78,7 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
 .tool-container :deep(.v-btn) {
     .v-icon {
         font-size: 1.5rem !important;
+        color: #1976D2 !important;
     }
 }
 </style>

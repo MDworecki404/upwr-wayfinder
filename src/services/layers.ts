@@ -111,6 +111,19 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
                     `;
                     updatePopUpData(newTitle, newDescription);
                     
+                    // Store original material for restoration
+                    const originalMaterial = pickedObject.id.polygon?.material;
+                    
+                    // Highlight the clicked building with a bright yellow color
+                    pickedObject.id.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.RED.withAlpha(0.5));
+                    
+                    // Restore original material after 1 second
+                    setTimeout(() => {
+                        if (pickedObject.id.polygon) {
+                            pickedObject.id.polygon.material = originalMaterial;
+                        }
+                    }, 1000);
+                    
                 }
             }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
         

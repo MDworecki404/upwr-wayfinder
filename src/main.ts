@@ -31,14 +31,14 @@ const vuetify = createVuetify({
         defaultTheme: 'light',
     },
     display: {
-    mobileBreakpoint: 'sm',
-    thresholds: {
-        xs: 0,
-        sm: 340,
-        md: 540,
-        lg: 800,
-        xl: 1280,
-    },
+      mobileBreakpoint: 'sm',
+      thresholds: {
+          xs: 0,
+          sm: 340,
+          md: 540,
+          lg: 800,
+          xl: 1280,
+      },
     },
 })
 

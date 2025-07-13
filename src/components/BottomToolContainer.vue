@@ -48,8 +48,8 @@ const triggerChangeMapType = () => {
         clearRoutes(mapType.value)
         isGpsEnabled.value = false
         gpsStyle.value = 'mdi-crosshairs'
-        selectedBasemap.value = 'google'
-        selectedLayer.value.google3dtiles = true
+        selectedBasemap.value = 'osm'
+        selectedLayer.value.google3dtiles = false
         selectedLayer.value.osm3dtiles = false
         selectedLayer.value.lod1buildings = false
         selectedLayer.value.upwrbuildings = false
@@ -69,14 +69,12 @@ watch(fabPosition, () => open.value = false)
         size='small'
         rounded="lg"
         :icon="mapType === '3d' ? 'mdi-video-2d' : 'mdi-video-3d'"
-        color="info"
         @click="triggerChangeMapType"
     />
     <v-fab
         size='small'
         rounded="lg"
         icon="mdi-home"
-        color="info"
         @click="flyToHome(mapType)"
     />
     <v-fab
@@ -84,14 +82,12 @@ watch(fabPosition, () => open.value = false)
         v-if="mapType === '3d'"
         rounded="lg" 
         icon="mdi-presentation-play" 
-        color="info"
         @click="togglePresentationComponentVisibility"
     />
     <v-fab
         size='small'
         rounded="lg" 
         icon="mdi-dots-vertical" 
-        color="info"
         @click="open = !open"
     >
         <v-icon>{{ open ? 'mdi-close' : 'mdi-dots-vertical' }}</v-icon>
@@ -101,8 +97,8 @@ watch(fabPosition, () => open.value = false)
         :transition="transition"
         activator="parent"  
         >
-            <v-btn v-if="mapType === '3d'" key="1" color="info" icon @click="toggleTimelineComponentVisibility">
-                <v-icon size="24">mdi-clock-outline</v-icon>
+            <v-btn v-if="mapType === '3d'" key="1" icon @click="toggleTimelineComponentVisibility">
+                <v-icon color="#1976D2" size="24">mdi-clock-outline</v-icon>
             </v-btn>
         </v-speed-dial>
     </v-fab>
@@ -127,6 +123,7 @@ watch(fabPosition, () => open.value = false)
 .fab-column :deep(.v-fab) {
     .v-icon {
         font-size: 1.5rem !important;
+        color: #1976D2 !important;
     }
 }
 

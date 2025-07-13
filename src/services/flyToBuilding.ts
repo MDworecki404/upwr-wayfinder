@@ -7,14 +7,17 @@ import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 
-export const flyToBuilding = (building: string, mapType: string) => {
+const flyToBuilding = (building: string, mapType: string) => {
     if (mapType === '3d') {
         const buildingEntity = upwrBuildingsDataSource?.entities.values.find(
             (entity: any) => entity._properties.A._value === building
         );
 
         if (buildingEntity) {
-            viewer?.zoomTo(buildingEntity, new Cesium.HeadingPitchRange(0, -0.5, 300));
+            viewer?.flyTo(buildingEntity, {
+                duration: 1.0,
+                offset: new Cesium.HeadingPitchRange(0, -0.8, 300)
+            });
             const buildingColor = buildingEntity?.polygon?.material;
             // @ts-expect-error
             buildingEntity.polygon!.material = Cesium.Color.RED.withAlpha(0.5);
@@ -53,3 +56,5 @@ export const flyToBuilding = (building: string, mapType: string) => {
         }
     }
 }
+
+export default flyToBuilding;

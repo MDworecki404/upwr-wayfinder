@@ -11,18 +11,26 @@ const buildings = ref(universityBuildings.buildings);
 const selectedStartBuilding = ref();
 const selectedEndBuilding = ref();
 const selectedMode = ref('foot');
+const routeDistance = ref<number | null>(null);
 
 const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibility') as () => void;
 
-const findRoute = () => {
-    routeFinder(selectedStartBuilding.value, selectedEndBuilding.value, selectedMode.value, mapType.value);
+const findRoute = async () => {
+    const distance = await routeFinder(selectedStartBuilding.value, selectedEndBuilding.value, selectedMode.value, mapType.value);
+    routeDistance.value = distance;
 }
 
-const findUserRoute = () => {
-    userRouteFinder(selectedEndBuilding.value, selectedMode.value, mapType.value);
+const findUserRoute = async () => {
+    const distance = await userRouteFinder(selectedEndBuilding.value, selectedMode.value, mapType.value);
+    routeDistance.value = distance;
 }
 
 const selectedRouteType = ref(t('toBuilding'));
+
+// Resetuj odległość gdy zmienia się typ trasy
+const resetDistance = () => {
+    routeDistance.value = null;
+};
 </script>
 
 <template>
@@ -33,6 +41,7 @@ const selectedRouteType = ref(t('toBuilding'));
         :items="[$t('toBuilding'), $t('fromBuildingToBuilding')]" 
         v-model="selectedRouteType"
         variant="underlined"
+        @update:model-value="resetDistance"
         >
         </v-select>
         <v-divider class="my-2"></v-divider>
@@ -67,8 +76,15 @@ const selectedRouteType = ref(t('toBuilding'));
             <v-btn 
             color="info" 
             @click="findUserRoute"
-            class="mt-5 "
+            class="mt-5"
             >{{ $t('findRoute') }}</v-btn>
+            
+            <v-card-text v-if="routeDistance !== null" class="text-center">
+                <v-chip color="success" class="ma-2">
+                    <v-icon start>mdi-map-marker-distance</v-icon>
+                    Odległość: {{ routeDistance }} m
+                </v-chip>
+            </v-card-text>
         </v-card-text>
         <v-card-text v-if="selectedRouteType === $t('fromBuildingToBuilding')">
             <v-select
@@ -112,10 +128,21 @@ const selectedRouteType = ref(t('toBuilding'));
             @click="findRoute"
             class="mt-5 "
             >{{ $t('findRoute') }}</v-btn>
+            
+            <v-card-text v-if="routeDistance !== null" class="text-center">
+                <v-chip color="success" class="ma-2">
+                    <v-icon start>mdi-map-marker-distance</v-icon>
+                    Odległość: {{ routeDistance }} m
+                </v-chip>
+            </v-card-text>
         </v-card-text>
     </v-card>   
 </template>
 
 <style scoped lang="scss">
-
+.v-btn-toggle {
+    .v-btn {
+        color: #1976D2 !important;
+    }
+}
 </style>
