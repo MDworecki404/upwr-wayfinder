@@ -4,9 +4,9 @@
     permanent
     width="auto"
     height="100%"
-    class="bg-transparent border-0 outline-0 pr-0"
+    class="bg-transparent border-0 outline-0 pr-1"
   >
-    <v-list class="pt-0">
+    <v-list class="pt-1">
       
       <Suspense v-for="component in activeComponents" :key="component.id">
         <template #default>

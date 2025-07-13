@@ -47,23 +47,23 @@ const toggleDescriptionsDialogVisibility = inject('toggleDescriptionsDialogVisib
 <template>
         <v-container class="tool-container" fluid>
             <v-row no-gutters>
-                <v-col cols="12" class="d-flex justify-start align-center">
-                    <v-btn size="small" rounded="lg" icon="mdi-tune" @click="toggleSettingsComponentVisibility">
+                <v-col cols="12" class="d-flex justify-start align-start align-sm-center flex-column flex-sm-row align-items-start">
+                    <v-btn size="small" rounded="lg" icon="mdi-tune" @click="toggleSettingsComponentVisibility" class="mb-2 mb-sm-0">
 
                     </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-information-outline" class="ml-2" @click="toggleDescriptionsDialogVisibility">
+                    <v-btn size="small" rounded="lg" icon="mdi-information-outline" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleDescriptionsDialogVisibility">
 
                     </v-btn>
-                    <v-btn size="small" rounded="lg" :icon="fullscreenStyle" class="ml-2" @click="toggleFullscreen">
+                    <v-btn size="small" rounded="lg" :icon="fullscreenStyle" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleFullscreen">
 
                     </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-layers-outline" class="ml-2" @click="toggleLayerComponentVisibility">
+                    <v-btn size="small" rounded="lg" icon="mdi-layers-outline" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleLayerComponentVisibility">
 
                     </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-map-marker-path" class="ml-2" @click="toggleRoutingComponentVisibility">
+                    <v-btn size="small" rounded="lg" icon="mdi-map-marker-path" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleRoutingComponentVisibility">
                         
                     </v-btn>
-                    <v-btn size="small" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-2"></v-btn>
+                    <v-btn size="small" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-sm-2 mb-2 mb-sm-0"></v-btn>
                 </v-col>
             </v-row>
         </v-container>
