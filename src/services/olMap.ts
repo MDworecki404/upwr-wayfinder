@@ -5,6 +5,7 @@ import 'ol/ol.css'
 import startConfig from '../data/startConfig.json'
 import { defaultOlBasemap } from './olBasemaps';
 
+
 useGeographic()
 
 export let map: Map
@@ -20,4 +21,5 @@ export const createMap = () => {
         }),
     });
     defaultOlBasemap()
+
 }

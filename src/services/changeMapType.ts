@@ -2,7 +2,6 @@ import { viewer } from "./displayMap";
 import { displayMap } from "./displayMap";
 import { createMap, map } from "./olMap";
 
-
 export const changeMapType = (mapType: string) => {
     if (mapType === '2d'){
         viewer?.destroy()

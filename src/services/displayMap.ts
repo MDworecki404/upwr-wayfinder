@@ -74,9 +74,7 @@ export function displayMap(containerId: string): void {
 
     }
     viewer.clock.onTick.addEventListener(updateImageryBrightness);
-
     
-
     
 }
 

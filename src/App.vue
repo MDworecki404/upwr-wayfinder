@@ -87,6 +87,32 @@ const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
 const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
 const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
 
+const hideAllPanels = () => {
+        if (isLayerComponentVisible.value) {
+            toggleLayerComponentVisibility();
+        }
+        if (isSettingsComponentVisible.value) {
+            toggleSettingsComponentVisibility();
+        }
+        if (isRoutingComponentVisible.value) {
+            toggleRoutingComponentVisibility();
+        }
+        if (isUpwrBuildingsLegendVisible.value) {
+            toggleUpwrBuildingsLegendVisibility();
+        }
+        if (isPopUpVisible.value) {
+            hidePopUp();
+        }
+        if (isTimelineComponentVisible.value) {
+            toggleTimelineComponentVisibility();
+        }
+        if (isPresentationComponentVisible.value) {
+            togglePresentationComponentVisibility();
+        }
+    }
+
+provide('hideAllPanels', hideAllPanels);
+
 provide('mapType', mapType)
 provide('isGpsEnabled', isGpsEnabled)
 provide('gpsStyle', gpsStyle)

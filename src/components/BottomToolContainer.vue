@@ -4,6 +4,8 @@ import { flyToHome } from '../services/flyToHome';
 import { changeMapType } from '../services/changeMapType';
 import { clearRoutes } from '../services/clearRoutes';
 import { stopTracking } from '../services/userLocation';
+import { map } from '../services/olMap';
+
 
 const open = shallowRef(false)
 const fabPosition = shallowRef('absolute')
@@ -13,6 +15,7 @@ const transition = shallowRef('slide-x-reverse')
 
 const toggleTimelineComponentVisibility = inject('toggleTimelineComponentVisibility') as () => void;
 const togglePresentationComponentVisibility = inject('togglePresentationComponentVisibility') as () => void;
+const hideAllPanels = inject('hideAllPanels') as () => void;
 
 const reopen = () => {
     open.value = true
@@ -54,6 +57,10 @@ const triggerChangeMapType = () => {
         selectedLayer.value.lod1buildings = false
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
+
+        map.on('click', () => {
+            hideAllPanels();
+        });
     }
 }
 
