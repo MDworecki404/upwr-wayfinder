@@ -1,6 +1,7 @@
 import { viewer } from "./displayMap";
 import * as Cesium from 'cesium';
 import { updatePopUpData } from './popUpStates';
+import cityGMLId from '../data/zlaczone_citygmlID.json'
 
 
 let google3dtiles: Cesium.Cesium3DTileset | null = null;
@@ -60,7 +61,7 @@ export const registerLod1Buildings = async (isEnabled: boolean) => {
     }
 }
 
-let upwrBuildingsDataSource: Cesium.GeoJsonDataSource | null = null;
+let upwrBuildingsDataSource: Cesium.Cesium3DTileset | null = null;
 
 Cesium.GeoJsonDataSource.clampToGround = true;
 
@@ -69,70 +70,46 @@ Cesium.GeoJsonDataSource.clampToGround = true;
 export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () => void) => {
     switch(isEnabled){
         case true:
-            const resource = await Cesium.IonResource.fromAssetId(3519578);
-            upwrBuildingsDataSource = await Cesium.GeoJsonDataSource.load(resource);
-            
-            upwrBuildingsDataSource.entities.values.forEach(entity => {
-                entity.polygon!.height = new Cesium.ConstantProperty(158+entity.properties?.height._value+5);
-                entity.polygon!.extrudedHeight = new Cesium.ConstantProperty(158);
-                entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(255, 255, 255, 255));
-                entity.polygon!.outline = new Cesium.ConstantProperty(false);
-                const id = entity.properties?.A._value;
-                if (typeof id === 'string') {
-                    if (id.startsWith('A')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(135, 70, 36, 255));
-                    } else if (id.startsWith('B')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(131, 105, 30, 255));
-                    } else if (id.startsWith('C')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(108, 140, 58, 255));
-                    } else if (id.startsWith('D')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(52, 171, 116, 255));
-                    } else if (id.startsWith('E')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(0, 199, 193, 255));
-                    } else if (id.startsWith('F')) {
-                        entity.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.fromBytes(71, 64, 99, 255));
-                    }
-                }
-            });
-            const handler = new Cesium.ScreenSpaceEventHandler(viewer?.canvas);
-            
+            upwrBuildingsDataSource = await Cesium.Cesium3DTileset.fromIonAssetId(3294785);
+            // Filtrowanie budynków po gml_id
+            const allowedIds = cityGMLId.map((item: any) => item.properties.gml_id);
 
-            handler.setInputAction(function (click: any) {
-                const pickedObject = viewer?.scene.pick(click.position);
-                if (Cesium.defined(pickedObject) && pickedObject.id && upwrBuildingsDataSource?.entities.contains(pickedObject.id)) {
-                    if (showPopUp) {
-                        showPopUp();
-                    }
-                    const newTitle = 'Budynek UPWr';
-                    const newDescription = `
-                        Numer budynku: <b>${pickedObject.id.properties?.A._value}</b> <br>
-                        Adres: <b>${pickedObject.id.properties?.B._value}</b> <br><br>
-                        <b>Informacje dodatkowe:</b> <i>${pickedObject.id.properties?.desc._value}</i> <br>
-                    `;
-                    updatePopUpData(newTitle, newDescription);
-                    
-                    // Store original material for restoration
-                    const originalMaterial = pickedObject.id.polygon?.material;
-                    
-                    // Highlight the clicked building with a bright yellow color
-                    pickedObject.id.polygon!.material = new Cesium.ColorMaterialProperty(Cesium.Color.RED.withAlpha(0.5));
-                    
-                    // Restore original material after 1 second
-                    setTimeout(() => {
-                        if (pickedObject.id.polygon) {
-                            pickedObject.id.polygon.material = originalMaterial;
-                        }
-                    }, 1000);
-                    
-                }
-            }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-        
+            const conditions: [string, string][] = [];
+
+            cityGMLId.forEach((item: any) => {
+                const gmlId = item.properties.gml_id;
+                const A = item.properties.A;
+              
+                let color = "color('gray')";
+                if (A?.startsWith('A')) color = "color('rgb(135,70,36)')";
+                else if (A?.startsWith('B')) color = "color('rgb(131,105,30)')";
+                else if (A?.startsWith('C')) color = "color('rgb(108,140,58)')";
+                else if (A?.startsWith('D')) color = "color('rgb(52,171,116)')";
+                else if (A?.startsWith('E')) color = "color('rgb(0,199,193)')";
+                else if (A?.startsWith('F')) color = "color('rgb(71,64,99)')";
+              
+                conditions.push([`\${gml_id} === '${gmlId}'`, color]);
+              });
             
-            viewer?.dataSources.add(upwrBuildingsDataSource);
-            break;
-        case false:
-            viewer?.dataSources.remove(upwrBuildingsDataSource!);
-            upwrBuildingsDataSource = null;
+            upwrBuildingsDataSource.style = new Cesium.Cesium3DTileStyle({
+                show: {
+                    conditions: [
+                        [`${allowedIds.map((id: any) => `\${gml_id} === '${id}'`).join(' || ')}`, 'true'],
+                        ['true', 'false']
+                    ]
+                },
+                color: {
+                    conditions: conditions
+                }
+            })
+            viewer?.scene.primitives.add(upwrBuildingsDataSource);
+            const boundingSphere = upwrBuildingsDataSource.boundingSphere;
+            const cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
+            const surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, -42.0);
+            const offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0);
+            const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
+            upwrBuildingsDataSource.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+            upwrBuildingsDataSource.shadows = Cesium.ShadowMode.ENABLED;
             break;
     }
 }
