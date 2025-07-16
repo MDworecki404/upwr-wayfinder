@@ -31,7 +31,7 @@ const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as R
 const showPopUp = inject('showPopUp') as () => void;
 const isGoogleBasemapEnabled = ref(selectedBasemap.value === 'google');
 const isEsriBasemapEnabled = ref(selectedBasemap.value === 'esri');
-const isDemEnabled = ref(false);
+const isDemEnabled = inject('isDemEnabled') as Ref<boolean>;
 
 watch(isGoogle3dtilesEnabled, (newVal) => {
     register3DGoogleTiles(newVal);
