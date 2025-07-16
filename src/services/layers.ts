@@ -166,4 +166,4 @@ export const registerDemWroclaw = async (isEnabled: boolean) => {
 
 
 
-export {google3dtiles, osm3dtiles, lod1buildings, upwrBuildingsDataSource}
+export {google3dtiles, osm3dtiles, lod1buildings, upwrBuildingsDataSource, demWroclaw}
