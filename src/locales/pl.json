@@ -45,5 +45,6 @@
   "font": "Czcionka",
   "projectDescription": "Opis projektu",
   "projectDescriptionText": "UPWr Wayfinder jest wynikiem pracy magisterskiej studenta Geodezji i Kartografii Uniwersytetu Przyrodniczego we Wrocławiu. Projekt został stworzony w celu uproszczenia nawigacji na terenie uczelni.",
-  "technologies": "Do opracowania aplikacji wykorzystano nowoczesne technologie, takie jak:"
+  "technologies": "Do opracowania aplikacji wykorzystano nowoczesne technologie, takie jak:",
+  "dem": "Numeryczny model terenu"
 } 

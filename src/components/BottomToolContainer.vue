@@ -7,6 +7,7 @@ import { stopTracking } from '../services/userLocation';
 import { map } from '../services/olMap';
 import { viewer } from '../services/displayMap';
 import * as Cesium from 'cesium';
+import { registerDemWroclaw } from '../services/layers';
 
 
 const open = shallowRef(false)
@@ -29,6 +30,7 @@ const gpsStyle = inject('gpsStyle') as Ref<string>
 const selectedBasemap = inject('selectedBasemap') as Ref<string>
 const selectedLayer = inject('selectedLayer') as Ref<any>
 const isUpwrBuildingsEnabled = inject('isUpwrBuildingsEnabled') as Ref<boolean>
+const isDemEnabled = inject('isDemEnabled') as Ref<boolean>
 
 const triggerChangeMapType = () => {
     if (mapType.value === '2d') {
@@ -45,7 +47,8 @@ const triggerChangeMapType = () => {
         selectedLayer.value.lod1buildings = false
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
-
+        isDemEnabled.value = true
+        registerDemWroclaw(true)
         viewer?.screenSpaceEventHandler.setInputAction(() => {
         hideAllPanels();
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -63,6 +66,7 @@ const triggerChangeMapType = () => {
         selectedLayer.value.lod1buildings = false
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
+        isDemEnabled.value = false
 
         map.on('click', () => {
             hideAllPanels();

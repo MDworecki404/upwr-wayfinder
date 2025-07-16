@@ -4,7 +4,8 @@ import {
     register3DGoogleTiles, 
     register3DOSM3DTiles,
     registerLod1Buildings,
-    registerUpwrBuildings
+    registerUpwrBuildings,
+    registerDemWroclaw
 }  from '../../services/layers';
 import { changeBasemap } from '../../services/basemaps';
 import { defineAsyncComponent, ref, watch } from 'vue';
@@ -30,6 +31,8 @@ const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as R
 const showPopUp = inject('showPopUp') as () => void;
 const isGoogleBasemapEnabled = ref(selectedBasemap.value === 'google');
 const isEsriBasemapEnabled = ref(selectedBasemap.value === 'esri');
+const isDemEnabled = ref(false);
+
 watch(isGoogle3dtilesEnabled, (newVal) => {
     register3DGoogleTiles(newVal);
 });
@@ -48,6 +51,10 @@ watch(isUpwrBuildingsEnabled, (newVal) => {
     } else if (mapType.value === '2d') {
         olRegisterUpwrBuildings(newVal, showPopUp);
     }
+});
+
+watch(isDemEnabled, (newVal) => {
+    registerDemWroclaw(newVal);
 });
 
 watch(selectedBasemap, (newVal) => {
@@ -107,6 +114,14 @@ watch(mapType, (newVal) => {
                 >
                     <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('layers3D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
+                        <v-row class="align-center justify-start">
+                            <v-checkbox 
+                                color="info" 
+                                v-model="selectedLayer.dem" 
+                                @change="isDemEnabled = !isDemEnabled" 
+                            />
+                            <span class="mb-5 text-subtitle-1">{{ $t('dem') }}</span>
+                        </v-row>
                         <v-row class="align-center justify-start">
                             <v-checkbox 
                                 color="info" 

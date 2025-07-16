@@ -6,6 +6,7 @@ import { clearRoutes } from '../services/clearRoutes';
 import LoadingIcon from './LoadingIcon.vue';
 import { viewer } from '../services/displayMap';
 import * as Cesium from 'cesium';
+import { registerDemWroclaw } from '../services/layers';
 
 const mapType = inject('mapType') as Ref;
 
@@ -16,6 +17,7 @@ onMounted(() => {
     viewer?.screenSpaceEventHandler.setInputAction(() => {
         hideAllPanels();
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    registerDemWroclaw(true);
 });
 
 </script>

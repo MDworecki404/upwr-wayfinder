@@ -44,5 +44,6 @@
   "font": "Font",
   "projectDescription": "Project description",
   "projectDescriptionText": "UPWr Wayfinder is a geoportal for students of the University of Life Sciences in Wroclaw, focused on simplifying navigation on the university campus. The application allows you to search for routes between buildings on the map, search for buildings on the map, display information about buildings and much more.",
-  "technologies": "The application was developed using modern technologies, such as:"
+  "technologies": "The application was developed using modern technologies, such as:",
+  "dem": "Digital terrain model"
 }

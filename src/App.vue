@@ -72,7 +72,8 @@ const selectedLayer = ref({
     google3dtiles: false,
     osm3dtiles: false,
     lod1buildings: false,
-    upwrbuildings: false
+    upwrbuildings: false,
+    dem: true
 })
 
 const mapType = ref('3d')
@@ -86,6 +87,7 @@ const isUpwrBuildingsEnabled = ref(selectedLayer.value.upwrbuildings);
 const isGoogle3dtilesEnabled = ref(selectedLayer.value.google3dtiles);
 const isOsm3dtilesEnabled = ref(selectedLayer.value.osm3dtiles);
 const isLod1BuildingsEnabled = ref(selectedLayer.value.lod1buildings);
+const isDemEnabled = ref(selectedLayer.value.dem);
 
 const hideAllPanels = () => {
         if (isLayerComponentVisible.value) {
@@ -122,7 +124,7 @@ provide('isUpwrBuildingsEnabled', isUpwrBuildingsEnabled);
 provide('isGoogle3dtilesEnabled', isGoogle3dtilesEnabled);
 provide('isOsm3dtilesEnabled', isOsm3dtilesEnabled);
 provide('isLod1BuildingsEnabled', isLod1BuildingsEnabled);
-
+provide('isDemEnabled', isDemEnabled);
 provide('isLayerComponentVisible', isLayerComponentVisible);
 provide('toggleLayerComponentVisibility', toggleLayerComponentVisibility);
 provide('isSettingsComponentVisible', isSettingsComponentVisible);

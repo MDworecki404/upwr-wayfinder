@@ -40,8 +40,17 @@ export const registerLod1Buildings = async (isEnabled: boolean) => {
             viewer?.scene.primitives.add(lod1buildings);
             const boundingSphere = lod1buildings.boundingSphere;
             const cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
-            const surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, -42.0);
-            const offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0);
+
+            // Pobierz wysokość terenu
+            const terrainSample = await Cesium.sampleTerrainMostDetailed(viewer?.terrainProvider as Cesium.TerrainProvider, [cartographic]);
+            const terrainHeight = terrainSample[0].height;
+            console.log(terrainHeight);
+
+            // Oblicz przesunięcie
+            const surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
+            const offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 42);
+
+            // Zastosuj transformację
             const translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
             lod1buildings.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
             lod1buildings.shadows = Cesium.ShadowMode.ENABLED;
@@ -136,5 +145,25 @@ export const registerUpwrBuildings = async (isEnabled: boolean, showPopUp?: () =
             break;
     }
 }
+
+let demWroclaw: Cesium.CesiumTerrainProvider | null = null;
+
+export const registerDemWroclaw = async (isEnabled: boolean) => {
+    switch(isEnabled){
+        case true:
+            demWroclaw = await Cesium.CesiumTerrainProvider.fromIonAssetId(3554754) as Cesium.CesiumTerrainProvider;
+            viewer?.scene.setTerrain(
+                new Cesium.Terrain(
+                    Cesium.CesiumTerrainProvider.fromIonAssetId(3554754)
+                )
+            )
+            break;
+        case false:
+            viewer?.scene.setTerrain(Cesium.Terrain.fromWorldTerrain(),)
+            demWroclaw = null;
+    }
+}
+
+
 
 export {google3dtiles, osm3dtiles, lod1buildings, upwrBuildingsDataSource}
