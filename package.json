@@ -24,6 +24,7 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "vite-plugin-cesium": "^1.2.23",
+    "vite-plugin-pwa": "^1.0.1",
     "vite-plugin-vuetify": "^2.1.1",
     "vue-tsc": "^2.2.10",
     "vuetify": "^3.8.12"
