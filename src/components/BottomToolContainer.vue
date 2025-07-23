@@ -82,44 +82,67 @@ watch(fabPosition, () => open.value = false)
 
 <template>
 <div class="fab-column">
-    <v-fab
-        size='small'
-        rounded="lg"
-        :icon="mapType === '3d' ? 'mdi-video-2d' : 'mdi-video-3d'"
-        @click="triggerChangeMapType"
-    />
-    <v-fab
-        size='small'
-        rounded="lg"
-        icon="mdi-home"
-        @click="flyToHome(mapType)"
-    />
-    <v-fab
-        size='small'
+    <v-tooltip location="right" :text="$t('changeMapType')">
+        <template v-slot:activator="{ props }">
+            <v-fab
+                v-bind="props"
+                size="small"
+                rounded="lg"
+                :icon="mapType === '3d' ? 'mdi-video-2d' : 'mdi-video-3d'"
+                @click="triggerChangeMapType"
+            />
+        </template>
+    </v-tooltip>
+
+    <v-tooltip location="right" :text="$t('flyToHome')">
+        <template v-slot:activator="{ props }">
+            <v-fab
+                v-bind="props"
+                size="small"
+                rounded="lg"
+                icon="mdi-home"
+                @click="flyToHome(mapType)"
+            />
+        </template>
+    </v-tooltip>
+
+    <v-tooltip
         v-if="mapType === '3d'"
-        rounded="lg" 
-        icon="mdi-presentation-play" 
-        @click="togglePresentationComponentVisibility"
-    />
+        location="right"
+        :text="$t('togglePresentation')"
+    >
+        <template v-slot:activator="{ props }">
+            <v-fab
+                v-bind="props"
+                size="small"
+                rounded="lg"
+                icon="mdi-presentation-play"
+                @click="togglePresentationComponentVisibility"
+            />
+        </template>
+    </v-tooltip>
     <v-fab
-        size='small'
-        rounded="lg" 
-        icon="mdi-dots-vertical" 
+        size="small"
+        rounded="lg"
+        icon="mdi-dots-vertical"
         @click="open = !open"
     >
         <v-icon>{{ open ? 'mdi-close' : 'mdi-dots-vertical' }}</v-icon>
         <v-speed-dial
-        v-model="open"
-        :location="menuLocation"
-        :transition="transition"
-        activator="parent"  
+            v-model="open"
+            :location="menuLocation"
+            :transition="transition"
+            activator="parent"
         >
-            <v-btn v-if="mapType === '3d'" key="1" icon @click="toggleTimelineComponentVisibility">
-                <v-icon color="#1976D2" size="24">mdi-clock-outline</v-icon>
-            </v-btn>
+            <v-tooltip location="top left" :text="$t('timeline')">
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" v-if="mapType === '3d'" key="1" icon @click="toggleTimelineComponentVisibility">
+                        <v-icon color="#1976D2" size="24">mdi-clock-outline</v-icon>
+                    </v-btn>
+                </template>
+            </v-tooltip>
         </v-speed-dial>
     </v-fab>
-    <!-- Dodawaj kolejne <v-fab> tutaj -->
 </div>
 </template>
 

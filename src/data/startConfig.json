@@ -3,7 +3,7 @@
         "name": "UPWr Wayfinder",
         "version": "1.0.0",
         "description": "A wayfinding application for UPWr campus",
-        "author": "Marek",
+        "author": "Marek Dworecki",
         "license": "MIT"
     },
     "isDev": false,

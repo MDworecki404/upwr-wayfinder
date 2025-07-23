@@ -45,28 +45,91 @@ const toggleRoutingComponentVisibility = inject('toggleRoutingComponentVisibilit
 const toggleDescriptionsDialogVisibility = inject('toggleDescriptionsDialogVisibility') as () => void;
 </script>
 <template>
-        <v-container class="tool-container" fluid>
-            <v-row no-gutters>
-                <v-col cols="12" class="d-flex justify-start align-start align-sm-center flex-column flex-sm-row align-items-start">
-                    <v-btn size="small" rounded="lg" icon="mdi-tune" @click="toggleSettingsComponentVisibility" class="mb-2 mb-sm-0">
+    <v-container class="tool-container" fluid>
+        <v-row no-gutters>
+            <v-col cols="12" class="d-flex justify-start align-start align-sm-center flex-column flex-sm-row align-items-start">
 
-                    </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-information-outline" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleDescriptionsDialogVisibility">
+                <v-tooltip location="top left" :text="$t('settings')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            icon="mdi-tune"
+                            @click="toggleSettingsComponentVisibility"
+                            class="mb-2 mb-sm-0"
+                        />
+                    </template>
+                </v-tooltip>
 
-                    </v-btn>
-                    <v-btn size="small" rounded="lg" :icon="fullscreenStyle" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleFullscreen">
+                <v-tooltip location="top left" :text="$t('projectDescription')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            icon="mdi-information-outline"
+                            class="ml-sm-2 mb-2 mb-sm-0"
+                            @click="toggleDescriptionsDialogVisibility"
+                        />
+                    </template>
+                </v-tooltip>
 
-                    </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-layers-outline" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleLayerComponentVisibility">
+                <v-tooltip location="top left" :text="$t('fullscreen')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            :icon="fullscreenStyle"
+                            class="ml-sm-2 mb-2 mb-sm-0"
+                            @click="toggleFullscreen"
+                        />
+                    </template>
+                </v-tooltip>
 
-                    </v-btn>
-                    <v-btn size="small" rounded="lg" icon="mdi-map-marker-path" class="ml-sm-2 mb-2 mb-sm-0" @click="toggleRoutingComponentVisibility">
-                        
-                    </v-btn>
-                    <v-btn size="small" rounded="lg" :icon="gpsStyle" @click="changeGpsIcon" class="ml-sm-2 mb-2 mb-sm-0"></v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
+                <v-tooltip location="top left" :text="$t('layers')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            icon="mdi-layers-outline"
+                            class="ml-sm-2 mb-2 mb-sm-0"
+                            @click="toggleLayerComponentVisibility"
+                        />
+                    </template>
+                </v-tooltip>
+
+                <v-tooltip location="top left" :text="$t('routing')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            icon="mdi-map-marker-path"
+                            class="ml-sm-2 mb-2 mb-sm-0"
+                            @click="toggleRoutingComponentVisibility"
+                        />
+                    </template>
+                </v-tooltip>
+
+                <v-tooltip location="top left" :text="$t('gps')">
+                    <template v-slot:activator="{ props }">
+                        <v-btn
+                            v-bind="props"
+                            size="small"
+                            rounded="lg"
+                            :icon="gpsStyle"
+                            @click="changeGpsIcon"
+                            class="ml-sm-2 mb-2 mb-sm-0"
+                        />
+                    </template>
+                </v-tooltip>
+
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <style scoped lang="scss">
 .tool-container {

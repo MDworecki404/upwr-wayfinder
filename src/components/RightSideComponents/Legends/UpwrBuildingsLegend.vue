@@ -7,7 +7,7 @@ const toggleUpwrBuildingsLegendVisibility = inject('toggleUpwrBuildingsLegendVis
 
 <template>
     <v-card class="ma-2" v-if="isUpwrBuildingsLegendVisible">
-        <v-card-title class="d-flex align-center bg-blue-lighten-1 mb-5">
+        <v-card-title class="d-flex align-center bg-info mb-5">
             {{ $t('legend') }}
             <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;"  @click="toggleUpwrBuildingsLegendVisibility">mdi-close</v-icon>
         </v-card-title>
