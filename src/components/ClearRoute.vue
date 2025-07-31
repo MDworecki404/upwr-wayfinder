@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-    <v-btn id="routeClear" color="info" variant="elevated" class="position-absolute bottom-0 right-0 ma-2">{{ $t('clearRoute') }}</v-btn>
+    <v-btn id="routeClear" color="info" variant="elevated" prepend-icon="mdi-cancel" class="position-absolute bottom-0 right-0 ma-2">{{ $t('clearRoute') }}</v-btn>
 </template>
 
 <style scoped lang="scss">

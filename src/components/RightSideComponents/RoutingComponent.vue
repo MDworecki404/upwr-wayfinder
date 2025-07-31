@@ -95,15 +95,16 @@ const resetValues = () => {
                     <v-icon>mdi-car</v-icon>
                 </v-btn>
             </v-btn-toggle>
-            <v-btn
-            prepend-icon="mdi-map-marker-distance" 
-            color="info"
-            variant="outlined" 
-            @click="findUserRoute"
-            :disabled="!formValidate()"
-            class="mt-5"
-            >{{ $t('findRoute') }}</v-btn>
-            
+            <v-card-text class="d-flex justify-center align-center">
+                <v-btn
+                prepend-icon="mdi-map-marker-distance" 
+                color="info"
+                variant="outlined" 
+                @click="findUserRoute"
+                :disabled="!formValidate()"
+                class="mt-5"
+                >{{ $t('findRoute') }}</v-btn>
+            </v-card-text>
             <v-card-text v-if="routeDistance !== null" class="text-center">
                 <v-chip color="success" class="ma-2">
                     <v-icon start>mdi-map-marker-distance</v-icon>
@@ -154,6 +155,7 @@ const resetValues = () => {
                     <v-icon>mdi-car</v-icon>
                 </v-btn>
             </v-btn-toggle>
+            <v-card-text class="d-flex justify-center align-center">
                 <v-btn 
                 color="info"
                 variant="outlined" 
@@ -161,7 +163,8 @@ const resetValues = () => {
                 @click="findRoute"
                 class="mt-5"
                 :disabled="!formValidate()"
-                >{{ $t('findRoute') }}</v-btn>          
+                >{{ $t('findRoute') }}</v-btn>
+            </v-card-text>          
             <v-card-text v-if="routeDistance !== null" class="text-center">
                 <v-chip color="success" class="ma-2">
                     <v-icon start>mdi-map-marker-distance</v-icon>
