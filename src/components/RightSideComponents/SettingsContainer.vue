@@ -25,10 +25,11 @@ const changeFont = (value: string) => {
 
 <template>
     <v-card :width="300">
-        <v-card-title class="bg-info">{{ $t('settings') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" @click="toggleSettingsComponentVisibility">mdi-close</v-icon></v-card-title>
+        <v-card-title>{{ $t('settings') }} <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;" @click="toggleSettingsComponentVisibility">mdi-close</v-icon></v-card-title>
+        <v-divider></v-divider>
         <v-card-text>
             <v-card-text class="text-button">{{ $t('language') }}</v-card-text>
-            <v-radio-group v-model="selectedLanguage">
+            <v-radio-group color="info" v-model="selectedLanguage">
                 <v-radio label="Polski" @click="changeLanguage('pl')" value="pl"></v-radio>
                 <v-radio label="English" @click="changeLanguage('en')" value="en"></v-radio>
             </v-radio-group>

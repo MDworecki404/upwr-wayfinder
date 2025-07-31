@@ -51,7 +51,7 @@ const triggerFlyToBuilding = () => {
     </v-autocomplete>
     <v-row class="d-flex justify-center mb-1">
         <v-col cols="12" class="text-center">
-            <v-btn color="info" @click="triggerFlyToBuilding">
+            <v-btn prepend-icon="mdi-magnify" color="info" variant="outlined" @click="triggerFlyToBuilding">
                 {{ $t('searchBuilding') }}
             </v-btn>
         </v-col>

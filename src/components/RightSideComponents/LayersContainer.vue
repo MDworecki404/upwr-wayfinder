@@ -84,18 +84,19 @@ watch(mapType, (newVal) => {
 
 <template>  
     <v-card rounded="0" :width="300">
-        <v-card-title class="bg-info">
+        <v-card-title>
             {{ $t('layersPanel')}} 
             <v-icon class="position-absolute top-0 right-0 ma-2" style="cursor: pointer;"  @click="toggleLayerComponentVisibility">mdi-close</v-icon>
         </v-card-title>
+        <v-divider></v-divider>
         <v-card-text v-if="mapType === '3d'" class="pa-0">
-            <v-expansion-panels class="b-0 outline-0" focusable v-model="expandedBasemap">
+            <v-expansion-panels class="b-0 outline-0"  v-model="expandedBasemap">
                 <v-expansion-panel 
                 collapse-icon="mdi-map"
                 variant="accordion" 
                 :focusable="false"
                 >
-                    <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('basemaps')}}</v-expansion-panel-title>
+                    <v-expansion-panel-title class="small-title" color="white">{{ $t('basemaps')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <v-radio-group v-model="selectedBasemap">
                             <v-radio color="primary" label="OpenStreetMap" value="osm" @check="isOSMBasemapEnabled = !isOSMBasemapEnabled"></v-radio>
@@ -112,7 +113,7 @@ watch(mapType, (newVal) => {
                 variant="accordion"
                 collapse-icon="mdi-layers"
                 >
-                    <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('layers3D')}}</v-expansion-panel-title>
+                    <v-expansion-panel-title  class="small-title" color="white">{{ $t('layers3D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <v-row class="align-center justify-start">
                             <v-checkbox 
@@ -249,4 +250,12 @@ watch(mapType, (newVal) => {
     display: flex;
     align-items: center;
 }
+
+.v-expansion-panel{
+    font-weight: 500;
+    background-color: white;
+    border: none;
+    outline: none;
+}
+
 </style>

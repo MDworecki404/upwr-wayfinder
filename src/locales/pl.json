@@ -34,7 +34,7 @@
   "popUpTitle": "Informacje o obiekcie",
   "timeline": "Oś czasu",
   "selectedTime": "Wybrany czas",
-  "playAnimation": "Odtwórz animację",
+  "playAnimation": "Odtwórz",
   "stopAnimation": "Zresetuj",
   "searchBuilding": "Wyszukaj budynek",
   "google": "Google Maps",
@@ -52,5 +52,7 @@
   "togglePresentation": "Prezentacja",
   "fullscreen": "Pełny ekran",
   "layers": "Warstwy",
-  "gps": "Lokalizacja GPS"
+  "gps": "Lokalizacja GPS",
+  "selectStartBuilding": "Wybierz budynek startowy",
+  "selectEndBuilding": "Wybierz budynek docelowy"
 } 

@@ -33,7 +33,7 @@
   "popUpTitle": "Object information",
   "timeline": "Timeline",
   "selectedTime": "Selected time",
-  "playAnimation": "Play animation",
+  "playAnimation": "Play",
   "stopAnimation": "Reset",
   "searchBuilding": "Search building",
   "google": "Google Maps",
@@ -51,5 +51,7 @@
   "togglePresentation": "Presentation",
   "fullscreen": "Fullscreen",
   "layers": "Layers",
-  "gps": "GPS location"
+  "gps": "GPS location",
+  "selectStartBuilding": "Select start building",
+  "selectEndBuilding": "Select end building"
 }
