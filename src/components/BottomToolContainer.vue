@@ -48,6 +48,7 @@ const triggerChangeMapType = () => {
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
         isDemEnabled.value = true
+        hideAllPanels();
         registerDemWroclaw(true)
         viewer?.screenSpaceEventHandler.setInputAction(() => {
         hideAllPanels();
@@ -67,7 +68,7 @@ const triggerChangeMapType = () => {
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
         isDemEnabled.value = false
-
+        hideAllPanels();
         map.on('click', () => {
             hideAllPanels();
         });

@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium';
 import startConfig from '../data/startConfig.json';
+import { prepareLayers } from './layers';
 
 let viewer: Cesium.Viewer | null = null;
 
@@ -74,7 +75,7 @@ export function displayMap(containerId: string): void {
 
     }
     viewer.clock.onTick.addEventListener(updateImageryBrightness);
-    
+    prepareLayers()
     
 }
 

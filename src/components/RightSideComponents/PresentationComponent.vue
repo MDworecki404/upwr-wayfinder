@@ -80,7 +80,8 @@ const onStepChange = (val: number) => {
         <v-card-text v-if="isPresVisible" class="mt-2">
             <v-pagination
             color="primary"
-            :length="18" 
+            :length="8"
+            :total-visible="1" 
             v-model="currentStep"
             :disabled="isDisabled"
             @update:model-value="onStepChange"

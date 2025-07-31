@@ -1,7 +1,6 @@
 import { viewer } from "./displayMap";
 import * as Cesium from 'cesium';
 import { osm3dtiles, upwrBuildingsDataSource, google3dtiles, lod1buildings, registerUpwrBuildings } from "./layers";
-import { register3DGoogleTiles } from "./layers";
 import { changeBasemap } from "./basemaps";
 import { ref } from 'vue';
 
@@ -9,10 +8,10 @@ export const isDisabled = ref(false);
 export const subtitles = ref('');
 
 export const resetPresentation = () => {
-    viewer?.scene.primitives.remove(google3dtiles);
-    viewer?.scene.primitives.remove(osm3dtiles);
-    viewer?.dataSources.removeAll();
-    viewer?.scene.primitives.remove(lod1buildings);
+    google3dtiles!.show = false;
+    osm3dtiles!.show = false;
+    upwrBuildingsDataSource!.show = false;
+    lod1buildings!.show = false;
     viewer?.entities.removeAll();
     changeBasemap('osm')
     isDisabled.value = false;
@@ -24,7 +23,7 @@ export const playPresentation = (step: number) => {
     switch (step) {
         case 1:
             resetPresentation();
-            register3DGoogleTiles(true);
+            google3dtiles!.show = true;
             isDisabled.value = true;
             setTimeout(() => {
                 isDisabled.value = false;
@@ -56,7 +55,7 @@ export const playPresentation = (step: number) => {
                 }
             });
             subtitles.value = ''
-            viewer?.scene.primitives.remove(google3dtiles);
+            google3dtiles!.show = false;
 
             registerUpwrBuildings(true).then(() => {
                 setTimeout(() => {
