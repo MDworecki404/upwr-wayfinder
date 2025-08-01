@@ -8,7 +8,6 @@ const hidePopUp = inject('hidePopUp') as () => void;
 <template>
     <v-card :width="300">
         <v-card-title>
-        <v-divider></v-divider>
             <v-row class="d-flex justify-space-between align-center">
                 <v-col cols="12" class="d-flex justify-start align-center">
                     <span class="ml-2">{{$t('popUpTitle')}}</span>
@@ -16,6 +15,7 @@ const hidePopUp = inject('hidePopUp') as () => void;
                 </v-col>
             </v-row>
         </v-card-title>
+        <v-divider></v-divider>
         <v-card-text class="mt-2">
             <p v-html="popUpData.title"></p>
             <p v-html="popUpData.description"></p>

@@ -54,5 +54,10 @@
   "layers": "Warstwy",
   "gps": "Lokalizacja GPS",
   "selectStartBuilding": "Wybierz budynek startowy",
-  "selectEndBuilding": "Wybierz budynek docelowy"
+  "selectEndBuilding": "Wybierz budynek docelowy",
+  "addService": "Dodaj warstwę WMS/WMTS",
+  "url": "Adres URL",
+  "downloadService": "Pobierz usługę",
+  "incorrectUrl": "Niepoprawny adres URL",
+  "wmsLayers": "Warstwy WMS"
 } 

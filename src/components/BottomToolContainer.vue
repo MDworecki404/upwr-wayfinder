@@ -19,6 +19,7 @@ const transition = shallowRef('slide-x-reverse')
 const toggleTimelineComponentVisibility = inject('toggleTimelineComponentVisibility') as () => void;
 const togglePresentationComponentVisibility = inject('togglePresentationComponentVisibility') as () => void;
 const hideAllPanels = inject('hideAllPanels') as () => void;
+const toggleDynamicServiceComponentVisible = inject('toggleDynamicServiceComponentVisible') as () => void
 
 const reopen = () => {
     open.value = true
@@ -137,14 +138,14 @@ watch(fabPosition, () => open.value = false)
         >
             <v-tooltip location="top left" :text="$t('timeline')">
                 <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" v-if="mapType === '3d'" key="1" icon @click="toggleTimelineComponentVisibility">
+                    <v-btn v-bind="props" v-if="mapType === '3d'" :key="1" icon @click="toggleTimelineComponentVisibility">
                         <v-icon color="#1976D2" size="24">mdi-clock-outline</v-icon>
                     </v-btn>
                 </template>
             </v-tooltip>
             <v-tooltip location="top left" :text="$t('dynamicService')">
                 <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" key="1" icon>
+                    <v-btn v-bind="props" :key="2" icon @click="toggleDynamicServiceComponentVisible">
                         <v-icon color="#1976D2" size="24">mdi-earth-plus</v-icon>
                     </v-btn>
                 </template>

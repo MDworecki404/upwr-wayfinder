@@ -6,7 +6,7 @@
     height="100%"
     class="bg-transparent border-0 outline-0 pr-1"
   >
-    <v-list class="pt-1">
+    <v-list class="pt-1  d-flex flex-column align-end">
       
       <Suspense v-for="component in activeComponents" :key="component.id">
         <template #default>
@@ -41,6 +41,9 @@ const TimelineComponent = defineAsyncComponent(() =>
 const PresentationComponent = defineAsyncComponent(() =>
   import('./RightSideComponents/PresentationComponent.vue')
 );
+const DynamicAddServiceComponent = defineAsyncComponent(() => 
+  import('./RightSideComponents/DynamicAddService.vue')
+)
 
 const isLayerComponentVisible = inject('isLayerComponentVisible') as Ref<boolean>;
 const isSettingsComponentVisible = inject('isSettingsComponentVisible') as Ref<boolean>;
@@ -49,6 +52,7 @@ const isUpwrBuildingsLegendVisible = inject('isUpwrBuildingsLegendVisible') as R
 const isPopUpVisible = inject('isPopUpVisible') as Ref<boolean>;
 const isTimelineComponentVisible = inject('isTimelineComponentVisible') as Ref<boolean>;
 const isPresentationComponentVisible = inject('isPresentationComponentVisible') as Ref<boolean>;
+const isDynamicServiceComponentVisible = inject('isDynamicServiceComponentVisible') as Ref<boolean>;
 
 const componentOrder = ref<string[]>([]);
 
@@ -154,6 +158,21 @@ watch(isPresentationComponentVisible, (newVal, oldVal) => {
   }
 });
 
+watch(isDynamicServiceComponentVisible, (newVal, oldVal) => {
+
+  if (newVal && !oldVal) {
+    if (!componentOrder.value.includes('dynamicService')) {
+      componentOrder.value.unshift('dynamicService');
+    }
+  }
+  else if (!newVal && oldVal) {
+    const index = componentOrder.value.indexOf('dynamicService');
+    if (index > -1) {
+      componentOrder.value.splice(index, 1);
+    }
+  }
+});
+
 // Tablica aktywnych komponentów w kolejności ich aktywacji
 const activeComponents = computed(() => {
   const components = [];
@@ -194,6 +213,11 @@ const activeComponents = computed(() => {
       components.push({
         id: 'presentation',
         component: PresentationComponent
+      });
+    } else if (componentId === 'dynamicService' && isDynamicServiceComponentVisible.value) {
+      components.push({
+        id: 'dynamicService',
+        component: DynamicAddServiceComponent
       });
     }
   }

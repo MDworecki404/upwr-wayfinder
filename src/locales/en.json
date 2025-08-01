@@ -53,5 +53,10 @@
   "layers": "Layers",
   "gps": "GPS location",
   "selectStartBuilding": "Select start building",
-  "selectEndBuilding": "Select end building"
+  "selectEndBuilding": "Select end building",
+  "addService": "Add WMS/WMTS service",
+  "url": "URL Address",
+  "downloadService": "Download service",
+  "incorrectUrl": "Niepoprawny adres URL",
+  "wmsLayers": "WMS Layers"
 }

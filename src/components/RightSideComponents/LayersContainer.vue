@@ -12,6 +12,7 @@ import { defineAsyncComponent, ref, watch } from 'vue';
 import { zoomTo } from '../../services/zoomTo'
 import { changeOlBasemap } from '../../services/olBasemaps';
 import { olRegisterUpwrBuildings } from '../../services/olLayers';
+import { viewer } from '../../services/displayMap';
 
 const SearchComponent = defineAsyncComponent(() => import('./SearchComponent.vue'));
 
@@ -19,6 +20,7 @@ const SearchComponent = defineAsyncComponent(() => import('./SearchComponent.vue
 const selectedBasemap = inject('selectedBasemap') as any;
 const expandedBasemap = inject('expandedBasemap') as any;
 const expandedLayers = inject('expandedLayers') as any;
+const expandedWMS = inject('expandedWMS') as any
 const selectedLayer = inject('selectedLayer') as any;
 
 const isGoogle3dtilesEnabled = inject('isGoogle3dtilesEnabled') as Ref<boolean>;
@@ -80,6 +82,48 @@ watch(mapType, (newVal) => {
     mapVersion.value = newVal
 })
 
+interface TempWmsEntry {
+  resource: {
+    id: string;
+    title: string;
+    enabled: boolean;
+    temporaryImageryLayer: any;
+  };
+}
+
+const tempWMSArray = inject('tempWMSArray') as Ref<TempWmsEntry[]>;
+
+const showWMSLayer = (id: string) => {
+  const found = tempWMSArray.value.find(entry => entry.resource.id === id);
+
+  if (found) {
+    console.log('Znaleziono warstwę:', found.resource);
+  } else {
+    console.warn(`Nie znaleziono warstwy o id: ${id}`);
+  }
+
+  const layer = found?.resource.temporaryImageryLayer
+  layer.show = !layer.show
+}
+
+const deleteWMSLayer = (id: string) => {
+  const index = tempWMSArray.value.findIndex(entry => entry.resource.id === id);
+
+  if (index !== -1) {
+    const layerToRemove = tempWMSArray.value[index].resource.temporaryImageryLayer;
+    layerToRemove.show = false
+
+    if (viewer && layerToRemove) {
+      viewer.imageryLayers.remove(layerToRemove, true);
+    }
+
+    tempWMSArray.value.splice(index, 1);
+    console.log(`Warstwa o id ${id} została usunięta.`);
+  } else {
+    console.warn(`Nie znaleziono warstwy o id: ${id}`);
+  }
+};
+
 </script>
 
 <template>  
@@ -109,6 +153,7 @@ watch(mapType, (newVal) => {
             </v-expansion-panels>
             <v-expansion-panels class="b-0 outline-0" focusable v-model="expandedLayers">
                 <v-expansion-panel 
+                elevation="0"
                 :focusable="false" 
                 variant="accordion"
                 collapse-icon="mdi-layers"
@@ -178,7 +223,6 @@ watch(mapType, (newVal) => {
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
-            <hr>
         </v-card-text>
         <v-card-text v-if="mapType === '2d'" class="pa-0">
             <v-expansion-panels class="b-0 outline-0" focusable v-model="expandedBasemap">
@@ -187,7 +231,7 @@ watch(mapType, (newVal) => {
                 variant="accordion" 
                 :focusable="false"
                 >
-                    <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('basemaps')}}</v-expansion-panel-title>
+                    <v-expansion-panel-title class="small-title" color="white">{{ $t('basemaps')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <v-radio-group v-model="selectedBasemap">
                             <v-radio color="primary" label="OpenStreetMap" value="osm" @check="isOSMBasemapEnabled = !isOSMBasemapEnabled"></v-radio>
@@ -204,7 +248,7 @@ watch(mapType, (newVal) => {
                 variant="accordion"
                 collapse-icon="mdi-layers"
                 >
-                    <v-expansion-panel-title class="small-title" color="grey-lighten-3">{{ $t('layers2D')}}</v-expansion-panel-title>
+                    <v-expansion-panel-title class="small-title" color="white">{{ $t('layers2D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <v-row class="align-center justify-space-between">
                             <div class="d-flex align-center">
@@ -230,7 +274,48 @@ watch(mapType, (newVal) => {
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
-            <hr>
+        </v-card-text>
+        <v-card-text class="pa-0"  v-if="tempWMSArray.length > 0">
+            <v-expansion-panels class="b-0 outline-0" focusable v-model="expandedWMS">
+                <v-expansion-panel 
+                :focusable="false" 
+                variant="accordion"
+                collapse-icon="mdi-layers"
+                >
+                    <v-expansion-panel-title class="small-title" color="white">{{ $t('wmsLayers')}}</v-expansion-panel-title>
+                    <v-expansion-panel-text>
+                      <v-row
+                        v-for="(layer, index) in tempWMSArray"
+                        :key="layer.resource?.id || index"
+                        class="align-center justify-space-between"
+                      >
+                        <div class="d-flex align-center">
+                          <v-checkbox
+                              color="info"
+                              v-model="layer.resource.enabled"
+                              @change="showWMSLayer(layer.resource.id)"
+                            >
+                              <template #label>
+                                <span
+                                  class="text-truncate"
+                                  style="max-width: 150px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                                  :title="layer.resource?.title || 'Unnamed Layer'"
+                                >
+                                  {{ layer.resource?.title || 'Unnamed Layer' }}
+                                </span>
+                              </template>
+                            </v-checkbox>
+                          
+                        </div>
+                        <div class="d-flex">
+                            <v-btn class="mb-5" icon size="x-small" variant="text" @click="deleteWMSLayer(layer.resource.id)">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                        </div>
+                      </v-row>
+                    </v-expansion-panel-text>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-card-text>
     </v-card>
 </template>

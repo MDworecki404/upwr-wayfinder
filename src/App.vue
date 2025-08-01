@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, provide, defineAsyncComponent } from 'vue';
+import { ref, provide, defineAsyncComponent, type Ref } from 'vue';
 import { checkCameraPosition } from './services/forTest/checkCameraPosition';
 import startConfig from './data/startConfig.json';
 
@@ -53,6 +53,11 @@ const togglePresentationComponentVisibility = () => {
   isPresentationComponentVisible.value = !isPresentationComponentVisible.value;
 };
 
+const isDynamicServiceComponentVisible = ref(false)
+const toggleDynamicServiceComponentVisible = () => {
+  isDynamicServiceComponentVisible.value = !isDynamicServiceComponentVisible.value
+}
+
 const isPopUpVisible = ref(false);
 
   const showPopUp = () => {
@@ -67,6 +72,8 @@ const hidePopUp = () => {
 const selectedBasemap = ref('osm')
 const expandedBasemap = ref([0])
 const expandedLayers = ref([0])
+const expandedWMS = ref([0])
+
 
 const selectedLayer = ref({
     google3dtiles: false,
@@ -111,7 +118,18 @@ const hideAllPanels = () => {
         if (isPresentationComponentVisible.value) {
             togglePresentationComponentVisibility();
         }
+        if (isDynamicServiceComponentVisible.value) {
+            toggleDynamicServiceComponentVisible()
+        }
     }
+
+
+// TEMPORARY WMS
+
+const tempWMSArray = ref([]) as Ref<object[]>
+provide('tempWMSArray', tempWMSArray)
+//TEMPORARY WMS
+
 
 provide('hideAllPanels', hideAllPanels);
 
@@ -131,11 +149,14 @@ provide('isSettingsComponentVisible', isSettingsComponentVisible);
 provide('toggleSettingsComponentVisibility', toggleSettingsComponentVisibility);
 provide('isRoutingComponentVisible', isRoutingComponentVisible);
 provide('toggleRoutingComponentVisibility', toggleRoutingComponentVisibility);
+provide('isDynamicServiceComponentVisible', isDynamicServiceComponentVisible)
+provide('toggleDynamicServiceComponentVisible', toggleDynamicServiceComponentVisible)
 
 // Provide dla stanu warstw
 provide('selectedBasemap', selectedBasemap);
 provide('expandedBasemap', expandedBasemap);
 provide('expandedLayers', expandedLayers);
+provide('expandedWMS', expandedWMS)
 provide('selectedLayer', selectedLayer);
 provide('isUpwrBuildingsLegendVisible', isUpwrBuildingsLegendVisible);
 provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibility);
