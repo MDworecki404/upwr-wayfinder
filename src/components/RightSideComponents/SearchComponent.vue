@@ -37,6 +37,7 @@ const triggerFlyToBuilding = () => {
         :item-value="item => item.code"
         :label="$t('searchBuilding')"
         :placeholder="$t('searchBuilding')"
+        clear-on-select
         v-model="search"
         :loading="loading"
         variant="underlined"

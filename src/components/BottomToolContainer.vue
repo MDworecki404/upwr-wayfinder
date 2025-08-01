@@ -142,6 +142,13 @@ watch(fabPosition, () => open.value = false)
                     </v-btn>
                 </template>
             </v-tooltip>
+            <v-tooltip location="top left" :text="$t('dynamicService')">
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" key="1" icon>
+                        <v-icon color="#1976D2" size="24">mdi-earth-plus</v-icon>
+                    </v-btn>
+                </template>
+            </v-tooltip>
         </v-speed-dial>
     </v-fab>
 </div>

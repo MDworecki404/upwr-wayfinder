@@ -24,10 +24,12 @@ const triggerPlayPresentation = (step: number) => {
         isLod1BuildingsEnabled.value = false
         isOsm3dtilesEnabled.value = false
         isGoogle3dtilesEnabled.value = false
+        playIcon.value = 'mdi-play'
     }
     else {
         isPresVisible.value = true;
         playPresentation(step);
+        playIcon.value = 'mdi-stop'
     }
 }
 
@@ -55,6 +57,8 @@ const onStepChange = (val: number) => {
     playPresentation(val);
 }
 
+const playIcon = ref('mdi-play')
+
 
 
 </script>
@@ -73,7 +77,7 @@ const onStepChange = (val: number) => {
             <v-row class="d-flex justify-center align-center mt-1">
                 <v-col cols="12" class="d-flex justify-center align-center">
                     <v-btn color="info" icon="mdi-play" @click="triggerPlayPresentation(1)">
-                        <v-icon>mdi-play</v-icon>
+                        <v-icon>{{ playIcon }}</v-icon>
                     </v-btn>
                 </v-col>
             </v-row>
