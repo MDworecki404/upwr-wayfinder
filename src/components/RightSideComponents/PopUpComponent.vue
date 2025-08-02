@@ -16,14 +16,18 @@ const hidePopUp = inject('hidePopUp') as () => void;
             </v-row>
         </v-card-title>
         <v-divider></v-divider>
-        <v-card-text class="mt-2">
+        <v-card-text class="mt-2 description">
             <p v-html="popUpData.title"></p>
-            <p v-html="popUpData.description"></p>
+            <p v-html="popUpData.description" style="max-height: 300px;"></p>
         </v-card-text>
     </v-card>
 </template>
 
 
 
-<style scoped>  
+<style scoped lang="scss"> 
+    .description {
+        overflow: scroll;
+    }
+    
 </style>

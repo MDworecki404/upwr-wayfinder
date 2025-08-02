@@ -212,7 +212,7 @@ const deleteWMTSLayer = (id: string) => {
                 elevation="0"
                 :focusable="false" 
                 variant="accordion"
-                collapse-icon="mdi-layers"
+                collapse-icon="mdi-printer-3d"
                 >
                     <v-expansion-panel-title  class="small-title" color="white">{{ $t('layers3D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
@@ -302,7 +302,7 @@ const deleteWMTSLayer = (id: string) => {
                 <v-expansion-panel 
                 :focusable="false" 
                 variant="accordion"
-                collapse-icon="mdi-layers"
+                collapse-icon="mdi-video-2d"
                 >
                     <v-expansion-panel-title class="small-title" color="white">{{ $t('layers2D')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
@@ -336,7 +336,7 @@ const deleteWMTSLayer = (id: string) => {
                 <v-expansion-panel 
                 :focusable="false" 
                 variant="accordion"
-                collapse-icon="mdi-layers"
+                collapse-icon="mdi-map-clock"
                 >
                     <v-expansion-panel-title class="small-title" color="white">{{ $t('wmsLayers')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>
@@ -378,7 +378,7 @@ const deleteWMTSLayer = (id: string) => {
                 <v-expansion-panel 
                 :focusable="false" 
                 variant="accordion"
-                collapse-icon="mdi-layers"
+                collapse-icon="mdi-map-clock"
                 >
                     <v-expansion-panel-title class="small-title" color="white">{{ $t('wmtsLayers')}}</v-expansion-panel-title>
                     <v-expansion-panel-text>

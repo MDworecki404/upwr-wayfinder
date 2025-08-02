@@ -70,10 +70,10 @@ const hidePopUp = () => {
 
 // Stan warstw - przeniesiony z LayersContainer
 const selectedBasemap = ref('osm')
-const expandedBasemap = ref([0])
-const expandedLayers = ref([0])
-const expandedWMS = ref([0])
-const expandedWMTS = ref([0])
+const expandedBasemap = ref([1])
+const expandedLayers = ref([1])
+const expandedWMS = ref([1])
+const expandedWMTS = ref([1])
 
 
 const selectedLayer = ref({

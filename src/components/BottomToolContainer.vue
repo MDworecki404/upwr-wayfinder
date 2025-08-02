@@ -8,7 +8,7 @@ import { map } from '../services/olMap';
 import { viewer } from '../services/displayMap';
 import * as Cesium from 'cesium';
 import { registerDemWroclaw } from '../services/layers';
-
+import { zoom } from '../services/zoomInOut';
 
 
 const open = shallowRef(false)
@@ -33,10 +33,11 @@ const selectedBasemap = inject('selectedBasemap') as Ref<string>
 const selectedLayer = inject('selectedLayer') as Ref<any>
 const isUpwrBuildingsEnabled = inject('isUpwrBuildingsEnabled') as Ref<boolean>
 const isDemEnabled = inject('isDemEnabled') as Ref<boolean>
+const tempWMSArray = inject('tempWMSArray') as Ref<object[]>
+const tempWMTSArray = inject('tempWMTSArray') as Ref<object[]>
 
 const triggerChangeMapType = () => {
     if (mapType.value === '2d') {
-        // Zatrzymaj śledzenie w poprzednim trybie (2D)
         stopTracking('2d')
         mapType.value = '3d'
         changeMapType(mapType.value)
@@ -50,13 +51,14 @@ const triggerChangeMapType = () => {
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
         isDemEnabled.value = true
+        tempWMSArray.value = []
+        tempWMTSArray.value = []
         hideAllPanels();
         registerDemWroclaw(true)
         viewer?.screenSpaceEventHandler.setInputAction(() => {
-        hideAllPanels();
+            hideAllPanels();
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     } else {
-        // Zatrzymaj śledzenie w poprzednim trybie (3D)
         stopTracking('3d')
         mapType.value = '2d'
         changeMapType(mapType.value)
@@ -70,6 +72,8 @@ const triggerChangeMapType = () => {
         selectedLayer.value.upwrbuildings = false
         isUpwrBuildingsEnabled.value = false
         isDemEnabled.value = false
+        tempWMSArray.value = []
+        tempWMTSArray.value = []
         hideAllPanels();
         map.on('click', () => {
             hideAllPanels();
@@ -81,10 +85,37 @@ watch(menuLocation, reopen)
 watch(transition, reopen)
 watch(fabLocation, () => open.value = false)
 watch(fabPosition, () => open.value = false)
+
+const triggerZoom = (type: string) => {
+    zoom(mapType, type)
+}
+
 </script>
 
 <template>
 <div class="fab-column">
+    <v-tooltip location="right" :text="$t('zoomIn')">
+        <template v-slot:activator="{ props }">
+            <v-fab
+                v-bind="props"
+                size="small"
+                rounded="lg"
+                icon="mdi-plus"
+                @click="triggerZoom('in')"
+            />
+        </template>
+    </v-tooltip>
+    <v-tooltip location="right" :text="$t('zoomOut')">
+        <template v-slot:activator="{ props }">
+            <v-fab
+                v-bind="props"
+                size="small"
+                rounded="lg"
+                icon="mdi-minus"
+                @click="triggerZoom('out')"
+            />
+        </template>
+    </v-tooltip>
     <v-tooltip location="right" :text="$t('changeMapType')">
         <template v-slot:activator="{ props }">
             <v-fab

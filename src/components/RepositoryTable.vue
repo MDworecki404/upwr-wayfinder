@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import servicesRepo from '../data/serviceRepository.json'
-import { inject, ref, type Ref, defineEmits} from 'vue'
+import { inject, ref, type Ref} from 'vue'
 
 const emit = defineEmits(['service-selected'])
 
