@@ -8,7 +8,7 @@ const RepositoryTable = defineAsyncComponent(() => import('../RepositoryTable.vu
 const selectedServiceType = ref('WMS')
 provide('selectedServiceType', selectedServiceType)
 
-const toggleDynamicServiceComponentVisible = inject('toggleDynamicServiceComponentVisible')
+const toggleDynamicServiceComponentVisible = inject('toggleDynamicServiceComponentVisible') as () => void
 
 const mapType = inject('mapType') as Ref
 
@@ -71,7 +71,9 @@ errorMessage.value = ''; // zresetuj błąd
             <v-row class="d-flex justify-space-between align-center">
                 <v-col cols="12" class="d-flex justify-start align-center">
                     <span class="ml-2">{{$t('addService')}}</span>
-                    <v-icon class="position-absolute right-0 ma-2" style="cursor: pointer;"  @click="toggleDynamicServiceComponentVisible">mdi-close</v-icon>
+                    <v-icon class="position-absolute right-0 ma-2" style="cursor: pointer;" @click="toggleDynamicServiceComponentVisible">
+                      mdi-close
+                    </v-icon>
                 </v-col>
             </v-row>
         </v-card-title>
