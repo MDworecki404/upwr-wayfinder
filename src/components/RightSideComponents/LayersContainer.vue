@@ -22,6 +22,7 @@ const selectedBasemap = inject('selectedBasemap') as any;
 const expandedBasemap = inject('expandedBasemap') as any;
 const expandedLayers = inject('expandedLayers') as any;
 const expandedWMS = inject('expandedWMS') as any
+const expandedWMTS = inject('expandedWMS') as any
 const selectedLayer = inject('selectedLayer') as any;
 
 const isGoogle3dtilesEnabled = inject('isGoogle3dtilesEnabled') as Ref<boolean>;
@@ -93,6 +94,7 @@ interface TempWmsEntry {
 }
 
 const tempWMSArray = inject('tempWMSArray') as Ref<TempWmsEntry[]>;
+const tempWMTSArray = inject('tempWMTSArray') as Ref<TempWmsEntry[]>;
 
 const showWMSLayer = (id: string) => {
   const found = tempWMSArray.value.find(entry => entry.resource.id === id);
@@ -131,6 +133,48 @@ const deleteWMSLayer = (id: string) => {
     }
 
     tempWMSArray.value.splice(index, 1);
+  } else {
+    return false
+  }
+};
+
+const showWMTSLayer = (id: string) => {
+  const found = tempWMTSArray.value.find(entry => entry.resource.id === id);
+
+  if (found) {
+    console.log('Znaleziono warstwę:', found.resource);
+  } else {
+    console.warn(`Nie znaleziono warstwy o id: ${id}`);
+  }
+
+  if(mapType.value === '3d'){
+    const layer = found?.resource.temporaryImageryLayer
+    layer.show = !layer.show
+  } else if(mapType.value === '2d') {
+    const layer = found?.resource.temporaryImageryLayer
+    layer.setVisible(!layer.values_.visible)
+  }
+}
+
+const deleteWMTSLayer = (id: string) => {
+  const index = tempWMTSArray.value.findIndex(entry => entry.resource.id === id);
+
+  if (index !== -1) {
+    const layerToRemove = tempWMTSArray.value[index].resource.temporaryImageryLayer;
+    if(mapType.value === '3d'){
+        layerToRemove.show = false
+
+        if (viewer && layerToRemove) {
+          viewer.imageryLayers.remove(layerToRemove, true);
+        }
+    } else if(mapType.value === '2d') {
+        if (map && layerToRemove) {
+          layerToRemove.setVisible(false)
+          map.removeLayer(layerToRemove)
+        }
+    }
+
+    tempWMTSArray.value.splice(index, 1);
   } else {
     return false
   }
@@ -321,6 +365,48 @@ const deleteWMSLayer = (id: string) => {
                         </div>
                         <div class="d-flex">
                             <v-btn class="mb-5" icon size="x-small" variant="text" @click="deleteWMSLayer(layer.resource.id)">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                        </div>
+                      </v-row>
+                    </v-expansion-panel-text>
+                </v-expansion-panel>
+            </v-expansion-panels>
+        </v-card-text>
+        <v-card-text class="pa-0"  v-if="tempWMTSArray.length > 0">
+            <v-expansion-panels class="b-0 outline-0" focusable v-model="expandedWMTS">
+                <v-expansion-panel 
+                :focusable="false" 
+                variant="accordion"
+                collapse-icon="mdi-layers"
+                >
+                    <v-expansion-panel-title class="small-title" color="white">{{ $t('wmtsLayers')}}</v-expansion-panel-title>
+                    <v-expansion-panel-text>
+                      <v-row
+                        v-for="(layer, index) in tempWMTSArray"
+                        :key="layer.resource?.id || index"
+                        class="align-center justify-space-between"
+                      >
+                        <div class="d-flex align-center">
+                          <v-checkbox
+                              color="info"
+                              v-model="layer.resource.enabled"
+                              @change="showWMTSLayer(layer.resource.id)"
+                            >
+                              <template #label>
+                                <span
+                                  class="text-truncate"
+                                  style="max-width: 150px; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                                  :title="layer.resource?.title || 'Unnamed Layer'"
+                                >
+                                  {{ layer.resource?.title || 'Unnamed Layer' }}
+                                </span>
+                              </template>
+                            </v-checkbox>
+                          
+                        </div>
+                        <div class="d-flex">
+                            <v-btn class="mb-5" icon size="x-small" variant="text" @click="deleteWMTSLayer(layer.resource.id)">
                                 <v-icon>mdi-close</v-icon>
                             </v-btn>
                         </div>

@@ -27,67 +27,76 @@ const extractAllLayers = (layers: WmsLayer[], collected: WmsLayer[] = []): WmsLa
 }
 
 export const getWmsService = async (mapType: Ref<string>, url: string) => {
-  const parser = new WMSCapabilities()
+  const parser = new WMSCapabilities();
   try {
-    const text = await fetch(`${url}?service=wms&request=GetCapabilities`).then(res => res.text())
-    const data = parser.read(text)
-    console.log(data)
+    const response = await fetch(`${url}?service=wms&request=GetCapabilities`);
     
-    const allLayers = extractAllLayers(data.Capability.Layer.Layer)
+    if (!response.ok) {
+      console.error(`Fetch failed with status: ${response.status}`);
+      return [];
+    }
 
-    const title = data.Service.Title
+    const text = await response.text();
+    const data = parser.read(text);
 
-    let layers: string = ''
+    if (!data?.Capability?.Layer?.Layer) {
+      console.error('WMS Capabilities response missing expected structure.');
+      return [];
+    }
 
-    allLayers.map((l) => {
-        layers = layers + `${l.Name}, `
-    })
-    layers = layers.slice(0, -2)
-    console.log(layers)
+    const allLayers = extractAllLayers(data.Capability.Layer.Layer);
+
+    if (allLayers.length === 0) {
+      console.warn('No WMS layers found in GetCapabilities response.');
+      return [];
+    }
+
+    const title = data.Service?.Title || 'Untitled WMS';
+    let layers = allLayers.map((l) => l.Name).filter(Boolean).join(',');
 
     if (mapType.value.toLowerCase() === '3d') {
       const provider = new Cesium.WebMapServiceImageryProvider({
         url: url,
         layers: layers,
-      })
-      const temporaryImageryLayer = new Cesium.ImageryLayer(provider)
-      viewer?.imageryLayers.add(temporaryImageryLayer)
-      const result = {
+      });
+
+      const temporaryImageryLayer = new Cesium.ImageryLayer(provider);
+      viewer?.imageryLayers.add(temporaryImageryLayer);
+      return {
         resource: {
-            id: `wms-${Date.now()}`,
-            title,
-            temporaryImageryLayer,
-            enabled: true
-        }
-      }
-      return result
+          id: `wms-${Date.now()}`,
+          title,
+          temporaryImageryLayer,
+          enabled: true,
+        },
+      };
 
     } else if (mapType.value.toLowerCase() === '2d') {
       const temporaryImageryLayer = new TileLayer({
         source: new TileWMS({
           url: url,
-          params: {'LAYERS': layers},
+          params: { 'LAYERS': layers },
         }),
-        zIndex: 500
-      })
-      console.log(temporaryImageryLayer)
-      const itemId = `wms-${Date.now()}`
-      temporaryImageryLayer.set('itemId',itemId)
-      map.addLayer(temporaryImageryLayer)
-      const result = {
+        zIndex: 500,
+      });
+
+      const itemId = `wms-${Date.now()}`;
+      temporaryImageryLayer.set('itemId', itemId);
+      map.addLayer(temporaryImageryLayer);
+
+      return {
         resource: {
-            id: itemId,
-            title,
-            temporaryImageryLayer,
-            enabled: true
-        }
-      }
-      console.log(map.getLayers())
-      return result
+          id: itemId,
+          title,
+          temporaryImageryLayer,
+          enabled: true,
+        },
+      };
     }
 
-    return allLayers// możesz też zwrócić
+    return allLayers;
   } catch (error) {
-    return []
+    console.error('Error loading WMS capabilities:', error);
+    return [];
   }
-}
+};

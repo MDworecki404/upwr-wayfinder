@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { inject, ref, type Ref } from 'vue';
 import { getWmsService } from '../../services/wmsService';
+import { getWmtsService } from '../../services/wmtsService';
 
 const selectedServiceType = ref('WMS')
 
@@ -9,6 +10,7 @@ const toggleDynamicServiceComponentVisible = inject('toggleDynamicServiceCompone
 const mapType = inject('mapType') as Ref
 
 const tempWMSArray = inject('tempWMSArray') as Ref<object[]>
+const tempWMTSArray = inject('tempWMTSArray') as Ref<object[]>
 
 const url = ref('')
 
@@ -18,16 +20,34 @@ const isFormValidate = () => {
   return pattern.test(trimmedUrl);
 }
 
+const errorMessage = ref('');
 
 const triggerDownloadService = async () => {
-    if (selectedServiceType.value === 'WMS'){
-        const layer = await getWmsService(mapType, url.value)
-        console.log(layer)
-        tempWMSArray.value.push(layer)
-        console.log(tempWMSArray.value)
+errorMessage.value = ''; // zresetuj błąd
+
+  try {
+    if (selectedServiceType.value === 'WMS') {
+      const layer = await getWmsService(mapType, url.value);
+      console.log(layer);
+      if (layer && typeof layer === 'object' && !Array.isArray(layer)) {
+        tempWMSArray.value.push(layer);
+      } else {
+        errorMessage.value = 'errorMessageService';
+      }
+    } else if (selectedServiceType.value === 'WMTS') {
+      const layer = await getWmtsService(mapType, url.value);
+      console.log(layer);
+      if (layer && typeof layer === 'object' && !Array.isArray(layer)) {
+        tempWMTSArray.value.push(layer);
+      } else {
+        errorMessage.value = 'errorMessageService';
+      }
     }
-    
-}
+  } catch (err) {
+    console.error(err);
+    errorMessage.value = 'errorMessageService2';
+  }
+};
 
 </script>
 
@@ -67,6 +87,17 @@ const triggerDownloadService = async () => {
                 :error-messages="!isFormValidate() ? $t('incorrectUrl') : ''"
             >
             </v-text-field>
+            <v-alert
+              v-if="errorMessage"
+              type="error"
+              class="ma-4"
+              dense
+              border="start"
+              color="error"
+              variant="outlined"
+            >
+              {{ $t(errorMessage) }}
+            </v-alert>
             <v-card-text class="d-flex justify-end align-center">
                 <v-btn
                   prepend-icon="mdi-download" 

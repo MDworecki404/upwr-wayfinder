@@ -73,6 +73,7 @@ const selectedBasemap = ref('osm')
 const expandedBasemap = ref([0])
 const expandedLayers = ref([0])
 const expandedWMS = ref([0])
+const expandedWMTS = ref([0])
 
 
 const selectedLayer = ref({
@@ -125,11 +126,13 @@ const hideAllPanels = () => {
 
 
 // TEMPORARY WMS
-
 const tempWMSArray = ref([]) as Ref<object[]>
 provide('tempWMSArray', tempWMSArray)
 //TEMPORARY WMS
-
+// TEMPORARY WMTS
+const tempWMTSArray = ref([]) as Ref<object[]>
+provide('tempWMTSArray', tempWMTSArray)
+//TEMPORARY WMTS
 
 provide('hideAllPanels', hideAllPanels);
 
@@ -157,6 +160,7 @@ provide('selectedBasemap', selectedBasemap);
 provide('expandedBasemap', expandedBasemap);
 provide('expandedLayers', expandedLayers);
 provide('expandedWMS', expandedWMS)
+provide('expandedWMTS', expandedWMTS)
 provide('selectedLayer', selectedLayer);
 provide('isUpwrBuildingsLegendVisible', isUpwrBuildingsLegendVisible);
 provide('toggleUpwrBuildingsLegendVisibility', toggleUpwrBuildingsLegendVisibility);
