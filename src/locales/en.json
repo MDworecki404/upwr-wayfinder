@@ -61,5 +61,6 @@
   "wmsLayers": "WMS Layers",
   "dynamicService": "Add WMS/WMTS service",
   "errorMessageService": "Unable to download layer or invalid format.",
-  "wmtsLayers": "WMTS Layers"
+  "wmtsLayers": "WMTS Layers",
+  "downloadFromRepo": "Download from repository"
 }

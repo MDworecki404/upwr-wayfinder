@@ -62,6 +62,7 @@
   "wmsLayers": "Warstwy WMS",
   "dynamicService": "Dodaj usługę WMS/WMTS",
   "errorMessageService": "Nie udało się pobrać warstwy lub nieprawidłowy format.",
-  "wmtsLayers": "Warstwy WMTS"
+  "wmtsLayers": "Warstwy WMTS",
+  "downloadFromRepo": "Pobierz z repozytorium"
 
 } 

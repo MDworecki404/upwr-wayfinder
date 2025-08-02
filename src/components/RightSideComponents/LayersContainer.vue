@@ -22,7 +22,7 @@ const selectedBasemap = inject('selectedBasemap') as any;
 const expandedBasemap = inject('expandedBasemap') as any;
 const expandedLayers = inject('expandedLayers') as any;
 const expandedWMS = inject('expandedWMS') as any
-const expandedWMTS = inject('expandedWMS') as any
+const expandedWMTS = inject('expandedWMTS') as any
 const selectedLayer = inject('selectedLayer') as any;
 
 const isGoogle3dtilesEnabled = inject('isGoogle3dtilesEnabled') as Ref<boolean>;

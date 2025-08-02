@@ -1,0 +1,303 @@
+{
+  "WMS": [
+  {
+    "WMS_Title": "Usługa przeglądania danych Bazy Danych Obiektów Topograficznych BDOT10k",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/pub/guest/kompozycja_BDOT10k_WMS/MapServer/WMSServer",
+    "description": "Treść i szczegółowość bazy BDOT10k odpowiada mapie topograficznej w skali\n1:10 000. gdzie zakres tematyczny obejmuje m.in. informacje o: sieci wodnej. sieci komunikacyjnej. sieci uzbrojenia terenu. pokryciu terenu. budynkach. budowlach i urządzeniach. kompleksach użytkowania terenu. terenach chronionych. jednostkach podziału terytorialnego.",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "topografia, obiekty, mapa, 1:10000",
+    "expectedLayers": ["RZab", "TPrz", "TLes", "RKr", "ku7", "ku6", "ku5", "ku4", "kan", "row"]
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) ortofotomap dla obszaru Polski",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/StandardResolution",
+    "description": "Umozliwia przegladanie ortofotomap dla obszaru Polski. Dane udostepniane za pomoca tej uslugi stanowia ortofotomape wykonana ze zdjec lotniczych.",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "ortofotomapa, zdjęcia lotnicze, obraz, raster",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "ORTO_HighResolution",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution",
+    "description": "Ortofotomapa o pikselu 10 cm",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "ortofotomapa, zdjęcia lotnicze, obraz, raster",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Numeryczny Model Terenu - Cieniowanie",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/ShadedRelief",
+    "description": "Usługa przeglądania (Web Map Service.WMS) umożliwiająca przeglądanie cieniowania NMT w siatce 1m x 1m. Usługa oferuje wsparcie dla interfejsu WMS 1.3.0.",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "nmt, wysokość, cieniowanie, relief",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) hipsometrii NMT o dynamicznej skali barw.",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/Hypsometry",
+    "description": "Usługa przeglądania (Web Map Service.WMS) umożliwiająca przeglądanie hipsometrii NMT o dynamicznej skali barw. Usługa oferuje wsparcie dla interfejsu WMS 1.3.0.",  
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "nmt, hipsometria, wysokość, barwy",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) danych o stacjach ASG-EUPOS",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/pub/guest/G2_ASG_EUPOS_WMS/MapServer/WMSServer",
+    "description": "Usługa przeglądania (Web Map Service.WMS) umozliwiająca przeglądanie danych o stacjach system precyzyjnego pozycjonowania i nawigacji ASG-EUPOS.",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "geodezja, pozycjonowanie, stacje, gps",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) Ogólnogeograficznej Mapy Polski",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/Ogolnogeograficzna/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "ogólnogeograficzna, mapa, tło",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) Administracyjnej Mapy Polski",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/Administracyjna/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "administracyjna, granice, podział",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) rastrowej mapy sozologicznej dla obszaru Polski w układzie odniesienia 1992",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/SOZO/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "sozologiczna, środowisko, raster",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) danych hydrologicznych dla obszaru Polski w układzie odniesienia 1992",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/HYDRO/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "hydrologia, woda, rzeki, jeziora",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) Krajobrazowej Mapy Polski",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/Krajobrazowa/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "krajobraz, mapa, tło",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) danych topograficznych dla Polski",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/img/guest/TOPO/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "topografia, mapa, szczegółowa",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania (WMS) skorowidzów dla rastrowej mapy sozologicznej dla obszaru Polski",
+    "url": "http://mapy.geoportal.gov.pl/wss/service/pub/guest/G2_SKOROWIDZE_SOZO/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "Główny Urząd Geodezji i Kartografii",
+    "type": "expansion",
+    "tags": "skorowidz, indeks, raster",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania INSPIRE dla tematu Strefy zagrożenia naturalnego (zjawiska meteorologiczne)",
+    "url": "https://imgw.isok.gov.pl/wss/INSPIRE/INSPIRE_NZ_METEO_WMS",
+    "ContactOrganization" : "Instytut Meteorologii i Gospodarki Wodnej Państwowy Instytut Badawczy",
+    "description": "-",
+    "type": "expansion",
+    "tags": "inspire, zagrożenia, naturalne, meteo",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Obszary osuwisk i terenów zagrożonych ruchami masowymi ",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/geozagrozenia/sopo_obszary/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "osuwiska, geologia, zagrożenia",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "hydrogeologia_podtopienia",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/hydrogeologia/podtopienia/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "hydrogeologia, woda, podtopienia",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "MIDAS - informacje o surowcach mineralnych Polski oraz eksploatacji złóż",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/midas/MapServer/WMSServer",
+    "description": "Granice złóż. obszarów i terenów górniczych oraz złoża wykreślone z krajowego bilansu zasobów złóż kopalin",  
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "surowce, górnictwo, złoża, midas",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Obszary prognostyczne i perspektywiczne",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/geosrodowisko/obszary_zweryfikowane/MapServer/WMSServer",
+    "description": "Obszary prognostyczne i perspektywiczne",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "prognostyczne, perspektywiczne, geologia",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Otwory wiertnicze CBDG",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/cbdg_otwory/MapServer/WMSServer",
+    "description": "Otwory wiertnicze CBDG PIG-PIB",
+    "ContactOrganization" : "Państwowy Instytut Geologiczny - Państwowy Instytut Badawczy PIG-PIB",
+    "type": "expansion",
+    "tags": "otwory, wiertnicze, cbdg",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "CBDH - otwory",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/hydrogeologia/cbdh_otwory/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "cbdh, hydrogeologia, otwory",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "SMGP 1:50000",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/kartografia/smgp50k/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "smgp, kartografia, 1:50000",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "hydrogeologia_mwp",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/hydrogeologia/mwp/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization" : "PIG-PIB",
+    "type": "expansion",
+    "tags": "hydrogeologia, woda, mwp",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Jaskinie",
+    "url": "https://cbdgmapa.pgi.gov.pl/arcgis/services/jaskinie/MapServer/WMSServer",
+    "description": "Serwis prezentuje udokumentowane dane o jaskiniach i podobnych obiektach przyrodniczych. prowadzony jest przez PIG-PIB we współpracy z Polskim Towarzystwem Przyjaciół Nauk o Ziemi. Dane pochodzą z prac inwentaryzacyjnych prowadzonych przez speleologów na obszarze całej Polski. Adres: http://jaskinie.pgi.gov.pl",
+    "ContactOrganization" : "Państwowy Instytut Geologiczny - Państwowy Instytut Badawczy",
+    "type": "expansion",
+    "tags": "jaskinie, speleologia, przyroda",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Usługa przeglądania dla tematów Jednostki statystyczne i Rozmieszczenie ludności",
+    "url": "https://geo.stat.gov.pl/wss/wms_inspire/wms?version=1.3.0",
+    "description": "Usługa przeglądania danych INSPIRE tematu Jednostki statystyczne dla obszaru Polski. Publikowany jest podział Polski na rejony statystyczne i obwody spisowe. Usługa spełnia wymagania specyfikacji INSPIRE dla usług przeglądania (INSPIRE View Service). Usługa wykorzystuje interfejs WMS OGC w wersji 1.3.0.",
+    "ContactOrganization" : "Główny Urząd Statystyczny",
+    "type": "expansion",
+    "tags": "statystyka, inspire, ludność",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Obszary szczególnego zagrożenia powodzią",
+    "url": "https://wody.isok.gov.pl/gpservices/KZGW/MZP20_ObszarySzczegolnegoZagrozeniaPowodzia/MapServer/WMSServer",
+    "description": "Usługa przeglądania obszarów szczególnego zagrożenia powodzią. o których mowa w art. 169 ust. 2 pkt 2 ustawy z dnia 20 lipca 2017 r. – Prawo wodne. przedstawionych na mapach zagrożenia powodziowego.Usługa zawiera: obszary szczególnego zagrożenia powodzią od rzek. na których prawdopodobieństwo wystąpienia powodzi jest wysokie i wynosi 10% (częstotliwość: raz na 10 lat)- obszary szczególnego zagrożenia powodzią od rzek. na których prawdopodobieństwo wystąpienia powodzi jest średnie i wynosi 1% (częstotliwość: raz na 100 lat) - obszary szczególnego zagrożenia powodzią od morza. w tym morskich wód wewnętrznych. na których prawdopodobieństwo wystąpienia powodzi jest średnie 1% (częstotliwość: raz na 100 lat). Mapy zagrożenia powodziowego i mapy ryzyka powodziowego są opublikowane w postaci plików pdf na portalu mapowym dostępnym pod adresem: http://mapy.isok.gov.pl Mapy zagrożenia powodziowego i mapy ryzyka powodziowego zostały opracowane w ramach projektu „Informatyczny System Osłony Kraju przed nadzwyczajnymi zagrożeniami” (ISOK) współfinansowanego ze środków Europejskiego Funduszu Rozwoju Regionalnego w ramach Programu Operacyjnego Innowacyjna Gospodarka.",
+    "ContactOrganization" : "Państwowe Gospodarstwo Wodne Wody Polskie",
+    "type": "expansion",
+    "tags": "powódź, zagrożenie, wody, isok",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "WMS Banku Danych o Lasach",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL/mapserver/WMSServer",
+    "description": "-",
+    "ContactOrganization": "-",
+    "type": "expansion",
+    "tags": "lasy, bdl, środowisko",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "WMS_BDL_kat_wlasnosci",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL_kat_wlasnosci/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization": "-",
+    "type": "expansion",
+    "tags": "lasy, własność, bdl",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "WMS_zakazy_wstepu_do_lasu",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_zakazy_wstepu_do_lasu/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization": "-",
+    "type": "expansion",
+    "tags": "lasy, zakazy, bdl",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "WMS zagrożenie pożarowe w lasach",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_zagrozenie_pozarowe_w_lasach/MapServer/WMSServer",
+    "description": "-",
+    "ContactOrganization": "-",
+    "type": "expansion",
+    "tags": "lasy, pożar, zagrożenie, bdl",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "ZAH IH PAN Pastmaps",
+    "url": "https://pastmaps.cenagis.edu.pl/geoserver/ihpan/wms/",
+    "description": "Archiwum Map Wojskowego Instytutu Geograficznego",
+    "ContactOrganization" : "Instytut Historii PAN Zakład Atlasu Historycznego",
+    "type": "expansion",
+    "tags": "mapy historyczne, ihpan, archiwum",
+    "expectedLayers": []
+  },
+  {
+    "WMS_Title": "Corine Land Cover 2018",
+    "url": "https://clc.gios.gov.pl/arcgis/services/CLC/CLC2018/MapServer/WMSServer",
+    "description": "Mapa historyczna w skali 1:500k (Mapa Polski i Krajów Ościennych) z Archiwum Map Wojskowego Instytutu Geograficznego",
+    "ContactOrganization" : "Główny Inspektorat Ochrony Środowiska",
+    "type": "expansion",
+    "tags": "corine, land cover, środowisko, pokrycie terenu",
+    "expectedLayers": []
+    }
+  ],
+  "WMTS": [
+    {
+      "WMTS_Title": "Usługa przeglądania ortofotomap dla obszaru Polski. Profil kafelkowany (WMTS)",
+      "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMTS/StandardResolution",
+      "description": "Usługa przeglądania ortofotomap dla obszaru Polski. Dane udostępniane za pomocą tej usługi stanowią ortofotomapę wykonaną ze zdjęć lotniczych. Usługa wykorzystuje interfejs WMTS OGC w wersji 1.0.0.",
+      "ContactOrganization": "Główny Urząd Geodezji i Kartografii",
+      "type": "expansion",
+      "tags": "ortofotomapa, zdjęcia lotnicze, obraz, raster",
+      "expectedLayers": []
+    },
+    {
+      "WMTS_Title": "USGSShadedReliefOnly",
+      "url": "https://basemap.nationalmap.gov/arcgis/rest/services/USGSShadedReliefOnly/MapServer/WMTS",
+      "description": "-",
+      "ContactOrganization": "U.S. Geological Survey",
+      "type": "expansion",
+      "tags": "pokrycie terenu, raster, cieniowanie, usgs, shaded relief",
+      "expectedLayers": []
+    }    
+  ]
+}
