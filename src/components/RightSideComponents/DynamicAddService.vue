@@ -20,10 +20,13 @@ const isFormValidate = () => {
 
 
 const triggerDownloadService = async () => {
-    const layer = await getWmsService(mapType, url.value)
-    console.log(layer)
-    tempWMSArray.value.push(layer)
-    console.log(tempWMSArray.value)
+    if (selectedServiceType.value === 'WMS'){
+        const layer = await getWmsService(mapType, url.value)
+        console.log(layer)
+        tempWMSArray.value.push(layer)
+        console.log(tempWMSArray.value)
+    }
+    
 }
 
 </script>

@@ -10,6 +10,7 @@ import * as Cesium from 'cesium';
 import { registerDemWroclaw } from '../services/layers';
 
 
+
 const open = shallowRef(false)
 const fabPosition = shallowRef('absolute')
 const menuLocation = shallowRef('right center') as any
@@ -131,6 +132,7 @@ watch(fabPosition, () => open.value = false)
     >
         <v-icon>{{ open ? 'mdi-close' : 'mdi-dots-vertical' }}</v-icon>
         <v-speed-dial
+            
             v-model="open"
             :location="menuLocation"
             :transition="transition"
@@ -138,14 +140,14 @@ watch(fabPosition, () => open.value = false)
         >
             <v-tooltip location="top left" :text="$t('timeline')">
                 <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" v-if="mapType === '3d'" :key="1" icon @click="toggleTimelineComponentVisibility">
+                    <v-btn v-bind="props" v-if="mapType === '3d'" key="1" icon @click="toggleTimelineComponentVisibility">
                         <v-icon color="#1976D2" size="24">mdi-clock-outline</v-icon>
                     </v-btn>
                 </template>
             </v-tooltip>
             <v-tooltip location="top left" :text="$t('dynamicService')">
                 <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" :key="2" icon @click="toggleDynamicServiceComponentVisible">
+                    <v-btn v-bind="props" key="2" icon @click="toggleDynamicServiceComponentVisible">
                         <v-icon color="#1976D2" size="24">mdi-earth-plus</v-icon>
                     </v-btn>
                 </template>

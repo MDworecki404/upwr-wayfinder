@@ -13,6 +13,7 @@ import { zoomTo } from '../../services/zoomTo'
 import { changeOlBasemap } from '../../services/olBasemaps';
 import { olRegisterUpwrBuildings } from '../../services/olLayers';
 import { viewer } from '../../services/displayMap';
+import { map } from '../../services/olMap';
 
 const SearchComponent = defineAsyncComponent(() => import('./SearchComponent.vue'));
 
@@ -102,8 +103,13 @@ const showWMSLayer = (id: string) => {
     console.warn(`Nie znaleziono warstwy o id: ${id}`);
   }
 
-  const layer = found?.resource.temporaryImageryLayer
-  layer.show = !layer.show
+  if(mapType.value === '3d'){
+    const layer = found?.resource.temporaryImageryLayer
+    layer.show = !layer.show
+  } else if(mapType.value === '2d') {
+    const layer = found?.resource.temporaryImageryLayer
+    layer.setVisible(!layer.values_.visible)
+  }
 }
 
 const deleteWMSLayer = (id: string) => {
@@ -111,16 +117,22 @@ const deleteWMSLayer = (id: string) => {
 
   if (index !== -1) {
     const layerToRemove = tempWMSArray.value[index].resource.temporaryImageryLayer;
-    layerToRemove.show = false
+    if(mapType.value === '3d'){
+        layerToRemove.show = false
 
-    if (viewer && layerToRemove) {
-      viewer.imageryLayers.remove(layerToRemove, true);
+        if (viewer && layerToRemove) {
+          viewer.imageryLayers.remove(layerToRemove, true);
+        }
+    } else if(mapType.value === '2d') {
+        if (map && layerToRemove) {
+          layerToRemove.setVisible(false)
+          map.removeLayer(layerToRemove)
+        }
     }
 
     tempWMSArray.value.splice(index, 1);
-    console.log(`Warstwa o id ${id} została usunięta.`);
   } else {
-    console.warn(`Nie znaleziono warstwy o id: ${id}`);
+    return false
   }
 };
 

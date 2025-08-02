@@ -59,5 +59,6 @@
   "url": "Adres URL",
   "downloadService": "Pobierz usługę",
   "incorrectUrl": "Niepoprawny adres URL",
-  "wmsLayers": "Warstwy WMS"
+  "wmsLayers": "Warstwy WMS",
+  "dynamicService": "Dodaj usługę WMS/WMTS"
 } 
